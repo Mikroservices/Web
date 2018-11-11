@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+    production: true,
+    usersService: 'http://users.letterer.me'
 };
