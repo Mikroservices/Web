@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 import { ToastrService } from 'ngx-toastr';
 
-import { User } from '../shared/models/user';
+import { User } from '../../models/user';
+import { RegisterMode } from '../../models/register-mode';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,22 +15,23 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterComponent implements OnInit {
 
-    user: User = new User();
-    isSubmitting: Boolean = false;
+    user: User;
+    registerMode: RegisterMode;
 
     constructor(
         private http: HttpClient,
         private reCaptchaV3Service: ReCaptchaV3Service,
-        private router: Router,
         private toastr: ToastrService,
         @Inject(DOCUMENT) private document: any
     ) { }
 
     ngOnInit() {
+        this.registerMode = RegisterMode.Register;
+        this.user = new User();
     }
 
     async onSubmit() {
-        this.isSubmitting = true;
+        this.registerMode = RegisterMode.Submitting;
 
         this.reCaptchaV3Service.execute(environment.recaptchaKey, 'homepage', async (token) => {
 
@@ -38,23 +39,38 @@ export class RegisterComponent implements OnInit {
 
             this.http.post<User>(environment.usersService + '/users', this.user).subscribe(
                 () => {
-                    this.isSubmitting = false;
                     this.removeGoogleBadge();
-
-                    this.router.navigate(['/register-success']);
+                    this.registerMode = RegisterMode.Success;
                 },
                 error => {
-                    this.isSubmitting = false;
+                    this.removeGoogleBadge();
 
-                    if (error.error.reason == "USER_WITH_EMAIL_EXISTS") {
-                        this.router.navigate(['/register-user-exists']);
+                    if (error.error.reason == "USER_WITH_EMAIL_EXISTS") {    
+                        this.registerMode = RegisterMode.UserExists;
                         return;
                     }
 
+                    this.registerMode = RegisterMode.Register;
                     this.toastr.error('Error', 'Unexpected error during creating new user. Please try again.');
                 }
             )
         });
+    }
+
+    isRegisterMode(): Boolean {
+        return this.registerMode == RegisterMode.Register;
+    }
+
+    isSubmittingMode(): Boolean {
+        return this.registerMode == RegisterMode.Submitting;
+    }
+
+    isUserExistsMode(): Boolean {
+        return this.registerMode == RegisterMode.UserExists;
+    }
+
+    isSuccessMode(): Boolean {
+        return this.registerMode == RegisterMode.Success;
     }
 
     private removeGoogleBadge() {

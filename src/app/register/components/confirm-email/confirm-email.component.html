@@ -1,0 +1,41 @@
+<main *ngIf="isValidatingMode()" class="main pt-4" role="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+
+                <h1><i class="fas fa-spinner fa-spin"></i> Email validation...</h1>
+                <p>
+                    System now validates your email. Please be patient. Operation should take a few seconds.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main *ngIf="isSuccessMode()" class="main pt-4" role="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+
+                <h1><i class="fas fa-check-circle"></i> Email confirmed</h1>
+                <p>
+                    <strong>Congratulations!</strong> Your email has been confirmed. Your account was successfully created and enabled. You can go to the <a routerLink="/login">login</a> page and use your credentials to sign in into the system. Thank you!
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main *ngIf="isErrorMode()" class="main pt-4" role="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+
+                <h1><i class="fas fa-exclamation-circle"></i> Error!</h1>
+                <p>
+                    During confirming email unexpected error occurred. Please try again later. If error will still occurs you can try to <a routerLink="/forgot-password">reset your password</a> (it will also activate your account) or contact wih us.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
