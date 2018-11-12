@@ -29,7 +29,7 @@ export class ConfirmEmailComponent implements OnInit {
             confirmEmail.id = params.user;
             confirmEmail.confirmationGuid = params.token;
 
-            this.http.post(environment.usersService + '/users/confirm', confirmEmail).subscribe(
+            this.http.post(environment.usersService + '/register/confirm', confirmEmail).subscribe(
                 () => {
                     this.forgotPasswordMode = ForgotPasswordMode.Success;
                 },

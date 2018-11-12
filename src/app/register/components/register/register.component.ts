@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
 
             this.user.securityToken = token;
 
-            this.http.post<User>(environment.usersService + '/users', this.user).subscribe(
+            this.http.post<User>(environment.usersService + '/register', this.user).subscribe(
                 () => {
                     this.removeGoogleBadge();
                     this.registerMode = RegisterMode.Success;

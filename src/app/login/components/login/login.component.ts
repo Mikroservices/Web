@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     async onSubmit() {
         this.loginMode = LoginMode.Submitting;
 
-        this.http.post<AccessToken>(environment.usersService + '/users/login', this.login).subscribe(
+        this.http.post<AccessToken>(environment.usersService + '/login', this.login).subscribe(
             (result) => {
                 this.persistanceService.set('action_token', result.actionToken);
                 this.router.navigate(['/home']);
