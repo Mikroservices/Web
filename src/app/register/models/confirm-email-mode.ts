@@ -1,4 +1,4 @@
-export enum ForgotPasswordMode {
+export enum ConfirmEmailMode {
     Validating,
     Success,
     Error

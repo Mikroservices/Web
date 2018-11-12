@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { RegisterModule } from './register/register.module';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
+import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { LoginModule } from './login/login.module';
         NgxCaptchaModule,
         CoreModule,
         RegisterModule,
-        LoginModule
+        LoginModule,
+        ForgotPasswordModule
     ],
     providers: [],
     bootstrap: [AppComponent]

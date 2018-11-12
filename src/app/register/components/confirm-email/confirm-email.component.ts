@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { ConfirmEmail } from '../../models/confirm-email';
 import { environment } from 'src/environments/environment';
-import { ForgotPasswordMode } from '../../models/forgot-password-mode';
+import { ConfirmEmailMode } from '../../models/confirm-email-mode';
 
 @Component({
     selector: 'app-confirm-email',
@@ -13,7 +13,7 @@ import { ForgotPasswordMode } from '../../models/forgot-password-mode';
 })
 export class ConfirmEmailComponent implements OnInit {
 
-    forgotPasswordMode: ForgotPasswordMode;
+    confirmEmailMode: ConfirmEmailMode;
 
     constructor(
         private route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class ConfirmEmailComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.forgotPasswordMode = ForgotPasswordMode.Validating;
+        this.confirmEmailMode = ConfirmEmailMode.Validating;
 
         this.route.queryParams.subscribe(params => {
 
@@ -31,24 +31,24 @@ export class ConfirmEmailComponent implements OnInit {
 
             this.http.post(environment.usersService + '/register/confirm', confirmEmail).subscribe(
                 () => {
-                    this.forgotPasswordMode = ForgotPasswordMode.Success;
+                    this.confirmEmailMode = ConfirmEmailMode.Success;
                 },
                 () => {
-                    this.forgotPasswordMode = ForgotPasswordMode.Error;
+                    this.confirmEmailMode = ConfirmEmailMode.Error;
                 }
             )
         });
     }
 
     isValidatingMode(): Boolean {
-        return this.forgotPasswordMode == ForgotPasswordMode.Validating;
+        return this.confirmEmailMode == ConfirmEmailMode.Validating;
     }
 
     isErrorMode(): Boolean {
-        return this.forgotPasswordMode == ForgotPasswordMode.Error;
+        return this.confirmEmailMode == ConfirmEmailMode.Error;
     }
 
     isSuccessMode(): Boolean {
-        return this.forgotPasswordMode == ForgotPasswordMode.Success;
+        return this.confirmEmailMode == ConfirmEmailMode.Success;
     }
 }
