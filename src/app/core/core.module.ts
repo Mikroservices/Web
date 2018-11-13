@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-import { HomeComponent } from './components/home/home.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ErrorsModule } from './errors/errors.module';
+import { MenuModule } from './menu/menu.module';
 
 @NgModule({
     declarations: [
-        HomeComponent,
-        PageNotFoundComponent
     ],
     imports: [
         SharedModule
+    ],
+    exports: [
+        ErrorsModule,
+        MenuModule
     ]
 })
 export class CoreModule { }

@@ -6,7 +6,7 @@ import { Login } from '../../models/login';
 import { AccessToken } from '../../models/access-token';
 import { LoginMode } from '../../models/login-mode';
 import { environment } from 'src/environments/environment';
-import { PersistanceService } from 'src/app/shared/services/persistance.service';
+import { PersistanceService } from 'src/app/core/services/persistance/persistance.service';
 
 @Component({
     selector: 'app-login',
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
         this.http.post<AccessToken>(environment.usersService + '/login', this.login).subscribe(
             (result) => {
-                this.persistanceService.set('action_token', result.actionToken);
+                this.persistanceService.setAccessToken(result.actionToken);
                 this.router.navigate(['/home']);
             },
             () => {
