@@ -4,7 +4,7 @@
 
             <a class="navbar-brand mx-auto" routerLink="/home" routerLinkActive="active">letterer</a>
 
-            <div *ngIf="!isLoggedIn" class="collapse navbar-collapse" id="navbar">
+            <div *ngIf="!user" class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a routerLink="/login" routerLinkActive="active" class="nav-link">Login</a>
@@ -14,13 +14,32 @@
                     </li>
                 </ul>
             </div>
-            <div *ngIf="isLoggedIn" class="collapse navbar-collapse" id="navbar">
+
+            <div *ngIf="user" class="navbar-collapse collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a routerLink="/profile" routerLinkActive="active" class="nav-link">{{ user.name }}</a>
+                    <li class="nav-item dropdown">
+                        <span dropdown>
+                            <a href id="basic-link" dropdownToggle class="nav-link dropdown-toggle" (click)="false" aria-controls="basic-link-dropdown"><img ngxGravatar [email]="user.email" size="32"> <span class="text-dark"></span> {{ user.name }}</a>
+                            <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="basic-link">
+                                <li>
+                                    <a class="dropdown-item" routerLink="/profile">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" routerLink="/settings">Settings &amp; Privacy</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" routerLink="/help">Help</a>
+                                </li>
+                                <div class="dropdown-divider"></div>
+                                <li>
+                                    <a [routerLink]="" class="dropdown-item" (click)="signOut()">Sign out</a>
+                                </li>
+                            </ul>
+                        </span>
                     </li>
                 </ul>
             </div>
+
         </div>
     </nav>
 </header>

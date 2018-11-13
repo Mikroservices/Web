@@ -23,11 +23,23 @@ export class PersistanceService {
         }
     }
 
+    remove(key: string): void {
+        try {
+            localStorage.removeItem(key);
+        } catch (e) {
+            console.error('Error removing from localStorage', e);
+        }
+    }
+
     setAccessToken(data: any): void {
         this.set('access_token', data);
     }
 
     getAccessToken(): any {
         return this.get('access_token');
+    }
+
+    removeAccessToken(): void {
+        localStorage.removeItem('access_token')
     }
 }

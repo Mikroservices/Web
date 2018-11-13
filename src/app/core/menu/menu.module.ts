@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { GravatarModule } from  'ngx-gravatar';
 
 @NgModule({
     declarations: [
         NavbarComponent
     ],
     imports: [
-        SharedModule
+        SharedModule,
+        BsDropdownModule.forRoot(),
+        GravatarModule
     ],
     exports: [
         NavbarComponent

@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { PersistanceService } from '../persistance/persistance.service';
 import { User } from 'src/app/shared/models/user';
 
+
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
+
+    public changes = new BehaviorSubject<User>(this.getUser());
 
     constructor(
         private jwtHelperService: JwtHelperService,
@@ -43,5 +47,17 @@ export class UserService {
         user.name = decodedToken.name;
 
         return user;
+    }
+
+    signIn(accessToken: string): void {
+        this.persistanceService.setAccessToken(accessToken);
+
+        const user = this.getUser();
+        this.changes.next(user);
+    }
+
+    signOut(): void {
+        this.persistanceService.removeAccessToken();
+        this.changes.next(null);
     }
 }

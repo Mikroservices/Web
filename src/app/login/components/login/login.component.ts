@@ -6,7 +6,7 @@ import { Login } from '../../models/login';
 import { AccessToken } from '../../models/access-token';
 import { LoginMode } from '../../models/login-mode';
 import { environment } from 'src/environments/environment';
-import { PersistanceService } from 'src/app/core/services/persistance/persistance.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private http: HttpClient, 
         private router: Router, 
-        private persistanceService: PersistanceService) { 
+        private userService: UserService) { 
     }
 
     ngOnInit() {
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
         this.http.post<AccessToken>(environment.usersService + '/login', this.login).subscribe(
             (result) => {
-                this.persistanceService.setAccessToken(result.actionToken);
+                this.userService.signIn(result.actionToken);
                 this.router.navigate(['/home']);
             },
             () => {
