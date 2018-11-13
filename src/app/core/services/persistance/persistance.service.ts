@@ -14,12 +14,20 @@ export class PersistanceService {
         }
     }
 
-    get(key: string) {
+    get(key: string): any {
         try {
             return JSON.parse(localStorage.getItem(key));
         } catch (e) {
             console.error('Error getting data from localStorage', e);
             return null;
         }
+    }
+
+    setAccessToken(data: any): void {
+        this.set('access_token', data);
+    }
+
+    getAccessToken(): any {
+        return this.get('access_token');
     }
 }

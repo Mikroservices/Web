@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 import { ReCaptchaV3Service } from 'ngx-captcha';
-import { ToastrService } from 'ngx-toastr';
 
 import { User } from '../../models/user';
 import { RegisterMode } from '../../models/register-mode';
@@ -21,7 +20,6 @@ export class RegisterComponent implements OnInit {
     constructor(
         private http: HttpClient,
         private reCaptchaV3Service: ReCaptchaV3Service,
-        private toastr: ToastrService,
         @Inject(DOCUMENT) private document: any
     ) { }
 
@@ -50,8 +48,7 @@ export class RegisterComponent implements OnInit {
                         return;
                     }
 
-                    this.registerMode = RegisterMode.Register;
-                    this.toastr.error('Error', 'Unexpected error during creating new user. Please try again.');
+                    this.registerMode = RegisterMode.Error;
                 }
             )
         });
@@ -72,6 +69,11 @@ export class RegisterComponent implements OnInit {
     isSuccessMode(): Boolean {
         return this.registerMode == RegisterMode.Success;
     }
+
+    isErrorMode(): Boolean {
+        return this.registerMode == RegisterMode.Error;
+    }
+
 
     private removeGoogleBadge() {
         const googleBadge = this.document.getElementsByClassName('grecaptcha-badge');

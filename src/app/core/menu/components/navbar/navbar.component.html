@@ -1,12 +1,10 @@
-<app-navbar></app-navbar>
-
-<!-- <header role="banner">
-    <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top border-bottom">
+<header role="banner">
+    <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
         <div class="container">
 
             <a class="navbar-brand mx-auto" routerLink="/home" routerLinkActive="active">letterer</a>
 
-            <div class="collapse navbar-collapse" id="navbar">
+            <div *ngIf="!isLoggedIn" class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a routerLink="/login" routerLinkActive="active" class="nav-link">Login</a>
@@ -16,8 +14,13 @@
                     </li>
                 </ul>
             </div>
+            <div *ngIf="isLoggedIn" class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a routerLink="/profile" routerLinkActive="active" class="nav-link">{{ user.name }}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-</header> -->
-
-<router-outlet></router-outlet>
+</header>

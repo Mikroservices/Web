@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
-import { HomeComponent } from './core/components/home/home.component';
-
+import { HomeComponent } from './home/components/home/home.component';
+import { PageNotFoundComponent } from './core/errors/components/page-not-found/page-not-found.component';
 import { LoginComponent } from './login/components/login/login.component';
-
 import { RegisterComponent } from './register/components/register/register.component';
 import { ConfirmEmailComponent } from './register/components/confirm-email/confirm-email.component';
-
 import { ForgotPasswordComponent } from './forgot-password/components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './forgot-password/components/reset-password/reset-password.component';
 
