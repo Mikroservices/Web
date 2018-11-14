@@ -17,8 +17,8 @@ export class ForgotPasswordComponent implements OnInit {
     forgotPasswordMode: ForgotPasswordMode;
 
     constructor(
-        private http: HttpClient, 
-        private toastr: ToastrService) { 
+        private http: HttpClient,
+        private toastr: ToastrService) {
     }
 
     ngOnInit() {
@@ -35,7 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
             },
             (error) => {
 
-                if (error.error.reason == "USER_NOT_EXISTS") {    
+                if (error.error.reason === 'USER_NOT_EXISTS') {
                     this.forgotPasswordMode = ForgotPasswordMode.UserNotExists;
                     return;
                 }
@@ -43,23 +43,23 @@ export class ForgotPasswordComponent implements OnInit {
                 this.forgotPasswordMode = ForgotPasswordMode.ForgotPassword;
                 this.toastr.error('Error', 'Unexpected error during resetting your password. Please try again.');
             }
-        )
+        );
     }
 
-    isForgotPasswordMode() : Boolean {
-        return this.forgotPasswordMode == ForgotPasswordMode.ForgotPassword;
+    isForgotPasswordMode(): Boolean {
+        return this.forgotPasswordMode === ForgotPasswordMode.ForgotPassword;
     }
 
     isSubmittingMode(): Boolean {
-        return this.forgotPasswordMode == ForgotPasswordMode.Submitting;
+        return this.forgotPasswordMode === ForgotPasswordMode.Submitting;
     }
 
     isUserNotExistsMode(): Boolean {
-        return this.forgotPasswordMode == ForgotPasswordMode.UserNotExists;
+        return this.forgotPasswordMode === ForgotPasswordMode.UserNotExists;
     }
 
     isSuccessMode(): Boolean {
-        return this.forgotPasswordMode == ForgotPasswordMode.Success;
+        return this.forgotPasswordMode === ForgotPasswordMode.Success;
     }
 
     resetMode() {

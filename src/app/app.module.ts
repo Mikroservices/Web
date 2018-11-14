@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ToastrModule } from 'ngx-toastr';
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt'
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +19,7 @@ export function jwtOptionsFactory(persistanceService: PersistanceService) {
         tokenGetter: () => {
             return persistanceService.getAccessToken();
         }
-    }
+    };
 }
 
 @NgModule({

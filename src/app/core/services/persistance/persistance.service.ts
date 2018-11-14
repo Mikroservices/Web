@@ -40,6 +40,6 @@ export class PersistanceService {
     }
 
     removeAccessToken(): void {
-        localStorage.removeItem('access_token')
+        localStorage.removeItem('access_token');
     }
 }

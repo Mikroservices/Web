@@ -43,35 +43,35 @@ export class RegisterComponent implements OnInit {
                 error => {
                     this.removeGoogleBadge();
 
-                    if (error.error.reason == "USER_WITH_EMAIL_EXISTS") {    
+                    if (error.error.reason === 'USER_WITH_EMAIL_EXISTS') {
                         this.registerMode = RegisterMode.UserExists;
                         return;
                     }
 
                     this.registerMode = RegisterMode.Error;
                 }
-            )
+            );
         });
     }
 
     isRegisterMode(): Boolean {
-        return this.registerMode == RegisterMode.Register;
+        return this.registerMode === RegisterMode.Register;
     }
 
     isSubmittingMode(): Boolean {
-        return this.registerMode == RegisterMode.Submitting;
+        return this.registerMode === RegisterMode.Submitting;
     }
 
     isUserExistsMode(): Boolean {
-        return this.registerMode == RegisterMode.UserExists;
+        return this.registerMode === RegisterMode.UserExists;
     }
 
     isSuccessMode(): Boolean {
-        return this.registerMode == RegisterMode.Success;
+        return this.registerMode === RegisterMode.Success;
     }
 
     isErrorMode(): Boolean {
-        return this.registerMode == RegisterMode.Error;
+        return this.registerMode === RegisterMode.Error;
     }
 
 

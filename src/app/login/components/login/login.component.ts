@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
     loginMode: LoginMode;
 
     constructor(
-        private http: HttpClient, 
-        private router: Router, 
-        private userService: UserService) { 
+        private http: HttpClient,
+        private router: Router,
+        private userService: UserService) {
     }
 
     ngOnInit() {
@@ -40,18 +40,18 @@ export class LoginComponent implements OnInit {
             () => {
                 this.loginMode = LoginMode.Error;
             }
-        )
+        );
     }
 
-    isLoginMode() : Boolean {
-        return this.loginMode == LoginMode.Login;
+    isLoginMode(): Boolean {
+        return this.loginMode === LoginMode.Login;
     }
 
     isSubmittingMode(): Boolean {
-        return this.loginMode == LoginMode.Submitting;
+        return this.loginMode === LoginMode.Submitting;
     }
 
     isErrorMode(): Boolean {
-        return this.loginMode == LoginMode.Error;
+        return this.loginMode === LoginMode.Error;
     }
 }

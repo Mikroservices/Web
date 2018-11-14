@@ -36,19 +36,19 @@ export class ConfirmEmailComponent implements OnInit {
                 () => {
                     this.confirmEmailMode = ConfirmEmailMode.Error;
                 }
-            )
+            );
         });
     }
 
     isValidatingMode(): Boolean {
-        return this.confirmEmailMode == ConfirmEmailMode.Validating;
+        return this.confirmEmailMode === ConfirmEmailMode.Validating;
     }
 
     isErrorMode(): Boolean {
-        return this.confirmEmailMode == ConfirmEmailMode.Error;
+        return this.confirmEmailMode === ConfirmEmailMode.Error;
     }
 
     isSuccessMode(): Boolean {
-        return this.confirmEmailMode == ConfirmEmailMode.Success;
+        return this.confirmEmailMode === ConfirmEmailMode.Success;
     }
 }

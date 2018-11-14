@@ -17,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
     resetPassword: ResetPassword;
     resetPasswordMode: ResetPasswordMode;
 
-    constructor(        
+    constructor(
         private route: ActivatedRoute,
         private http: HttpClient,
         private toastr: ToastrService) {
@@ -43,18 +43,18 @@ export class ResetPasswordComponent implements OnInit {
                 this.resetPasswordMode = ResetPasswordMode.ResetPassword;
                 this.toastr.error('Error', 'Unexpected error during resetting your password. Please try again.');
             }
-        )
+        );
     }
 
-    isResetPasswordMode() : Boolean {
-        return this.resetPasswordMode == ResetPasswordMode.ResetPassword;
+    isResetPasswordMode(): Boolean {
+        return this.resetPasswordMode === ResetPasswordMode.ResetPassword;
     }
 
     isSubmittingMode(): Boolean {
-        return this.resetPasswordMode == ResetPasswordMode.Submitting;
+        return this.resetPasswordMode === ResetPasswordMode.Submitting;
     }
 
     isSuccessMode(): Boolean {
-        return this.resetPasswordMode == ResetPasswordMode.Success;
+        return this.resetPasswordMode === ResetPasswordMode.Success;
     }
 }
