@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
                 error => {
                     this.removeGoogleBadge();
 
-                    if (error.error.reason === 'USER_WITH_EMAIL_EXISTS') {
+                    if (error.error.code === 'userWithEmailExists') {
                         this.registerMode = RegisterMode.UserExists;
                         return;
                     }

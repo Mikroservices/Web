@@ -35,7 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
             },
             (error) => {
 
-                if (error.error.reason === 'USER_NOT_EXISTS') {
+                if (error.error.code === 'userNotExists') {
                     this.forgotPasswordMode = ForgotPasswordMode.UserNotExists;
                     return;
                 }
