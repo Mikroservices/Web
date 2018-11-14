@@ -22,22 +22,28 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" required class="form-control" id="password" name="password" [(ngModel)]="login.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }">
+                                <input type="password" required class="form-control" id="password" name="password"
+                                    [(ngModel)]="login.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }">
                                 <div *ngIf="password.invalid" class="invalid-feedback">
                                     <div *ngIf="password.errors.required">Password is required.</div>
                                 </div>
                             </div>
 
-                            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Login <i *ngIf="isSubmittingMode()"
-                                class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()" class="text-danger ml-4">Invalid email or password.</span>
+                            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Login <i
+                                    *ngIf="isSubmittingMode()" class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()"
+                                class="text-danger ml-4">Invalid email or password.</span>
                         </form>
 
                     </div>
                 </article>
 
-                <div>Forgot your password? <a routerLink="/forgot-password">Here</a> you can reset them.</div>
-                <div>You do not have an account yet. Don't worry, you can set them on <a routerLink="/register">here</a>.</div>
-
+                <div>
+                    Forgot your password? <a routerLink="/forgot-password">Here</a> you can change it.
+                </div>
+                <div>
+                    You don't have an account yet? Don't worry,
+                    you can create a new account <a routerLink="/register">here</a>.
+                </div>
             </div>
         </div>
     </div>

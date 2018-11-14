@@ -63,8 +63,9 @@
                                 <textarea class="form-control" id="bio" rows="4" name="bio" maxlength="200" [(ngModel)]="user.bio"></textarea>
                             </div>
 
-                            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Register <i *ngIf="isSubmittingMode()"
-                                    class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()" class="text-danger ml-4">Unexpected error occured. Please try again.</span>
+                            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Register <i
+                                    *ngIf="isSubmittingMode()" class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()"
+                                class="text-danger ml-4">Unexpected error occured. Please try again.</span>
                         </form>
 
                     </div>
@@ -83,9 +84,10 @@
 
                 <h1><i class="fas fa-hand-paper"></i> User exists</h1>
                 <p>
-                    User with email that you entered exists in the system. If this account is yours you can <a
-                        routerLink="/login">login</a> to the system. If you forgot your password you can use <a
-                        routerLink="/forgot-password">page</a> where you can reset your password.
+                    User with email that you entered exists in the system. 
+                    If this account is yours you can <a routerLink="/login">login</a> to the system. 
+                    If you forgot your password you can use <a routerLink="/forgot-password">page</a>
+                    where you can reset your password.
                 </p>
             </div>
         </div>
@@ -97,10 +99,11 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
 
-                <h1><i class="fas fa-check-circle"></i> Account created</h1>
+                <h1><i class="fas fa-envelope"></i> Welcome to letterer.me!</h1>
                 <p>
-                    <strong>Congratulations!</strong> Your account has been created. There is only one further step.
-                    Check your email and activate your account by clicking hyperlink in the message. Thank you!
+                    <strong>Congratuations!</strong> Your letterer.me account has been successfully created.
+                    We've sent you a link to confirm your email address. Please check your inbox.
+                    It could take up to 10 minutes to show up in your inbox.
                 </p>
                 <p>
                     In the meantime, you can go back to the <a routerLink="/home">homepage</a>.
