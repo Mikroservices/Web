@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
 
     user: User;
     registerMode: RegisterMode;
+    errorMessage: string;
 
     constructor(
         private http: HttpClient,
@@ -41,11 +42,13 @@ export class RegisterComponent implements OnInit {
                     this.registerMode = RegisterMode.Success;
                 },
                 error => {
-                    this.removeGoogleBadge();
 
-                    if (error.error.code === 'userWithEmailExists') {
-                        this.registerMode = RegisterMode.UserExists;
-                        return;
+                    if (error.error.code === 'userNameIsAlreadyTaken') {
+                        this.errorMessage = 'User name is already taken. Please choose different one.';
+                    } else if (error.error.code === 'emailIsAlreadyConnected') {
+                        this.errorMessage = 'Given email is already connected with other account.';
+                    } else {
+                        this.errorMessage = 'Unexpected error occurred. Please try again.';
                     }
 
                     this.registerMode = RegisterMode.Error;
@@ -60,10 +63,6 @@ export class RegisterComponent implements OnInit {
 
     isSubmittingMode(): Boolean {
         return this.registerMode === RegisterMode.Submitting;
-    }
-
-    isUserExistsMode(): Boolean {
-        return this.registerMode === RegisterMode.UserExists;
     }
 
     isSuccessMode(): Boolean {

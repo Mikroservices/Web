@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   recaptchaKey: '6LfwsncUAAAAAPsUABRdM5OQVLRBFur_ZVQJoXPx',
-  usersService: 'http://127.0.0.1:8001'
+  usersService: 'http://localhost:8001'
 };
 
 /*

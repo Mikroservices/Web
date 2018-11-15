@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
     login: Login;
     loginMode: LoginMode;
+    errorMessage: string;
 
     constructor(
         private http: HttpClient,
@@ -33,11 +34,22 @@ export class LoginComponent implements OnInit {
         this.loginMode = LoginMode.Submitting;
 
         this.http.post<AccessToken>(environment.usersService + '/login', this.login).subscribe(
-            (result) => {
+            result => {
                 this.userService.signIn(result.actionToken);
                 this.router.navigate(['/home']);
             },
-            () => {
+            error => {
+
+                if (error.error.code === 'invalidLoginCredentials') {
+                    this.errorMessage = 'Invalid credentials.'
+                } else if (error.error.code === 'emailNotConfirmed') {
+                    this.errorMessage = 'Your email is not confirmed. Check your inbox or reset your password.'
+                } else if (error.error.code === 'userAccountIsBlocked') {
+                    this.errorMessage = 'Your account is blocked. Contact with our support.'
+                } else {
+                    this.errorMessage = 'Unknown login error. Try again later.'
+                }
+
                 this.loginMode = LoginMode.Error;
             }
         );
