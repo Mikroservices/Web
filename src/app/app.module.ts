@@ -13,6 +13,7 @@ import { LoginModule } from './login/login.module';
 import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 import { HomeModule } from './home/home.module';
 import { PersistanceService } from './core/services/persistance/persistance.service';
+import { SharedModule } from './shared/shared.module';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
@@ -46,7 +47,8 @@ export function jwtOptionsFactory(persistanceService: PersistanceService) {
         HomeModule,
         RegisterModule,
         LoginModule,
-        ForgotPasswordModule
+        ForgotPasswordModule,
+        SharedModule
     ],
     providers: [],
     bootstrap: [AppComponent]
