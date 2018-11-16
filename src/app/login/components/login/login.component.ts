@@ -41,13 +41,13 @@ export class LoginComponent implements OnInit {
             error => {
 
                 if (error.error.code === 'invalidLoginCredentials') {
-                    this.errorMessage = 'Invalid credentials.'
+                    this.errorMessage = 'Invalid credentials.';
                 } else if (error.error.code === 'emailNotConfirmed') {
-                    this.errorMessage = 'Your email is not confirmed. Check your inbox or reset your password.'
+                    this.errorMessage = 'Your email is not confirmed. Check your inbox or reset your password.';
                 } else if (error.error.code === 'userAccountIsBlocked') {
-                    this.errorMessage = 'Your account is blocked. Contact with our support.'
+                    this.errorMessage = 'Your account is blocked. Contact with our support.';
                 } else {
-                    this.errorMessage = 'Unknown login error. Try again later.'
+                    this.errorMessage = 'Unknown login error. Try again later.';
                 }
 
                 this.loginMode = LoginMode.Error;

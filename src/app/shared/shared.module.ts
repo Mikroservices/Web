@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { UserNameValidatorDirective } from './validations/user-name-validator.directive';
-import { EmailConnectedValidatorDirective } from './validations/email-connected-validator.directive';
+import { UniqueUserNameValidatorDirective } from './validations/unique-user-name-validator.directive';
+import { UniqueEmailValidatorDirective } from './validations/unique-email-validator.directive';
 
 @NgModule({
     declarations: [
-        UserNameValidatorDirective,
-        EmailConnectedValidatorDirective
+        UniqueEmailValidatorDirective,
+        UniqueUserNameValidatorDirective
     ],
     imports: [
         CommonModule
@@ -20,8 +20,8 @@ import { EmailConnectedValidatorDirective } from './validations/email-connected-
         RouterModule,
         FormsModule,
         HttpClientModule,
-        EmailConnectedValidatorDirective,
-        UserNameValidatorDirective
+        UniqueEmailValidatorDirective,
+        UniqueUserNameValidatorDirective
     ]
 })
 export class SharedModule { }

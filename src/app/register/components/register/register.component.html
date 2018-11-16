@@ -13,22 +13,22 @@
                         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
                             <div class="form-group">
-                                <label for="userName">User name</label>
+                                <label for="userName">User name <i *ngIf="userName.pending" class="fas fa-spinner fa-spin"></i></label>
                                 <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" #userName="ngModel"
-                                    [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required appForbiddenName="bob" />
+                                    [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required appUniqueUserName />
                                 <div *ngIf="userName.invalid" class="invalid-feedback">
                                     <div *ngIf="userName.errors.required">User name is required.</div>
-                                    <div *ngIf="userName.errors.appForbiddenName">Jakis blad</div> 
+                                    <div *ngIf="userName.errors.appUniqueUserName">User name is already taken.</div> 
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">Email <i *ngIf="email.pending" class="fas fa-spinner fa-spin"></i></label>
                                 <input type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel"
-                                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" appEmailConnected  />
+                                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" appUniqueEmail  /> 
                                 <div *ngIf="email.invalid" class="invalid-feedback">
                                     <div *ngIf="email.errors.required">Email is required.</div>
                                     <div *ngIf="email.errors.pattern">Email format is invalid.</div>
-                                    <div *ngIf="email.errors.appEmailConnected">Email must be on the codecraft.tv domain</div> 
+                                    <div *ngIf="email.errors.appUniqueEmail">Email is already connected to different account.</div> 
                                 </div>
                             </div>
                             <div class="form-group">
