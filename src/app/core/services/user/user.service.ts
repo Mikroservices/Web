@@ -45,6 +45,7 @@ export class UserService {
         user.id = decodedToken.id;
         user.email = decodedToken.email;
         user.name = decodedToken.name;
+        user.userName = decodedToken.userName;
 
         return user;
     }

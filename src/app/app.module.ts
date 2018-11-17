@@ -14,12 +14,15 @@ import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 import { HomeModule } from './home/home.module';
 import { PersistanceService } from './core/services/persistance/persistance.service';
 import { SharedModule } from './shared/shared.module';
+import { ProfileModule } from './profile/profile.module';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
         tokenGetter: () => {
             return persistanceService.getAccessToken();
-        }
+        },
+        whitelistedDomains: ['localhost:8001'],
+        blacklistedRoutes: []
     };
 }
 
@@ -48,6 +51,7 @@ export function jwtOptionsFactory(persistanceService: PersistanceService) {
         RegisterModule,
         LoginModule,
         ForgotPasswordModule,
+        ProfileModule,
         SharedModule
     ],
     providers: [],

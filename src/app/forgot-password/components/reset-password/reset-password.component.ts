@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 import { ResetPassword } from '../../models/reset-password';
 import { ResetPasswordMode } from '../../models/reset-password-mode';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-reset-password',
     templateUrl: './reset-password.component.html',
     styleUrls: ['./reset-password.component.less']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit, OnDestroy {
 
     resetPassword: ResetPassword;
     resetPasswordMode: ResetPasswordMode;
+    queryParamsSubscription: Subscription
 
     constructor(
         private route: ActivatedRoute,
@@ -27,9 +29,13 @@ export class ResetPasswordComponent implements OnInit {
         this.resetPassword = new ResetPassword();
         this.resetPasswordMode = ResetPasswordMode.ResetPassword;
 
-        this.route.queryParams.subscribe(params => {
+        this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
             this.resetPassword.forgotPasswordGuid = params.token;
         });
+    }
+
+    ngOnDestroy() {
+        this.queryParamsSubscription.unsubscribe();
     }
 
     async onSubmit() {

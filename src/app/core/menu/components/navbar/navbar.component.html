@@ -19,20 +19,26 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <span dropdown>
-                            <a href id="basic-link" dropdownToggle class="nav-link dropdown-toggle" (click)="false" aria-controls="basic-link-dropdown"><img ngxGravatar [email]="user.email" size="32"> <span class="text-dark"></span> {{ user.name }}</a>
-                            <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="basic-link">
+                            <a href id="basic-link" dropdownToggle class="nav-link" (click)="false" aria-controls="basic-link-dropdown"><img
+                                    ngxGravatar [email]="user.email" size="32"></a>
+                            <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                                aria-labelledby="basic-link">
                                 <li>
-                                    <a class="dropdown-item" routerLink="/profile">Profile</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" routerLink="/settings">Settings &amp; Privacy</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" routerLink="/help">Help</a>
+                                    <div class="dropdown-item disabled">Marcin Czachurski</div>
                                 </li>
                                 <div class="dropdown-divider"></div>
                                 <li>
-                                    <a [routerLink]="" class="dropdown-item" (click)="signOut()">Sign out</a>
+                                    <a class="dropdown-item" [routerLink]="['/profile', '@' + user.userName]" routerLinkActive="active">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" routerLink="/settings" routerLinkActive="active">Settings &amp; Privacy</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" routerLink="/help" routerLinkActive="active">Help</a>
+                                </li>
+                                <div class="dropdown-divider"></div>
+                                <li>
+                                    <a routerLink="" class="dropdown-item" (click)="signOut()">Sign out</a>
                                 </li>
                             </ul>
                         </span>

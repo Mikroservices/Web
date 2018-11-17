@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 
-import { User } from '../../models/user';
 import { RegisterMode } from '../../models/register-mode';
 import { environment } from 'src/environments/environment';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
     selector: 'app-register',

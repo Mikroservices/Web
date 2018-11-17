@@ -15,9 +15,10 @@
                             <div class="form-group">
                                 <label for="userName">User name <i *ngIf="userName.pending" class="fas fa-spinner fa-spin"></i></label>
                                 <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" #userName="ngModel"
-                                    [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required appUniqueUserName />
+                                    [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required pattern="^[a-zA-Z0-9]*$" appUniqueUserName />
                                 <div *ngIf="userName.invalid" class="invalid-feedback">
                                     <div *ngIf="userName.errors.required">User name is required.</div>
+                                    <div *ngIf="userName.errors.pattern">User name format is invalid. Only alphanumeric characters are allowed.</div>
                                     <div *ngIf="userName.errors.appUniqueUserName">User name is already taken.</div> 
                                 </div>
                             </div>

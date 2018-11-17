@@ -44,6 +44,12 @@ label {
     font-size: .875rem;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+    color: @body-color;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    }
+
 .form-control {
     display: block;
     width: 100%;
@@ -73,4 +79,32 @@ label {
     background-color: #fff;
     border-bottom: 0px;
     // font-family: "PT Serif", serif;
+}
+
+.vertical-align {
+    display: flex; 
+    flex-direction: column;
+}
+
+.nav-tabs {
+    border: 0px;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link.active:hover,
+.nav-tabs .nav-link.active:focus {
+    border-bottom: 2px solid #f0f0f0;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.nav-tabs .nav-link, 
+.nav-tabs .nav-link {
+    border: 0px;
+}
+
+.nav-tabs .nav-link:hover, 
+.nav-tabs .nav-link:focus {
+    border: 0px;
 }

@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/components/register/register.compo
 import { ConfirmEmailComponent } from './register/components/confirm-email/confirm-email.component';
 import { ForgotPasswordComponent } from './forgot-password/components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './forgot-password/components/reset-password/reset-password.component';
+import { ProfileComponent } from './profile/components/profile/profile.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'reset-password', component: ResetPasswordComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'confirm-email', component: ConfirmEmailComponent },
+    { path: 'profile/:userName', component: ProfileComponent },
     { path: 'home', component: HomeComponent },
     { path: '',   redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
