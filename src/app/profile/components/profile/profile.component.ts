@@ -20,13 +20,6 @@ export class ProfileComponent implements OnInit {
     constructor(private route: ActivatedRoute, private httpClient: HttpClient) { }
 
     ngOnInit() {
-        // this.user$ = this.route.paramMap.pipe(
-        //     switchMap(params => {
-        //         this.userName = params.get('userName');
-        //         return this.httpClient.get<User>(environment.usersService +  '/users/' + this.userName);
-        //     })
-        // );
-
         this.route.params.subscribe(params => {
             this.userName = params['userName'];
             this.httpClient.get<User>(environment.usersService +  '/users/' + this.userName).subscribe(user => {

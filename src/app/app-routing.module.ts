@@ -9,6 +9,8 @@ import { ConfirmEmailComponent } from './register/components/confirm-email/confi
 import { ForgotPasswordComponent } from './forgot-password/components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './forgot-password/components/reset-password/reset-password.component';
 import { ProfileComponent } from './profile/components/profile/profile.component';
+import { SettingsComponent } from './settings/components/settings/settings.component';
+import { AuthorizationGuardService } from './core/services/user/authorization-guard.service';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -17,6 +19,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'confirm-email', component: ConfirmEmailComponent },
     { path: 'profile/:userName', component: ProfileComponent },
+    { path: 'settings', component: SettingsComponent, canActivate: [AuthorizationGuardService] },
     { path: 'home', component: HomeComponent },
     { path: '',   redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }

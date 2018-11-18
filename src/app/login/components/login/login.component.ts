@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
     async onSubmit() {
         this.loginMode = LoginMode.Submitting;
 
-        this.http.post<AccessToken>(environment.usersService + '/login', this.login).subscribe(
+        this.http.post<AccessToken>(environment.usersService + '/account/login', this.login).subscribe(
             result => {
-                this.userService.signIn(result.actionToken);
+                this.userService.signIn(result.accessToken);
                 this.router.navigate(['/home']);
             },
             error => {

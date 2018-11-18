@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
@@ -15,15 +15,21 @@ import { HomeModule } from './home/home.module';
 import { PersistanceService } from './core/services/persistance/persistance.service';
 import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
+import { SettingsModule } from './settings/settings.module';
+import { UserService } from './core/services/user/user.service';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
         tokenGetter: () => {
             return persistanceService.getAccessToken();
         },
-        whitelistedDomains: ['localhost:8001'],
+        whitelistedDomains: ['localhost:8001', 'localhost:8080','letterer.me'],
         blacklistedRoutes: []
     };
+}
+
+export function appInitialization(userService: UserService) {
+    return () => userService.refreshAccessToken();
 }
 
 @NgModule({
@@ -52,9 +58,12 @@ export function jwtOptionsFactory(persistanceService: PersistanceService) {
         LoginModule,
         ForgotPasswordModule,
         ProfileModule,
+        SettingsModule,
         SharedModule
     ],
-    providers: [],
+    providers: [
+        { provide: APP_INITIALIZER, useFactory: appInitialization, deps: [ UserService ], multi: true },
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

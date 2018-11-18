@@ -24,7 +24,7 @@
                             <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
                                 aria-labelledby="basic-link">
                                 <li>
-                                    <div class="dropdown-item disabled">Marcin Czachurski</div>
+                                    <div class="dropdown-item disabled">{{ user.name ? user.name : user.userName }}</div>
                                 </li>
                                 <div class="dropdown-divider"></div>
                                 <li>
