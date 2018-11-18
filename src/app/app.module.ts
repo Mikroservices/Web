@@ -16,20 +16,20 @@ import { PersistanceService } from './core/services/persistance/persistance.serv
 import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
 import { SettingsModule } from './settings/settings.module';
-import { UserService } from './core/services/user/user.service';
+import { AuthorizationService } from './core/services/authorization/authorization.service';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
         tokenGetter: () => {
             return persistanceService.getAccessToken();
         },
-        whitelistedDomains: ['localhost:8001', 'localhost:8080','letterer.me'],
+        whitelistedDomains: ['localhost:8001', 'localhost:8080','letterer.me', 'users.letterer.me'],
         blacklistedRoutes: []
     };
 }
 
-export function appInitialization(userService: UserService) {
-    return () => userService.refreshAccessToken();
+export function appInitialization(authorizationService: AuthorizationService) {
+    return () => authorizationService.refreshAccessToken();
 }
 
 @NgModule({
@@ -62,7 +62,7 @@ export function appInitialization(userService: UserService) {
         SharedModule
     ],
     providers: [
-        { provide: APP_INITIALIZER, useFactory: appInitialization, deps: [ UserService ], multi: true },
+        { provide: APP_INITIALIZER, useFactory: appInitialization, deps: [ AuthorizationService ], multi: true },
     ],
     bootstrap: [AppComponent]
 })

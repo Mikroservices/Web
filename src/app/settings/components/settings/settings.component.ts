@@ -7,10 +7,11 @@ import { SettingsMode } from '../../models/settings-mode';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/shared/models/user';
 
-import { UserService } from 'src/app/core/services/user/user.service';
+import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
 import { ToastrService } from 'ngx-toastr';
 import { ChangePassword } from '../../models/change-password';
 import { Router } from '@angular/router';
+import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
 
 @Component({
     selector: 'app-settings',
@@ -30,19 +31,22 @@ export class SettingsComponent implements OnInit {
 
     constructor(
         private httpClient: HttpClient,
-        private userService: UserService,
+        private authorizationService: AuthorizationService,
         private toastrService: ToastrService,
         private modalService: BsModalService,
-        private router: Router) { }
+        private router: Router,
+        private spinnerService: SpinnerService) { }
 
     ngOnInit() {
+        this.spinnerService.show();
         this.settingsMode = SettingsMode.Settings;
         this.user = new User();
         this.changePassword = new ChangePassword();
 
-        let userFromToken = this.userService.getUser();
+        let userFromToken = this.authorizationService.getUser();
         this.httpClient.get<User>(environment.usersService + '/users/@' + userFromToken.userName).subscribe(user => {
             this.user = user;
+            this.spinnerService.hide();
         });
     }
 
@@ -52,7 +56,7 @@ export class SettingsComponent implements OnInit {
         this.httpClient.put<User>(environment.usersService + '/users/@' + this.user.userName, this.user).subscribe(
             () => {
                 this.settingsMode = SettingsMode.Success;
-                this.userService.refreshAccessToken();
+                this.authorizationService.refreshAccessToken();
                 this.toastrService.success('Settings was saved.');
             },
             () => {
@@ -80,7 +84,7 @@ export class SettingsComponent implements OnInit {
                 this.deleteAccountModalRef.hide();
                 this.toastrService.success('Your account was deleted.');
 
-                this.userService.signOut();
+                this.authorizationService.signOut();
                 this.router.navigate(['/home']);
             },
             () => {

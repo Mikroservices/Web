@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { UserService } from './user.service';
+import { AuthorizationService } from './authorization.service';
 
 
 @Injectable({
@@ -9,14 +9,14 @@ import { UserService } from './user.service';
 export class AuthorizationGuardService implements CanActivate {
 
     constructor(
-        public userService: UserService,
+        public authorizationService: AuthorizationService,
         public router: Router
     ) { }
 
     async canActivate(): Promise<boolean> {
 
-        if (!this.userService.isLoggedIn()) {
-            await this.userService.signOut();
+        if (!this.authorizationService.isLoggedIn()) {
+            await this.authorizationService.signOut();
             this.router.navigate(['/login']);
 
             return false;

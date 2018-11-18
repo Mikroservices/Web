@@ -11,7 +11,7 @@ import { AccessToken } from 'src/app/login/models/access-token';
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class AuthorizationService {
 
     public changes = new BehaviorSubject<User>(this.getUser());
     private sessionTimeout: any;

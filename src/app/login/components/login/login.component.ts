@@ -6,7 +6,7 @@ import { Login } from '../../models/login';
 import { AccessToken } from '../../models/access-token';
 import { LoginMode } from '../../models/login-mode';
 import { environment } from 'src/environments/environment';
-import { UserService } from 'src/app/core/services/user/user.service';
+import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
 
 @Component({
     selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private http: HttpClient,
         private router: Router,
-        private userService: UserService) {
+        private authorizationService: AuthorizationService) {
     }
 
     ngOnInit() {
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
         this.http.post<AccessToken>(environment.usersService + '/account/login', this.login).subscribe(
             result => {
-                this.userService.signIn(result.accessToken);
+                this.authorizationService.signIn(result.accessToken);
                 this.router.navigate(['/home']);
             },
             error => {

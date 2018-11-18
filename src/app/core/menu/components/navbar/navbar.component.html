@@ -4,6 +4,14 @@
 
             <a class="navbar-brand mx-auto" routerLink="/home" routerLinkActive="active">letterer</a>
 
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <app-spinner></app-spinner>
+                    </li>
+                </ul>
+            </div>
+
             <div *ngIf="!user" class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -19,10 +27,8 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <span dropdown>
-                            <a href id="basic-link" dropdownToggle class="nav-link" (click)="false" aria-controls="basic-link-dropdown"><img
-                                    ngxGravatar [email]="user.email" size="32"></a>
-                            <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
-                                aria-labelledby="basic-link">
+                            <a href id="basic-link" dropdownToggle class="nav-link" (click)="false" aria-controls="basic-link-dropdown"><img ngxGravatar [email]="user.email" size="32"></a>
+                            <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="basic-link">
                                 <li>
                                     <div class="dropdown-item disabled">{{ user.name ? user.name : user.userName }}</div>
                                 </li>

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
-import { UserService } from 'src/app/core/services/user/user.service';
+import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,11 +13,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     user: User = null;
     private userChangeSubscription: Subscription;
 
-    constructor(private userService: UserService) { }
+    constructor(private authorizationService: AuthorizationService) { }
 
     ngOnInit() {
-        this.user = this.userService.getUser();
-        this.userChangeSubscription = this.userService.changes.subscribe(user => {
+        this.user = this.authorizationService.getUser();
+        this.userChangeSubscription = this.authorizationService.changes.subscribe(user => {
             this.user = user;
         });
     }
@@ -27,6 +27,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     signOut(): void {
-        this.userService.signOut();
+        this.authorizationService.signOut();
     }
 }

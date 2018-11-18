@@ -10,16 +10,17 @@ import { ForgotPasswordComponent } from './forgot-password/components/forgot-pas
 import { ResetPasswordComponent } from './forgot-password/components/reset-password/reset-password.component';
 import { ProfileComponent } from './profile/components/profile/profile.component';
 import { SettingsComponent } from './settings/components/settings/settings.component';
-import { AuthorizationGuardService } from './core/services/user/authorization-guard.service';
+import { AuthorizationGuardService } from './core/services/authorization/authorization-guard.service';
+import { LoggedInGuardService } from './core/services/authorization/logged-in-guard.service';
 
 const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent },
-    { path: 'reset-password', component: ResetPasswordComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'confirm-email', component: ConfirmEmailComponent },
+    { path: 'login', component: LoginComponent, canActivate: [ LoggedInGuardService ] },
+    { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ LoggedInGuardService ] },
+    { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ LoggedInGuardService ] },
+    { path: 'register', component: RegisterComponent, canActivate: [ LoggedInGuardService ] },
+    { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedInGuardService ] },
     { path: 'profile/:userName', component: ProfileComponent },
-    { path: 'settings', component: SettingsComponent, canActivate: [AuthorizationGuardService] },
+    { path: 'settings', component: SettingsComponent, canActivate: [ AuthorizationGuardService ] },
     { path: 'home', component: HomeComponent },
     { path: '',   redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
