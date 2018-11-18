@@ -53,6 +53,7 @@ export class AuthorizationService {
         user.email = decodedToken.email;
         user.name = decodedToken.name;
         user.userName = decodedToken.userName;
+        user.gravatarHash = decodedToken.gravatarHash;
 
         return user;
     }

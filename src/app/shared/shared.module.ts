@@ -8,13 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UniqueUserNameValidatorDirective } from './validations/unique-user-name-validator.directive';
 import { UniqueEmailValidatorDirective } from './validations/unique-email-validator.directive';
-import { SpinnerComponent } from '../shared/spinner/components/spinner.component';
+import { SpinnerComponent } from './spinner/components/spinner.component';
+import { GravatarComponent } from './gravatar/gravatar.component';
 
 @NgModule({
     declarations: [
         UniqueEmailValidatorDirective,
         UniqueUserNameValidatorDirective,
-        SpinnerComponent
+        SpinnerComponent,
+        GravatarComponent
     ],
     imports: [
         CommonModule
@@ -27,7 +29,8 @@ import { SpinnerComponent } from '../shared/spinner/components/spinner.component
         HttpClientModule,
         UniqueEmailValidatorDirective,
         UniqueUserNameValidatorDirective,
-        SpinnerComponent
+        SpinnerComponent,
+        GravatarComponent
     ]
 })
 export class SharedModule { }

@@ -29,8 +29,7 @@
     "zone.js": "~0.8.26",
     "ngx-captcha": "~6.0.0",
     "ngx-toastr": "~9.1.1",
-    "@auth0/angular-jwt": "~2.0.0",
-    "ngx-gravatar": "~7.0.0"
+    "@auth0/angular-jwt": "~2.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",

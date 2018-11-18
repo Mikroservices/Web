@@ -8,4 +8,5 @@ export class User {
     public location: string;
     public website: string;
     public securityToken: string;
+    public gravatarHash: string;
 }

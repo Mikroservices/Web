@@ -5,7 +5,7 @@
 
                 <div class="row">
                     <div class="col-md-auto">
-                        <img ngxGravatar [email]="user.email" size="120">
+                        <app-gravatar [size]="120" [emailHash]="user.gravatarHash"></app-gravatar>
                     </div>
                     <div class="col">
                         <div class="h-100 justify-content-center vertical-align">

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
-import { GravatarModule } from 'ngx-gravatar';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
@@ -10,7 +9,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ],
     imports: [
         SharedModule,
-        GravatarModule,
         TabsModule.forRoot()
     ]
 })
