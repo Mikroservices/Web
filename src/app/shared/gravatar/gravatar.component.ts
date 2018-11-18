@@ -13,7 +13,7 @@ export class GravatarComponent implements OnInit {
     @Input()
     emailHash: string;
     
-    protected url: string;
+    url: string;
 
     constructor() { }
 

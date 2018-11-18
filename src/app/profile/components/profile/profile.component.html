@@ -30,17 +30,17 @@
                     <tabset>
                         <tab heading="Stories" id="tab1">
                             <div class="mt-4">
-                                Stories...
+                                <app-story-item *ngFor="let i of [1,2,3]"></app-story-item>
                             </div>
                         </tab>
                         <tab heading="Bookmarked">
                             <div class="mt-4">
-                                Bookmarked...
+                                <app-story-item *ngFor="let i of [1,2,3,4]"></app-story-item>
                             </div>
                         </tab>
                         <tab heading="Claps">
                             <div class="mt-4">
-                                Claps...
+                                <app-story-item *ngFor="let i of [1,2]"></app-story-item>
                             </div>
                         </tab>
                     </tabset>

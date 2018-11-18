@@ -10,13 +10,15 @@ import { UniqueUserNameValidatorDirective } from './validations/unique-user-name
 import { UniqueEmailValidatorDirective } from './validations/unique-email-validator.directive';
 import { SpinnerComponent } from './spinner/components/spinner.component';
 import { GravatarComponent } from './gravatar/gravatar.component';
+import { StoryItemComponent } from './stories/components/story-item/story-item.component';
 
 @NgModule({
     declarations: [
         UniqueEmailValidatorDirective,
         UniqueUserNameValidatorDirective,
         SpinnerComponent,
-        GravatarComponent
+        GravatarComponent,
+        StoryItemComponent
     ],
     imports: [
         CommonModule
@@ -30,7 +32,8 @@ import { GravatarComponent } from './gravatar/gravatar.component';
         UniqueEmailValidatorDirective,
         UniqueUserNameValidatorDirective,
         SpinnerComponent,
-        GravatarComponent
+        GravatarComponent,
+        StoryItemComponent
     ]
 })
 export class SharedModule { }
