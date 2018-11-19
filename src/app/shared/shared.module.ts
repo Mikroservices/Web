@@ -11,6 +11,7 @@ import { SpinnerModule } from './spinner/spinner.module';
 import { StoriesModule } from './stories/stories.module';
 import { UserCardModule } from './user-card/user-card.module';
 import { ValidationsModule } from './validations/validations.module';
+import { TextEditorModule } from './text-editor/text-editor.module';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { ValidationsModule } from './validations/validations.module';
         SpinnerModule,
         StoriesModule,
         UserCardModule,
-        ValidationsModule
+        ValidationsModule,
+        TextEditorModule
     ]
 })
 export class SharedModule { }

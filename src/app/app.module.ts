@@ -17,6 +17,7 @@ import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
 import { SettingsModule } from './settings/settings.module';
 import { AuthorizationService } from './core/services/authorization/authorization.service';
+import { StoriesModule } from './stories/stories.module';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
@@ -59,6 +60,7 @@ export function appInitialization(authorizationService: AuthorizationService) {
         ForgotPasswordModule,
         ProfileModule,
         SettingsModule,
+        StoriesModule,
         SharedModule
     ],
     providers: [

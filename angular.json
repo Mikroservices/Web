@@ -30,6 +30,8 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/medium-editor/dist/css/medium-editor.css",
+              "./node_modules/medium-editor/dist/css/themes/beagle.css",
               "src/styles.less"
             ],
             "scripts": []
