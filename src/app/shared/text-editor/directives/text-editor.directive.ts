@@ -37,10 +37,7 @@ export class TextEditorDirective implements OnInit, OnChanges, OnDestroy {
                 buttons: [
                     'bold',
                     'italic',
-                    'underline',
                     'strikethrough',
-                    'superscript',
-                    'subscript',
                     'orderedlist',
                     'unorderedlist',
                     'anchor',
