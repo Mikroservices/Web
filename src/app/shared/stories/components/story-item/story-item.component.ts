@@ -8,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class StoryItemComponent implements OnInit {
 
     index: number = 0;
+    claps: number = 10;
 
     constructor() { }
 
     ngOnInit() {
         this.index = this.randomInt(1, 10000);
+        this.claps = this.randomInt(20, 1000);
     }
 
     randomInt(min, max) {

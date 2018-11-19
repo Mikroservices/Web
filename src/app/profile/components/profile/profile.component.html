@@ -3,28 +3,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
 
-                <div class="row">
-                    <div class="col-md-auto">
-                        <app-gravatar [size]="120" [emailHash]="user.gravatarHash"></app-gravatar>
-                    </div>
-                    <div class="col">
-                        <div class="h-100 justify-content-center vertical-align">
-                            <h3>{{ user.name }} <small class="text-muted">@{{ user.userName }}</small></h3>
-                            <h6>{{ user.bio }}</h6>
-                            <div class="text-muted">
-                                <span *ngIf="user.location" class="d-inline-block mr-3">
-                                    <i class="fas fa-map-marker-alt mr-1"></i>{{ user.location }}
-                                </span>
-                                <span *ngIf="user.website" class="d-inline-block mr-3">
-                                    <i class="fas fa-globe-asia mr-1"></i>{{ user.website }}
-                                </span>
-                                <span *ngIf="user.email" class="d-inline-block">
-                                    <i class="fas fa-envelope mr-1"></i>{{ user.email }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <app-user-card [user]="user"></app-user-card>
 
                 <div class="pt-4">
                     <tabset>

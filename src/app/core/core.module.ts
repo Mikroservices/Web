@@ -3,16 +3,17 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
 import { MenuModule } from './menu/menu.module';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
-    declarations: [
-    ],
+    declarations: [],
     imports: [
         SharedModule
     ],
     exports: [
         ErrorsModule,
-        MenuModule
+        MenuModule,
+        FooterModule
     ]
 })
 export class CoreModule { }

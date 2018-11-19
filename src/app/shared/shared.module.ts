@@ -6,19 +6,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { UniqueUserNameValidatorDirective } from './validations/unique-user-name-validator.directive';
-import { UniqueEmailValidatorDirective } from './validations/unique-email-validator.directive';
-import { SpinnerComponent } from './spinner/components/spinner.component';
-import { GravatarComponent } from './gravatar/gravatar.component';
-import { StoryItemComponent } from './stories/components/story-item/story-item.component';
+import { GravatarModule } from './gravatar/gravatar.module';
+import { SpinnerModule } from './spinner/spinner.module';
+import { StoriesModule } from './stories/stories.module';
+import { UserCardModule } from './user-card/user-card.module';
+import { ValidationsModule } from './validations/validations.module';
 
 @NgModule({
     declarations: [
-        UniqueEmailValidatorDirective,
-        UniqueUserNameValidatorDirective,
-        SpinnerComponent,
-        GravatarComponent,
-        StoryItemComponent
     ],
     imports: [
         CommonModule
@@ -29,11 +24,11 @@ import { StoryItemComponent } from './stories/components/story-item/story-item.c
         FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        UniqueEmailValidatorDirective,
-        UniqueUserNameValidatorDirective,
-        SpinnerComponent,
-        GravatarComponent,
-        StoryItemComponent
+        GravatarModule,
+        SpinnerModule,
+        StoriesModule,
+        UserCardModule,
+        ValidationsModule
     ]
 })
 export class SharedModule { }

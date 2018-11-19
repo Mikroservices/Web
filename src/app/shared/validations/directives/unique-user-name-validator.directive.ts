@@ -2,18 +2,19 @@ import { Directive } from '@angular/core';
 import { NG_ASYNC_VALIDATORS, ValidationErrors, AsyncValidator, AbstractControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { BooleanResult } from '../models/boolean-result';
 import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+
+import { BooleanResult } from '../../models/boolean-result';
 import { environment } from 'src/environments/environment';
 
 @Directive({
-    selector: '[appUniqueEmail]',
+    selector: '[appUniqueUserName]',
     providers: [
-        { provide: NG_ASYNC_VALIDATORS, useExisting: UniqueEmailValidatorDirective, multi: true }
+        { provide: NG_ASYNC_VALIDATORS, useExisting: UniqueUserNameValidatorDirective, multi: true }
     ]
 })
-export class UniqueEmailValidatorDirective implements AsyncValidator {
+export class UniqueUserNameValidatorDirective implements AsyncValidator {
 
     constructor(private httpClient: HttpClient) {
     }
@@ -25,10 +26,10 @@ export class UniqueEmailValidatorDirective implements AsyncValidator {
                     return of(null);
                 }
 
-                return this.httpClient.get<BooleanResult>(environment.usersService + '/register/email/' + control.value).pipe(
+                return this.httpClient.get<BooleanResult>(environment.usersService + '/register/userName/' + control.value).pipe(
                     map(response => {
                         if (response.result) {
-                            return { appUniqueEmail: { error: 'Email already connected to other account.', actualValue: control.value } };
+                            return { appUniqueUserName: { error: 'User name is already taken.', actualValue: control.value } };
                         }
 
                         return null;
