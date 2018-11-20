@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
 
+import { LoadingBarService } from '@ngx-loading-bar/core';
+
 @Injectable({
     providedIn: 'root'
 })
 export class SpinnerService {
 
-    private _isDisplayed: Boolean = false;
-
-    constructor() { }
+    constructor(private loadingBar: LoadingBarService) { }
 
     show() {
-        this._isDisplayed = true;
+        this.loadingBar.start();
     }
 
     hide() {
-        this._isDisplayed = false;
-    }
-
-    isDisplayed(): Boolean {
-        return this._isDisplayed;
+        this.loadingBar.complete();
     }
 }

@@ -4,14 +4,6 @@
 
             <a class="navbar-brand mx-auto" routerLink="/home" routerLinkActive="active">letterer</a>
 
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <app-spinner></app-spinner>
-                    </li>
-                </ul>
-            </div>
-
             <div *ngIf="!user" class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">

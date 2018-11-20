@@ -46,6 +46,14 @@ export class SettingsComponent implements OnInit {
         let userFromToken = this.authorizationService.getUser();
         this.httpClient.get<User>(environment.usersService + '/users/@' + userFromToken.userName).subscribe(user => {
             this.user = user;
+        },
+        () => {
+            this.toastrService.error('Error during downloading user settings.');
+                
+            this.spinnerService.hide();
+            this.router.navigate(['/home']);
+        },
+        () => {
             this.spinnerService.hide();
         });
     }

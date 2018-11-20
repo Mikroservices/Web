@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import { switchMap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 import { User } from 'src/app/shared/models/user';
 import { environment } from 'src/environments/environment';
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+
 
 @Component({
     selector: 'app-profile',
@@ -20,8 +20,10 @@ export class ProfileComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute, 
+        private router: Router,
         private httpClient: HttpClient,
-        private spinnerService: SpinnerService) { }
+        private spinnerService: SpinnerService,
+        private toastrService: ToastrService) { }
 
     ngOnInit() {
         this.spinnerService.show();
@@ -30,7 +32,14 @@ export class ProfileComponent implements OnInit {
             this.userName = params['userName'];
             this.httpClient.get<User>(environment.usersService +  '/users/' + this.userName).subscribe(user => {
                 this.user = user;
-
+            },
+            () => {
+                this.toastrService.error('Error during downloading user profile.');
+                
+                this.spinnerService.hide();
+                this.router.navigate(['/home']);
+            },
+            () => {
                 this.spinnerService.hide();
             });
         })

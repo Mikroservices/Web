@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 @NgModule({
     declarations: [
-        SpinnerComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        LoadingBarModule.forRoot()
     ],
     exports: [
-        SpinnerComponent
+        LoadingBarModule
     ]
 })
 export class SpinnerModule { }
