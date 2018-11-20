@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: [ LoggedInGuardService ] },
     { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedInGuardService ] },
     { path: 'profile/:userName', component: ProfileComponent },
-    { path: 'story', component: StoryEditComponent },
+    { path: 'stories/new', component: StoryEditComponent },
     { path: 'settings', component: SettingsComponent, canActivate: [ AuthorizationGuardService ] },
     { path: 'home', component: HomeComponent },
     { path: '',   redirectTo: '/home', pathMatch: 'full' },
