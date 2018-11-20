@@ -1,31 +1,27 @@
-<main *ngIf="user" class="main pt-4" role="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
+<div *ngIf="user" class="row">
+    <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                <app-user-card [user]="user"></app-user-card>
+        <app-user-card [user]="user"></app-user-card>
 
-                <div class="pt-4">
-                    <tabset>
-                        <tab heading="Stories" id="tab1">
-                            <div class="mt-4">
-                                <app-story-item *ngFor="let i of [1,2,3]"></app-story-item>
-                            </div>
-                        </tab>
-                        <tab heading="Bookmarked">
-                            <div class="mt-4">
-                                <app-story-item *ngFor="let i of [1,2,3,4]"></app-story-item>
-                            </div>
-                        </tab>
-                        <tab heading="Claps">
-                            <div class="mt-4">
-                                <app-story-item *ngFor="let i of [1,2]"></app-story-item>
-                            </div>
-                        </tab>
-                    </tabset>
-                </div>
-
-            </div>
+        <div class="pt-4">
+            <tabset>
+                <tab heading="Stories" id="tab1">
+                    <div class="mt-4">
+                        <app-story-item *ngFor="let i of [1,2,3]"></app-story-item>
+                    </div>
+                </tab>
+                <tab heading="Bookmarked">
+                    <div class="mt-4">
+                        <app-story-item *ngFor="let i of [1,2,3,4]"></app-story-item>
+                    </div>
+                </tab>
+                <tab heading="Claps">
+                    <div class="mt-4">
+                        <app-story-item *ngFor="let i of [1,2]"></app-story-item>
+                    </div>
+                </tab>
+            </tabset>
         </div>
+
     </div>
-</main>
+</div>

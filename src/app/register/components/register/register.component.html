@@ -1,111 +1,89 @@
-<main *ngIf="!isSuccessMode()" class="main pt-4" role="main">
+<div *ngIf="!isSuccessMode()" class="row">
+    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
+        <h1 class="text-center pt-4 pb-4">Register</h1>
 
-                <article class="card mb-4">
-                    <header class="card-header text-center">
-                        <h1 class="card-title">Register</h1>
-                    </header>
-                    <div class="card-body">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
-                        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-
-                            <div class="form-group">
-                                <label for="userName">User name <i *ngIf="userName.pending" class="fas fa-spinner fa-spin"></i></label>
-                                <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" #userName="ngModel"
-                                    [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required pattern="^[a-zA-Z0-9]*$" appUniqueUserName />
-                                <div *ngIf="userName.invalid" class="invalid-feedback">
-                                    <div *ngIf="userName.errors.required">User name is required.</div>
-                                    <div *ngIf="userName.errors.pattern">User name format is invalid. Only alphanumeric characters are allowed.</div>
-                                    <div *ngIf="userName.errors.appUniqueUserName">User name is already taken.</div> 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email <i *ngIf="email.pending" class="fas fa-spinner fa-spin"></i></label>
-                                <input type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel"
-                                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" appUniqueEmail  /> 
-                                <div *ngIf="email.invalid" class="invalid-feedback">
-                                    <div *ngIf="email.errors.required">Email is required.</div>
-                                    <div *ngIf="email.errors.pattern">Email format is invalid.</div>
-                                    <div *ngIf="email.errors.appUniqueEmail">Email is already connected to different account.</div> 
-                                </div>
-                                <small id="userNameHelpBlock" class="form-text text-muted">
-                                    Don't worry. This info is sacred for us. We won't ever show, sell or abuse it.
-                                </small>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password"
-                                    #password="ngModel" required minlength="8" maxlength="32" pattern="^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$"
-                                    [ngClass]="{ 'is-invalid': f.submitted && password.invalid }">
-                                <div *ngIf="password.invalid" class="invalid-feedback">
-                                    <div *ngIf="password.errors.required">Password is required.</div>
-                                    <div *ngIf="password.errors.minlength">Password must be at least 8 characters long.</div>
-                                    <div *ngIf="password.errors.maxlength">Password must be lower or equal then 32
-                                        characters long.</div>
-                                    <div *ngIf="password.errors.pattern">Password must contains at least one lowercase
-                                        letter, one uppercase letter and number or symbol.</div>
-                                </div>
-                                <small id="passwordHelpBlock" class="form-text text-muted">
-                                    Your password must be 8-32 characters long and must include: at least one lowercase
-                                    letter, one uppercase letter, and a number or symbol.
-                                </small>
-                            </div>
-
-                            <hr />
-
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" maxlength="50"
-                                    [(ngModel)]="user.name">
-                            </div>
-                            <div class="form-group">
-                                <label for="location">Location</label>
-                                <input type="text" class="form-control" id="location" name="location" maxlength="50"
-                                    [(ngModel)]="user.location">
-                            </div>
-                            <div class="form-group">
-                                <label for="website">Website</label>
-                                <input type="text" class="form-control" id="website" name="website" maxlength="50"
-                                    [(ngModel)]="user.website">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="bio">Biography</label>
-                                <textarea class="form-control" id="bio" rows="4" name="bio" maxlength="200" [(ngModel)]="user.bio"></textarea>
-                            </div>
-
-                            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Register <i
-                                    *ngIf="isSubmittingMode()" class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()"
-                                class="text-danger ml-4">{{ errorMessage }}</span>
-                        </form>
-
-                    </div>
-                </article>
-
+            <div class="form-group">
+                <label for="userName">User name <i *ngIf="userName.pending" class="fas fa-spinner fa-spin"></i></label>
+                <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" #userName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required pattern="^[a-zA-Z0-9]*$"
+                    appUniqueUserName />
+                <div *ngIf="userName.invalid" class="invalid-feedback">
+                    <div *ngIf="userName.errors.required">User name is required.</div>
+                    <div *ngIf="userName.errors.pattern">User name format is invalid. Only alphanumeric characters are allowed.</div>
+                    <div *ngIf="userName.errors.appUniqueUserName">User name is already taken.</div>
+                </div>
             </div>
-        </div>
-    </div>
-
-</main>
-
-<main *ngIf="isSuccessMode()" class="main pt-4" role="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-
-                <h1><i class="fas fa-envelope"></i> Welcome to letterer.me!</h1>
-                <p>
-                    <strong>Congratuations!</strong> Your letterer.me account has been successfully created.
-                    We've sent you a link to confirm your email address. Please check your inbox.
-                    It could take up to 10 minutes to show up in your inbox.
-                </p>
-                <p>
-                    In the meantime, you can go back to the <a routerLink="/home">homepage</a>.
-                </p>
+            <div class="form-group">
+                <label for="email">Email <i *ngIf="email.pending" class="fas fa-spinner fa-spin"></i></label>
+                <input type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                    appUniqueEmail />
+                <div *ngIf="email.invalid" class="invalid-feedback">
+                    <div *ngIf="email.errors.required">Email is required.</div>
+                    <div *ngIf="email.errors.pattern">Email format is invalid.</div>
+                    <div *ngIf="email.errors.appUniqueEmail">Email is already connected to different account.</div>
+                </div>
+                <small id="userNameHelpBlock" class="form-text text-muted">
+                    Don't worry. This info is sacred for us. We won't ever show, sell or abuse it.
+                </small>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required minlength="8" maxlength="32" pattern="^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$"
+                    [ngClass]="{ 'is-invalid': f.submitted && password.invalid }">
+                <div *ngIf="password.invalid" class="invalid-feedback">
+                    <div *ngIf="password.errors.required">Password is required.</div>
+                    <div *ngIf="password.errors.minlength">Password must be at least 8 characters long.</div>
+                    <div *ngIf="password.errors.maxlength">Password must be lower or equal then 32
+                        characters long.</div>
+                    <div *ngIf="password.errors.pattern">Password must contains at least one lowercase
+                        letter, one uppercase letter and number or symbol.</div>
+                </div>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    Your password must be 8-32 characters long and must include: at least one lowercase
+                    letter, one uppercase letter, and a number or symbol.
+                </small>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" maxlength="50" [(ngModel)]="user.name">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" maxlength="50" [(ngModel)]="user.location">
+            </div>
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input type="text" class="form-control" id="website" name="website" maxlength="50" [(ngModel)]="user.website">
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Biography</label>
+                <textarea class="form-control" id="bio" rows="4" name="bio" maxlength="200" [(ngModel)]="user.bio"></textarea>
+            </div>
+
+            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Register <i *ngIf="isSubmittingMode()" class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()" class="text-danger ml-4">{{
+                errorMessage }}</span>
+        </form>
     </div>
-</main>
+</div>
+
+
+<div *ngIf="isSuccessMode()" class="row">
+    <div class="col-md-8 mx-auto">
+
+        <h1><i class="fas fa-envelope"></i> Welcome to letterer.me!</h1>
+        <p>
+            <strong>Congratuations!</strong> Your letterer.me account has been successfully created.
+            We've sent you a link to confirm your email address. Please check your inbox.
+            It could take up to 10 minutes to show up in your inbox.
+        </p>
+        <p>
+            In the meantime, you can go back to the <a routerLink="/home">homepage</a>.
+        </p>
+    </div>
+</div>
