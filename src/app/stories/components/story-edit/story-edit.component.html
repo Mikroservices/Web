@@ -1,5 +1,16 @@
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
-        <app-text-editor [(editorModel)]="text" [editorPlaceholder]="placeholder"></app-text-editor>
+
+        <form name="form" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label for="title" style="color: #c1c1c1; font-weight: 200">title</label>
+                <div id="title" class="story-title" name="title" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" data-placeholder="title of your story..." [(ngModel)]="title"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="title" style="color: #c1c1c1; font-weight: 200">your story</label>
+                <app-text-editor [(editorModel)]="story" editorPlaceholder="enter your story here..."></app-text-editor>
+            </div>
+        </form>
     </div>
 </div>

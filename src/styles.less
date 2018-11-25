@@ -182,3 +182,21 @@ label {
     margin-left: -23px;
     padding-bottom: 2px;
 }
+
+.story-title {
+    margin-bottom: 0.5rem; 
+    font-family: inherit; 
+    font-weight: 500; 
+    line-height: 1.2; 
+    color: inherit; 
+    font-size: 2.5em; 
+    outline-color: white; 
+    outline-style: none; 
+    outline-width: 0px;
+}
+
+.story-title:empty:not(:focus):before {
+    content: attr(data-placeholder);
+    color: #999;
+}
+

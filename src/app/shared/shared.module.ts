@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContenteditableModule } from 'ng-contenteditable';
 
 import { GravatarModule } from './gravatar/gravatar.module';
 import { SpinnerModule } from './spinner/spinner.module';
@@ -25,6 +26,7 @@ import { TextEditorModule } from './text-editor/text-editor.module';
         FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        ContenteditableModule,
         GravatarModule,
         SpinnerModule,
         StoriesModule,
