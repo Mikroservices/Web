@@ -13,6 +13,7 @@ import { SettingsComponent } from './settings/components/settings/settings.compo
 import { AuthorizationGuardService } from './core/services/authorization/authorization-guard.service';
 import { LoggedInGuardService } from './core/services/authorization/logged-in-guard.service';
 import { StoryEditComponent } from './stories/components/story-edit/story-edit.component';
+import { StoriesComponent } from './stories/components/stories/stories.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [ LoggedInGuardService ] },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: [ LoggedInGuardService ] },
     { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedInGuardService ] },
     { path: 'profile/:userName', component: ProfileComponent },
+    { path: 'stories', component: StoriesComponent },
     { path: 'stories/new', component: StoryEditComponent },
     { path: 'settings', component: SettingsComponent, canActivate: [ AuthorizationGuardService ] },
     { path: 'home', component: HomeComponent },

@@ -24,7 +24,7 @@ export function jwtOptionsFactory(persistanceService: PersistanceService) {
         tokenGetter: () => {
             return persistanceService.getAccessToken();
         },
-        whitelistedDomains: ['localhost:8001', 'localhost:8080','letterer.me', 'users.letterer.me'],
+        whitelistedDomains: ['localhost:8001', 'localhost:8003', 'localhost:8080','letterer.me', 'users.letterer.me'],
         blacklistedRoutes: []
     };
 }

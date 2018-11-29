@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   recaptchaKey: '6LfwsncUAAAAAPsUABRdM5OQVLRBFur_ZVQJoXPx',
-  usersService: 'http://localhost:8001'
+  usersService: 'http://localhost:8001',
+  storiesService: 'http://localhost:8003'
 };
 
 /*
