@@ -1,3 +1,8 @@
-<p>
-  stories works!
-</p>
+<div class="row">
+    <div *ngIf="stories" class="col-sm-12 col-md-10 col-lg-8 mx-auto">
+        <div *ngFor="let story of stories" class="mb-5">
+            <h4>{{ story.title }}</h4>
+            <div>{{ story.lead }}</div>
+        </div>
+    </div>
+</div>
