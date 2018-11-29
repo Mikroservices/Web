@@ -3,6 +3,11 @@
         <div *ngFor="let story of stories" class="mb-5">
             <h4>{{ story.title }}</h4>
             <div>{{ story.lead }}</div>
+            <div>
+                <span>{{ story.modified }}</span>
+                <span>{{ story.words }}</span>
+                <span>{{ story.duration }}</span>
+            </div>
         </div>
     </div>
 </div>

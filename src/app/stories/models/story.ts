@@ -5,4 +5,8 @@ export class Story {
     public text: string;
     public userId: string;
     public lead: string;
+    public created: Date;
+    public modified: Date;
+    public words: number;
+    public duration: number;
 }
