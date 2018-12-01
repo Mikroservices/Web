@@ -13,6 +13,7 @@ import { StoriesModule } from './stories/stories.module';
 import { UserCardModule } from './user-card/user-card.module';
 import { ValidationsModule } from './validations/validations.module';
 import { TextEditorModule } from './text-editor/text-editor.module';
+import { WidgetsModule } from './widgets/widgets.module';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { TextEditorModule } from './text-editor/text-editor.module';
         StoriesModule,
         UserCardModule,
         ValidationsModule,
-        TextEditorModule
+        TextEditorModule,
+        WidgetsModule
     ]
 })
 export class SharedModule { }

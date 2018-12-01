@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
     user: User;
     registerMode: RegisterMode;
     errorMessage: string;
+    passwordIsValid: boolean;
 
     constructor(
         private http: HttpClient,
@@ -73,6 +74,9 @@ export class RegisterComponent implements OnInit {
         return this.registerMode === RegisterMode.Error;
     }
 
+    passwordValid(valid: boolean): void {
+        this.passwordIsValid = valid;
+    }
 
     private removeGoogleBadge() {
         const googleBadge = this.document.getElementsByClassName('grecaptcha-badge');

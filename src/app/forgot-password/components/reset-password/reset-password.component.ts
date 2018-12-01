@@ -18,6 +18,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     resetPassword: ResetPassword;
     resetPasswordMode: ResetPasswordMode;
     queryParamsSubscription: Subscription
+    passwordIsValid: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -62,5 +63,9 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
     isSuccessMode(): Boolean {
         return this.resetPasswordMode === ResetPasswordMode.Success;
+    }
+
+    passwordValid(valid: boolean): void {
+        this.passwordIsValid = valid;
     }
 }
