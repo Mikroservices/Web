@@ -8,7 +8,7 @@ import { NgForm, NgModel } from '@angular/forms';
 })
 export class PasswordComponent implements OnInit {
 
-    protected isPasswordVisible: boolean;
+    isPasswordVisible: boolean;
 
     @Input()
     passwordText: string;

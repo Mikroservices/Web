@@ -6,21 +6,23 @@
         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="email">User name or Email</label>
-                <input type="text" class="form-control" name="userNameOrEmail" [(ngModel)]="login.userNameOrEmail" #userNameOrEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && userNameOrEmail.invalid }" required />
+                <input type="text" class="form-control" name="userNameOrEmail" [(ngModel)]="login.userNameOrEmail"
+                    #userNameOrEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && userNameOrEmail.invalid }" required />
                 <div *ngIf="userNameOrEmail.invalid" class="invalid-feedback">
-                    <div *ngIf="userNameOrEmail.errors.required">User name is required.</div>
+                    <div *ngIf="userNameOrEmail.errors.required">Enter user name or email.</div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" required class="form-control" id="password" name="password" [(ngModel)]="login.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }">
+                <input type="password" required class="form-control" id="password" name="password" [(ngModel)]="login.password"
+                    #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }">
                 <div *ngIf="password.invalid" class="invalid-feedback">
-                    <div *ngIf="password.errors.required">Password is required.</div>
+                    <div *ngIf="password.errors.required">Enter password.</div>
                 </div>
             </div>
 
-            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Login <i *ngIf="isSubmittingMode()" class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()" class="text-danger ml-4">{{
-                errorMessage }}</span>
+            <button type="submit" [disabled]="isSubmittingMode()" class="btn btn-primary">Login <i *ngIf="isSubmittingMode()" 
+                class="fas fa-spinner fa-spin"></i></button> <span *ngIf="isErrorMode()" class="text-danger ml-4">{{ errorMessage }}</span>
         </form>
 
         <hr />

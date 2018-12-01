@@ -10,9 +10,9 @@
                 <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" #userName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required pattern="^[a-zA-Z0-9]*$"
                     appUniqueUserName />
                 <div *ngIf="userName.invalid" class="invalid-feedback">
-                    <div *ngIf="userName.errors.required">User name is required.</div>
-                    <div *ngIf="userName.errors.pattern">User name format is invalid. Only alphanumeric characters are allowed.</div>
-                    <div *ngIf="userName.errors.appUniqueUserName">User name is already taken.</div>
+                    <div *ngIf="userName.errors.required">Enter user name.</div>
+                    <div *ngIf="userName.errors.pattern">Only alphanumeric characters are allowed in user name.</div>
+                    <div *ngIf="userName.errors.appUniqueUserName">Choose a different user name, this one is already taken.</div>
                 </div>
             </div>
             <div class="form-group">
@@ -24,9 +24,9 @@
                 <input type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
                     appUniqueEmail />
                 <div *ngIf="email.invalid" class="invalid-feedback">
-                    <div *ngIf="email.errors.required">Email is required.</div>
-                    <div *ngIf="email.errors.pattern">Email format is invalid.</div>
-                    <div *ngIf="email.errors.appUniqueEmail">Email is already connected to different account.</div>
+                    <div *ngIf="email.errors.required">Enter email.</div>
+                    <div *ngIf="email.errors.pattern">Verify that you've entered proper email.</div>
+                    <div *ngIf="email.errors.appUniqueEmail">Choose other email, this one is already connected to different account.</div>
                 </div>
             </div>
             <div class="form-group">
