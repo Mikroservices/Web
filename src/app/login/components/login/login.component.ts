@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { Login } from '../../models/login';
-import { AccessToken } from '../../models/access-token';
+import { Login } from '../../../core/models/login';
 import { LoginMode } from '../../models/login-mode';
-import { environment } from 'src/environments/environment';
 import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
+import { AccountService } from 'src/app/core/services/http/account.service';
 
 @Component({
     selector: 'app-login',
@@ -20,7 +18,7 @@ export class LoginComponent implements OnInit {
     errorMessage: string;
 
     constructor(
-        private http: HttpClient,
+        private accountService: AccountService,
         private router: Router,
         private authorizationService: AuthorizationService) {
     }
@@ -33,7 +31,7 @@ export class LoginComponent implements OnInit {
     async onSubmit() {
         this.loginMode = LoginMode.Submitting;
 
-        this.http.post<AccessToken>(environment.usersService + '/account/login', this.login).subscribe(
+        this.accountService.login(this.login).subscribe(
             result => {
                 this.authorizationService.signIn(result.accessToken);
                 this.router.navigate(['/home']);

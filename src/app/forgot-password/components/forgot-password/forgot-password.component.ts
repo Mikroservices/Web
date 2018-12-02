@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { ForgotPassword } from '../../models/forgot-password';
-import { ForgotPasswordMode } from '../../models/forgot-password-mode';
-import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+
+import { ForgotPassword } from '../../../core/models/forgot-password';
+import { ForgotPasswordMode } from '../../models/forgot-password-mode';
+import { ForgotPasswordService } from 'src/app/core/services/http/forgot-password.service';
 
 @Component({
     selector: 'app-forgot-password',
@@ -17,7 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
     forgotPasswordMode: ForgotPasswordMode;
 
     constructor(
-        private http: HttpClient,
+        private forgotPasswordService: ForgotPasswordService,
         private toastr: ToastrService) {
     }
 
@@ -29,7 +28,7 @@ export class ForgotPasswordComponent implements OnInit {
     async onSubmit() {
         this.forgotPasswordMode = ForgotPasswordMode.Submitting;
 
-        this.http.post(environment.usersService + '/forgot/token', this.forgotPassword).subscribe(
+        this.forgotPasswordService.token(this.forgotPassword).subscribe(
             () => {
                 this.forgotPasswordMode = ForgotPasswordMode.Success;
             },

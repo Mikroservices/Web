@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-
-import { Story } from '../../models/story'
 import { ToastrService } from 'ngx-toastr';
+
+import { Story } from '../../../core/models/story'
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+import { StoriesService } from 'src/app/core/services/http/stories.service';
 
 @Component({
     selector: 'app-stories',
@@ -15,13 +14,13 @@ export class StoriesComponent implements OnInit {
 
     stories: Story[];
 
-    constructor(private httpClient: HttpClient,
+    constructor(private storiesService: StoriesService,
         private toastrService: ToastrService,
         private spinnerService: SpinnerService) { }
 
     ngOnInit() {
 
-        this.httpClient.get<Story[]>(environment.storiesService + '/stories').subscribe(stories => {
+        this.storiesService.stories().subscribe(stories => {
             this.stories = stories;
         },
         () => {

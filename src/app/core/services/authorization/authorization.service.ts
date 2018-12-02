@@ -1,12 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { PersistanceService } from '../persistance/persistance.service';
-import { User } from 'src/app/shared/models/user';
-import { environment } from 'src/environments/environment';
-import { AccessToken } from 'src/app/login/models/access-token';
+import { User } from 'src/app/core/models/user';
+import { AccountService } from '../http/account.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +19,7 @@ export class AuthorizationService {
     constructor(
         private jwtHelperService: JwtHelperService,
         private persistanceService: PersistanceService,
-        private httpClient: HttpClient,
+        private accountService: AccountService,
         private zone: NgZone) {
     }
 
@@ -81,7 +79,7 @@ export class AuthorizationService {
             return;
         }
 
-        this.httpClient.post<AccessToken>(environment.usersService + '/account/refresh', new AccessToken(accessToken)).subscribe(
+        this.accountService.refreshToken(accessToken).subscribe(
             result => {
                 this.signIn(result.accessToken);
             },

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
-import { ConfirmEmail } from '../../models/confirm-email';
-import { environment } from 'src/environments/environment';
+import { ConfirmEmail } from '../../../core/models/confirm-email';
 import { ConfirmEmailMode } from '../../models/confirm-email-mode';
+import { RegisterService } from 'src/app/core/services/http/register.service';
 
 @Component({
     selector: 'app-confirm-email',
@@ -17,7 +16,7 @@ export class ConfirmEmailComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private http: HttpClient
+        private registerService: RegisterService
     ) { }
 
     ngOnInit() {
@@ -29,7 +28,7 @@ export class ConfirmEmailComponent implements OnInit {
             confirmEmail.id = params.user;
             confirmEmail.confirmationGuid = params.token;
 
-            this.http.post(environment.usersService + '/register/confirm', confirmEmail).subscribe(
+            this.registerService.confirm(confirmEmail).subscribe(
                 () => {
                     this.confirmEmailMode = ConfirmEmailMode.Success;
                 },

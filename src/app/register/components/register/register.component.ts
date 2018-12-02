@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 
 import { RegisterMode } from '../../models/register-mode';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/shared/models/user';
+import { User } from 'src/app/core/models/user';
+import { RegisterService } from 'src/app/core/services/http/register.service';
 
 @Component({
     selector: 'app-register',
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     passwordIsValid: boolean;
 
     constructor(
-        private http: HttpClient,
+        private registerService: RegisterService,
         private reCaptchaV3Service: ReCaptchaV3Service,
         @Inject(DOCUMENT) private document: any
     ) { }
@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
 
             this.user.securityToken = token;
 
-            this.http.post<User>(environment.usersService + '/register', this.user).subscribe(
+            this.registerService.register(this.user).subscribe(
                 () => {
                     this.removeGoogleBadge();
                     this.registerMode = RegisterMode.Success;

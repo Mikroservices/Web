@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
-import { User } from 'src/app/shared/models/user';
-import { environment } from 'src/environments/environment';
+import { User } from 'src/app/core/models/user';
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+import { UsersService } from 'src/app/core/services/http/users.service';
 
 
 @Component({
@@ -21,7 +20,7 @@ export class ProfileComponent implements OnInit {
     constructor(
         private route: ActivatedRoute, 
         private router: Router,
-        private httpClient: HttpClient,
+        private usersService: UsersService,
         private spinnerService: SpinnerService,
         private toastrService: ToastrService) { }
 
@@ -30,18 +29,21 @@ export class ProfileComponent implements OnInit {
 
         this.route.params.subscribe(params => {
             this.userName = params['userName'];
-            this.httpClient.get<User>(environment.usersService +  '/users/' + this.userName).subscribe(user => {
-                this.user = user;
-            },
-            () => {
-                this.toastrService.error('Error during downloading user profile.');
-                
-                this.spinnerService.hide();
-                this.router.navigate(['/home']);
-            },
-            () => {
-                this.spinnerService.hide();
-            });
-        })
+
+            this.usersService.profile(this.userName).subscribe(
+                user => {
+                    this.user = user;
+                },
+                () => {
+                    this.toastrService.error('Error during downloading user profile.');
+                    
+                    this.spinnerService.hide();
+                    this.router.navigate(['/home']);
+                },
+                () => {
+                    this.spinnerService.hide();
+                }
+            );
+        });
     }
 }

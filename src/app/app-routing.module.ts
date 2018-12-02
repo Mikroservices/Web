@@ -14,6 +14,7 @@ import { AuthorizationGuardService } from './core/services/authorization/authori
 import { LoggedInGuardService } from './core/services/authorization/logged-in-guard.service';
 import { StoryEditComponent } from './stories/components/story-edit/story-edit.component';
 import { StoriesComponent } from './stories/components/stories/stories.component';
+import { StoryDetailsComponent } from './stories/components/story-details/story-details.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [ LoggedInGuardService ] },
@@ -23,7 +24,9 @@ const routes: Routes = [
     { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedInGuardService ] },
     { path: 'profile/:userName', component: ProfileComponent },
     { path: 'stories', component: StoriesComponent },
+    { path: 'stories/:token', component: StoryDetailsComponent },
     { path: 'stories/new', component: StoryEditComponent },
+    { path: 'stories/edit/:token', component: StoryEditComponent },
     { path: 'settings', component: SettingsComponent, canActivate: [ AuthorizationGuardService ] },
     { path: 'home', component: HomeComponent },
     { path: '',   redirectTo: '/home', pathMatch: 'full' },

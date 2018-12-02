@@ -1,17 +1,9 @@
 <div class="media mb-5">
     <div class="media-body">
-        <div class="row">
-            <div class="col">
-                <span class="text-muted text-lowercase font-weight-light mb-1">
-                    PROGRAMMING · SWIFT · APPLE
-                </span>
-            </div>
-            <div class="col-auto">
-                <img width="20px" src="assets/kudos.svg" /> 
-                <span class="text-muted text-lowercase font-weight-light mb-1" style="line-height: 17px; vertical-align: bottom; font-weight: 100">
-                    {{ claps }}
-                </span>
-            </div>
+        <div>
+            <span class="text-muted text-lowercase font-weight-light mb-1">
+                PROGRAMMING · SWIFT · APPLE
+            </span>
         </div>
         <h5 class="mt-0">Lorem ipsun fusce condimentium</h5>
         <p class="text-muted">
@@ -20,9 +12,15 @@
             Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
             vulputate fringilla. Donec lacinia congue felis in faucibus.
         </p>
-        <div>
-            <div class="float-left">Matt Bartlett</div>
-            <div class="float-right">Nov 18 · 5 min read</div>
+        <div class="row">
+            <div class="col">Matt Bartlett</div>
+            <div class="col-auto">
+                <span class="mr-3">Nov 18</span>·
+                <span class="ml-3 mr-3">5 min read</span>·
+                <span class="ml-3 mr-3">
+                    <i class="fas fa-thumbs-up mr-2"></i> {{ claps }}
+                </span>
+            </div>
         </div>
     </div>
     <img class="align-self-start ml-3 d-none d-sm-block" src="https://source.unsplash.com/random/320x320?sig={{ index }}" width="160" height="160" alt="" />

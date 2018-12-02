@@ -1,13 +1,18 @@
 <div class="row">
     <div *ngIf="stories" class="col-sm-12 col-md-10 col-lg-8 mx-auto">
-        <div *ngFor="let story of stories" class="mb-5">
-            <h4>{{ story.title }}</h4>
-            <div>{{ story.lead }}</div>
-            <div>
-                <span>{{ story.modified }}</span>
-                <span>{{ story.words }}</span>
-                <span>{{ story.duration }}</span>
-            </div>
-        </div>
+
+        <tabset>
+            <tab heading="Drafts" id="tab1">
+                <div *ngFor="let story of stories" class="mt-4">
+                    <app-story-list-item *ngIf="!story.published" [story]="story"></app-story-list-item>
+                </div>
+            </tab>
+            <tab heading="Published" id="tab2">
+                <div *ngFor="let story of stories" class="mt-4">
+                    <app-story-list-item *ngIf="story.published" [story]="story"></app-story-list-item>
+                </div>
+            </tab>
+        </tabset>
+
     </div>
 </div>

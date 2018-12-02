@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContenteditableModule } from 'ng-contenteditable';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { GravatarModule } from './gravatar/gravatar.module';
 import { SpinnerModule } from './spinner/spinner.module';
@@ -14,6 +16,7 @@ import { UserCardModule } from './user-card/user-card.module';
 import { ValidationsModule } from './validations/validations.module';
 import { TextEditorModule } from './text-editor/text-editor.module';
 import { WidgetsModule } from './widgets/widgets.module';
+
 
 @NgModule({
     declarations: [
@@ -34,7 +37,9 @@ import { WidgetsModule } from './widgets/widgets.module';
         UserCardModule,
         ValidationsModule,
         TextEditorModule,
-        WidgetsModule
+        WidgetsModule,
+        TabsModule,
+        BsDropdownModule
     ]
 })
 export class SharedModule { }

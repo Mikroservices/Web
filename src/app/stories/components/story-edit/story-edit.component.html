@@ -1,6 +1,21 @@
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
 
+        <div class="float-right">
+            <div class="btn-group" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn btn-light btn-sm dropdown-toggle" aria-controls="dropdown-basic">
+                  Actions <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                    role="menu" aria-labelledby="button-basic">
+                  <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="openPublishStoryModal(publishStoryModal)">Publish</a></li>
+                  <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="openDeleteStoryModal(deleteStoryModal)">Delete</a></li>
+                </ul>
+              </div>
+        </div>
+
+        <div class="clearfix"></div>
+
         <form name="form" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="title" style="color: #c1c1c1; font-weight: 200">title</label>
@@ -14,3 +29,43 @@
         </form>
     </div>
 </div>
+
+<ng-template #publishStoryModal>
+    <form name="form" (ngSubmit)="publishStoryForm.form.valid && onPublishStoryModal()" #publishStoryForm="ngForm" novalidate>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Publish story</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="publishStoryModalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-text text-danger mb-3">Are you sure you want to delete your account. Please be careful this operation is irreversible.</div>
+            <div class="form-group">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="publishStoryModalRef.hide()">Cancel</button>
+            <button type="submit" class="btn btn-danger">Publish story</button>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #deleteStoryModal>
+    <form name="form" (ngSubmit)="deleteStoryForm.form.valid && onDeleteStoryModal()" #deleteStoryForm="ngForm" novalidate>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Delete story</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="deleteStoryModalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-text text-danger mb-3">Are you sure you want to delete your account. Please be careful this operation is irreversible.</div>
+            <div class="form-group">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="deleteStoryModalRef.hide()">Cancel</button>
+            <button type="submit" class="btn btn-danger">Publish story</button>
+        </div>
+    </form>
+</ng-template>

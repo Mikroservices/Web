@@ -1,12 +1,12 @@
-import { Component, OnInit, NgZone, OnDestroy, HostListener } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, NgZone, OnDestroy, HostListener, TemplateRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
+import { Story } from '../../../core/models/story';
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
-import { Story } from '../../models/story';
 import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
-
+import { StoriesService } from 'src/app/core/services/http/stories.service';
 
 @Component({
     selector: 'app-story-edit',
@@ -19,18 +19,50 @@ export class StoryEditComponent implements OnInit, OnDestroy {
     text: string = '';
     token: string = null;
 
+    publishStoryModalRef: BsModalRef;
+    deleteStoryModalRef: BsModalRef;
+
     private saveTimeout: any;
     private oneSecond = 1000;
     private refreshTimeout = 60;
 
     constructor(private zone: NgZone,
-        private httpClient: HttpClient,
+        private route: ActivatedRoute,
+        private router: Router,
+        private storiesService: StoriesService,
         private toastrService: ToastrService,
+        private modalService: BsModalService,
         private spinnerService: SpinnerService,
         private authorizationService: AuthorizationService) { }
 
     ngOnInit(): void {
         this.initSavingTimeout();
+
+        this.route.params.subscribe(params => {
+
+            this.token = params['token'];
+
+            if (!this.token || this.token === '') {
+                return;
+            }
+
+            this.spinnerService.show();
+            this.storiesService.story(this.token).subscribe(
+                story => {
+                    this.title = story.title;
+                    this.text = story.text;
+                },
+                () => {
+                    this.toastrService.error('Error during downloading story.');
+                    
+                    this.spinnerService.hide();
+                    this.router.navigate(['/stories']);
+                },
+                () => {
+                    this.spinnerService.hide();
+                }
+            );
+        });
     }
 
     ngOnDestroy(): void {
@@ -60,6 +92,34 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         }
     }
 
+    openPublishStoryModal(template: TemplateRef<any>) {
+        this.publishStoryModalRef = this.modalService.show(template);
+    }
+
+    onPublishStoryModal(): void {
+
+        this.spinnerService.show();
+
+        this.storiesService.publish(this.token).subscribe(
+            () => {
+                this.toastrService.success('Your story was published.');
+                this.publishStoryModalRef.hide();
+                this.spinnerService.hide();
+            }, 
+            () => {
+                // this.publishStoryModalRef.hide();
+                this.spinnerService.hide();
+            }
+        );
+    }
+
+    openDeleteStoryModal(template: TemplateRef<any>) {
+        this.deleteStoryModalRef = this.modalService.show(template);
+    }
+
+    onDeleteStoryModal(): void {
+    }
+
     private save(): void {
         if (this.token) {
             this.update();
@@ -69,6 +129,11 @@ export class StoryEditComponent implements OnInit, OnDestroy {
     }
 
     private create(): void {
+
+        if (this.title === '' && this.text === '') {
+            return;
+        }
+
         this.spinnerService.show();
 
         const user = this.authorizationService.getUser();
@@ -80,7 +145,7 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         story.text = this.text;
         story.userId = user.id;
 
-        this.httpClient.post<Story>(environment.storiesService + '/stories', story).subscribe(storyDto => {
+        this.storiesService.create(story).subscribe(storyDto => {
             // this.stories = stories;
         },
         () => {
@@ -103,7 +168,7 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         story.text = this.text;
         story.userId = user.id;
 
-        this.httpClient.put<Story>(environment.storiesService + '/stories/' + this.token, story).subscribe(storyDto => {
+        this.storiesService.update(this.token, story).subscribe(storyDto => {
             // this.stories = stories;
         },
         () => {

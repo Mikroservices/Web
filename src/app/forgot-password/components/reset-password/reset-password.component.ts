@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-import { ResetPassword } from '../../models/reset-password';
+import { ResetPassword } from '../../../core/models/reset-password';
 import { ResetPasswordMode } from '../../models/reset-password-mode';
 import { environment } from 'src/environments/environment';
+import { ForgotPasswordService } from 'src/app/core/services/http/forgot-password.service';
 
 @Component({
     selector: 'app-reset-password',
@@ -22,7 +22,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private http: HttpClient,
+        private forgotPasswordService: ForgotPasswordService,
         private toastr: ToastrService) {
     }
 
@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     async onSubmit() {
         this.resetPasswordMode = ResetPasswordMode.Submitting;
 
-        this.http.post(environment.usersService + '/forgot/confirm', this.resetPassword).subscribe(
+        this.forgotPasswordService.confirm(this.resetPassword).subscribe(
             () => {
                 this.resetPasswordMode = ResetPasswordMode.Success;
             },

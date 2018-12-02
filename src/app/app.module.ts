@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,13 +20,14 @@ import { ProfileModule } from './profile/profile.module';
 import { SettingsModule } from './settings/settings.module';
 import { AuthorizationService } from './core/services/authorization/authorization.service';
 import { StoriesModule } from './stories/stories.module';
+import { environment } from 'src/environments/environment';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
         tokenGetter: () => {
             return persistanceService.getAccessToken();
         },
-        whitelistedDomains: ['localhost:8001', 'localhost:8003', 'localhost:8080','letterer.me', 'users.letterer.me'],
+        whitelistedDomains: [ environment.usersService, environment.storiesService ],
         blacklistedRoutes: []
     };
 }
@@ -52,6 +55,8 @@ export function appInitialization(authorizationService: AuthorizationService) {
             preventDuplicates: true,
             progressBar: true
         }),
+        TabsModule.forRoot(),
+        BsDropdownModule.forRoot(),
         NgxCaptchaModule,
         CoreModule,
         HomeModule,

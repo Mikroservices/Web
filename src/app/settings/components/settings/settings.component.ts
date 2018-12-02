@@ -1,17 +1,16 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { SettingsMode } from '../../models/settings-mode';
-import { environment } from 'src/environments/environment';
-import { User } from 'src/app/shared/models/user';
-
+import { ChangePassword } from '../../../core/models/change-password';
+import { User } from 'src/app/core/models/user';
 import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
-import { ToastrService } from 'ngx-toastr';
-import { ChangePassword } from '../../models/change-password';
-import { Router } from '@angular/router';
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+import { AccountService } from 'src/app/core/services/http/account.service';
+import { UsersService } from 'src/app/core/services/http/users.service';
 
 @Component({
     selector: 'app-settings',
@@ -30,12 +29,14 @@ export class SettingsComponent implements OnInit {
     deleteAccountModalRef: BsModalRef;
 
     constructor(
-        private httpClient: HttpClient,
+        private usersService: UsersService,
+        private accountService: AccountService,
         private authorizationService: AuthorizationService,
         private toastrService: ToastrService,
         private modalService: BsModalService,
         private router: Router,
-        private spinnerService: SpinnerService) { }
+        private spinnerService: SpinnerService
+    ) { }
 
     ngOnInit() {
         this.spinnerService.show();
@@ -44,7 +45,8 @@ export class SettingsComponent implements OnInit {
         this.changePassword = new ChangePassword();
 
         let userFromToken = this.authorizationService.getUser();
-        this.httpClient.get<User>(environment.usersService + '/users/@' + userFromToken.userName).subscribe(user => {
+
+        this.usersService.profile(userFromToken.userName).subscribe(user => {
             this.user = user;
         },
         () => {
@@ -61,7 +63,7 @@ export class SettingsComponent implements OnInit {
     async onSubmit() {
         this.settingsMode = SettingsMode.Submitting;
 
-        this.httpClient.put<User>(environment.usersService + '/users/@' + this.user.userName, this.user).subscribe(
+        this.usersService.update(this.user.userName, this.user).subscribe(
             () => {
                 this.settingsMode = SettingsMode.Success;
                 this.authorizationService.refreshAccessToken();
@@ -75,7 +77,7 @@ export class SettingsComponent implements OnInit {
     }
 
     onChangePassword() {
-        this.httpClient.post<User>(environment.usersService + '/account/change-password', this.changePassword).subscribe(
+        this.accountService.changePassword(this.changePassword).subscribe(
             () => {
                 this.changePasswordModalRef.hide();
                 this.toastrService.success('Password was changed.');
@@ -87,7 +89,7 @@ export class SettingsComponent implements OnInit {
     }
 
     onDeleteAccount() {
-        this.httpClient.delete<User>(environment.usersService + '/users/@' + this.userNameToDelete).subscribe(
+        this.usersService.delete(this.userNameToDelete).subscribe(
             () => {
                 this.deleteAccountModalRef.hide();
                 this.toastrService.success('Your account was deleted.');
