@@ -1,5 +1,6 @@
-import { Component, OnInit, NgZone, OnDestroy, HostListener, TemplateRef } from '@angular/core';
+import { Component, OnInit, NgZone, OnDestroy, HostListener, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -23,6 +24,12 @@ export class StoryEditComponent implements OnInit, OnDestroy {
     publishStoryModalRef: BsModalRef;
     deleteStoryModalRef: BsModalRef;
 
+    @ViewChild('publishStoryModal') publishStoryModalTemplate: TemplateRef<any>;
+    @ViewChild('deleteStoryModal') deleteStoryModalTemplate: TemplateRef<any>;
+
+    private publishStoryActionSubscription: Subscription;
+    private deleteStoryActionSubscription: Subscription;
+
     private saveTimeout: any;
     private oneSecond = 1000;
     private refreshTimeout = 60;
@@ -38,8 +45,16 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         private navbarService: NavbarService) { }
 
     ngOnInit(): void {
-        this.navbarService.isPublishStoryActionVisible = true;
-        this.navbarService.isNewStoryActionVisible = false;
+        this.navbarService.setPublishStoryActionVisible();
+
+        this.publishStoryActionSubscription = this.navbarService.publishStoryAction.subscribe(() => {
+            this.openPublishStoryModal(this.publishStoryModalTemplate);
+        });
+
+        this.deleteStoryActionSubscription = this.navbarService.deleteStoryAction.subscribe(() => {
+            this.openDeleteStoryModal(this.deleteStoryModalTemplate);
+        });
+
         this.initSavingTimeout();
 
         this.route.params.subscribe(params => {
@@ -74,8 +89,9 @@ export class StoryEditComponent implements OnInit, OnDestroy {
             clearTimeout(this.saveTimeout);
         }
 
-        this.navbarService.isPublishStoryActionVisible = false;
-        this.navbarService.isNewStoryActionVisible = true;
+        this.navbarService.setNewStoryActionVisible();
+        this.publishStoryActionSubscription.unsubscribe();
+        this.deleteStoryActionSubscription.unsubscribe();
     }
 
     initSavingTimeout(): void {
@@ -114,7 +130,6 @@ export class StoryEditComponent implements OnInit, OnDestroy {
                 this.spinnerService.hide();
             }, 
             () => {
-                // this.publishStoryModalRef.hide();
                 this.spinnerService.hide();
             }
         );
@@ -125,6 +140,19 @@ export class StoryEditComponent implements OnInit, OnDestroy {
     }
 
     onDeleteStoryModal(): void {
+        this.spinnerService.show();
+
+        this.storiesService.delete(this.token).subscribe(
+            () => {
+                this.toastrService.success('Your story was deleted.');
+                this.deleteStoryModalRef.hide();
+                this.spinnerService.hide();
+                this.router.navigate(['/stories']);
+            }, 
+            () => {
+                this.spinnerService.hide();
+            }
+        );
     }
 
     private save(): void {

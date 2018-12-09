@@ -19,17 +19,30 @@
                 <ul class="navbar-nav ml-auto">
                     <li *ngIf="isPublishStoryActionVisible()" class="nav-item pt-2 pr-2">
                         <div class="btn-group" dropdown>
-                            <button type="button" class="btn btn-light btn-sm">Publish</button>
+                            <button type="button" class="btn btn-light btn-sm" (click)="onPublishStory()">Publish</button>
                             <button id="button-split" type="button" dropdownToggle class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
                                 <span class="caret"></span>
                                 <span class="sr-only">Split button!</span>
                             </button>
                             <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
-                                <li role="menuitem"><a class="dropdown-item" [routerLink]="">Publish</a></li>
-                                <li role="menuitem"><a class="dropdown-item" [routerLink]="">Delete</a></li>
+                                <li role="menuitem"><a class="dropdown-item cursor-pointer" (click)="onPublishStory()">Publish</a></li>
+                                <li role="menuitem"><a class="dropdown-item cursor-pointer" (click)="onDeleteStory()">Delete</a></li>
                             </ul>
                         </div>
                     </li>
+                    <li *ngIf="isEditStoryActionVisible()" class="nav-item pt-2 pr-2">
+                            <div class="btn-group" dropdown>
+                                <button type="button" class="btn btn-light btn-sm" (click)="onEditStory()">Edit</button>
+                                <button id="button-split" type="button" dropdownToggle class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Split button!</span>
+                                </button>
+                                <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
+                                    <li role="menuitem"><a class="dropdown-item cursor-pointer" routerLink="/stories/new">Write new story</a></li>
+                                    <li role="menuitem"><a class="dropdown-item cursor-pointer" (click)="onDeleteStory()">Delete</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     <li *ngIf="isNewStoryActionVisible()" class="nav-item pt-1">
                         <a routerLink="/stories/new" class="nav-link">Write new story</a>
                     </li>
@@ -44,17 +57,17 @@
                                 </li>
                                 <div class="dropdown-divider"></div>
                                 <li>
-                                    <a class="dropdown-item" routerLink="/stories" routerLinkActive="active">Stories</a>
+                                    <a class="dropdown-item" routerLink="/stories">Stories</a>
                                 </li>
                                 <div class="dropdown-divider"></div>
                                 <li>
-                                    <a class="dropdown-item" [routerLink]="['/profile', '@' + user.userName]" routerLinkActive="active">Profile</a>
+                                    <a class="dropdown-item" [routerLink]="['/profile', '@' + user.userName]">Profile</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" routerLink="/settings" routerLinkActive="active">Settings &amp; Privacy</a>
+                                    <a class="dropdown-item" routerLink="/settings">Settings &amp; Privacy</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" routerLink="/help" routerLinkActive="active">Help</a>
+                                    <a class="dropdown-item" routerLink="/help">Help</a>
                                 </li>
                                 <div class="dropdown-divider"></div>
                                 <li>

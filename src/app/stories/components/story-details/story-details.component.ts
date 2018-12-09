@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { ToastrService } from 'ngx-toastr';
 
 import { Story } from 'src/app/core/models/story';
 import { StoriesService } from 'src/app/core/services/http/stories.service';
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+import { NavbarService } from 'src/app/core/menu/services/navbar.service';
 
 @Component({
     selector: 'app-story-details',
     templateUrl: './story-details.component.html',
     styleUrls: ['./story-details.component.less']
 })
-export class StoryDetailsComponent implements OnInit {
+export class StoryDetailsComponent implements OnInit, OnDestroy {
 
     story: Story;
     token: string;
+
+    private editStoryActionSubscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
@@ -22,10 +26,17 @@ export class StoryDetailsComponent implements OnInit {
         private storiesService: StoriesService,
         private toastrService: ToastrService,
         private spinnerService: SpinnerService,
+        private navbarService: NavbarService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.spinnerService.show();
+
+        this.navbarService.setEditStoryActionVisible();
+
+        this.editStoryActionSubscription = this.navbarService.editStoryAction.subscribe(() => {
+            this.router.navigate(['/stories/edit/', this.token]);
+        });
 
         this.route.params.subscribe(params => {
 
@@ -48,4 +59,8 @@ export class StoryDetailsComponent implements OnInit {
         });
     }
 
+    ngOnDestroy(): void {
+        this.editStoryActionSubscription.unsubscribe();
+        this.navbarService.setNewStoryActionVisible();
+    }
 }

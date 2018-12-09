@@ -39,7 +39,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
         return this.navbarService.isPublishStoryActionVisible;
     }
 
+    isEditStoryActionVisible(): boolean {
+        return this.navbarService.isEditStoryActionVisible;
+    }
+
     signOut(): void {
         this.authorizationService.signOut();
+    }
+
+    onPublishStory(): void {
+        this.navbarService.onPublishStoryAction();
+    }
+
+    onDeleteStory(): void {
+        this.navbarService.onDeleteStoryAction();
+    }
+
+    onEditStory(): void {
+        this.navbarService.onEditStoryAction();
     }
 }
