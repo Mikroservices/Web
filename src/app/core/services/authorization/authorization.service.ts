@@ -63,7 +63,12 @@ export class AuthorizationService {
         this.changes.next(user);
 
         const tokenExpirationTime = this.getTokenExpirationTime();
-        const sessionTimeout = tokenExpirationTime - this.tokenProcessingTime;
+        const now = new Date();
+        
+        var tokenExpirationSeconds = Math.round(tokenExpirationTime.getTime() / this.oneSecond);
+        var nowSeconds = Math.round(now.getTime() / this.oneSecond);
+
+        const sessionTimeout = (tokenExpirationSeconds - nowSeconds) - this.tokenProcessingTime;
         this.initSessionTimeout(sessionTimeout);
     }
 
@@ -89,14 +94,14 @@ export class AuthorizationService {
         );
     }
 
-    private getTokenExpirationTime(): number {
+    private getTokenExpirationTime(): Date {
         const actionToken = this.persistanceService.getAccessToken();
         if (!actionToken) {
             return null;
         }
 
         const decodedToken = this.jwtHelperService.decodeToken(actionToken);
-        return decodedToken.exp;
+        return new Date(Math.round(decodedToken.exp * this.oneSecond));
     }
 
     private initSessionTimeout(seconds: number): void {

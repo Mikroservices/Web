@@ -17,7 +17,20 @@
 
             <div *ngIf="user" class="navbar-collapse collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item pt-1">
+                    <li *ngIf="isPublishStoryActionVisible()" class="nav-item pt-2 pr-2">
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn btn-light btn-sm">Publish</button>
+                            <button id="button-split" type="button" dropdownToggle class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
+                                <li role="menuitem"><a class="dropdown-item" [routerLink]="">Publish</a></li>
+                                <li role="menuitem"><a class="dropdown-item" [routerLink]="">Delete</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li *ngIf="isNewStoryActionVisible()" class="nav-item pt-1">
                         <a routerLink="/stories/new" class="nav-link">Write new story</a>
                     </li>
                     <li class="nav-item dropdown">

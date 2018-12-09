@@ -1,21 +1,5 @@
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
-
-        <div class="float-right">
-            <div class="btn-group" dropdown>
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-light btn-sm dropdown-toggle" aria-controls="dropdown-basic">
-                  Actions <span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                    role="menu" aria-labelledby="button-basic">
-                  <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="openPublishStoryModal(publishStoryModal)">Publish</a></li>
-                  <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="openDeleteStoryModal(deleteStoryModal)">Delete</a></li>
-                </ul>
-              </div>
-        </div>
-
-        <div class="clearfix"></div>
-
         <form name="form" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="title" style="color: #c1c1c1; font-weight: 200">title</label>

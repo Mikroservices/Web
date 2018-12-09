@@ -7,6 +7,7 @@ import { Story } from '../../../core/models/story';
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
 import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
 import { StoriesService } from 'src/app/core/services/http/stories.service';
+import { NavbarService } from 'src/app/core/menu/services/navbar.service';
 
 @Component({
     selector: 'app-story-edit',
@@ -33,9 +34,12 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         private toastrService: ToastrService,
         private modalService: BsModalService,
         private spinnerService: SpinnerService,
-        private authorizationService: AuthorizationService) { }
+        private authorizationService: AuthorizationService,
+        private navbarService: NavbarService) { }
 
     ngOnInit(): void {
+        this.navbarService.isPublishStoryActionVisible = true;
+        this.navbarService.isNewStoryActionVisible = false;
         this.initSavingTimeout();
 
         this.route.params.subscribe(params => {
@@ -69,6 +73,9 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         if (this.saveTimeout) {
             clearTimeout(this.saveTimeout);
         }
+
+        this.navbarService.isPublishStoryActionVisible = false;
+        this.navbarService.isNewStoryActionVisible = true;
     }
 
     initSavingTimeout(): void {

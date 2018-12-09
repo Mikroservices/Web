@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { User } from 'src/app/core/models/user';
 import { AuthorizationService } from 'src/app/core/services/authorization/authorization.service';
-import { Subscription } from 'rxjs';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
     selector: 'app-navbar',
@@ -13,7 +15,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     user: User = null;
     private userChangeSubscription: Subscription;
 
-    constructor(private authorizationService: AuthorizationService) { }
+    constructor(
+        private authorizationService: AuthorizationService, 
+        private navbarService: NavbarService) { 
+    }
 
     ngOnInit() {
         this.user = this.authorizationService.getUser();
@@ -24,6 +29,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.userChangeSubscription.unsubscribe();
+    }
+
+    isNewStoryActionVisible(): boolean {
+        return this.navbarService.isNewStoryActionVisible;
+    }
+
+    isPublishStoryActionVisible(): boolean {
+        return this.navbarService.isPublishStoryActionVisible;
     }
 
     signOut(): void {
