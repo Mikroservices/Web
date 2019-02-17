@@ -94,6 +94,7 @@ export class TextEditorDirective implements OnInit, OnChanges, OnDestroy {
         if (change.isFirstChange()) {
             return true;
         }
+
         return !ɵlooseIdentical(viewModel, change.currentValue);
     }
 }

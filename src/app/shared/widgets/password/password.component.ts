@@ -25,9 +25,6 @@ export class PasswordComponent implements OnInit {
     @Input()
     form: NgForm;
 
-    constructor() {
-    }
-
     ngOnInit() {
         this.isPasswordVisible = false;
     }

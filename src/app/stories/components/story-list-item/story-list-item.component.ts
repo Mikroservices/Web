@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Story } from 'src/app/core/models/story';
 
@@ -7,7 +7,7 @@ import { Story } from 'src/app/core/models/story';
     templateUrl: './story-list-item.component.html',
     styleUrls: ['./story-list-item.component.less']
 })
-export class StoryListItemComponent implements OnInit {
+export class StoryListItemComponent {
 
     readonly day = 1000 * 60 * 60 * 24;
     readonly daysInMonth = 30;
@@ -15,11 +15,6 @@ export class StoryListItemComponent implements OnInit {
 
     @Input()
     story: Story;
-
-    constructor() { }
-
-    ngOnInit() {
-    }
 
     get duration(): string {
         if (this.story.duration === 0) {

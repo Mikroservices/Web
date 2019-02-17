@@ -16,7 +16,7 @@ export class AuthorizationGuardService implements CanActivate {
     async canActivate(): Promise<boolean> {
 
         if (!this.authorizationService.isLoggedIn()) {
-            await this.authorizationService.signOut();
+            this.authorizationService.signOut();
             this.router.navigate(['/login']);
 
             return false;

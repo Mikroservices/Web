@@ -33,6 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
         } catch (error) {
             if (error.error.code === 'userNotExists') {
                 this.forgotPasswordMode = ForgotPasswordMode.UserNotExists;
+
                 return;
             }
 

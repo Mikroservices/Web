@@ -16,6 +16,7 @@ export class LoggedInGuardService implements CanActivate {
 
         if (this.authorizationService.isLoggedIn()) {
             this.router.navigate(['/home']);
+
             return false;
         }
 

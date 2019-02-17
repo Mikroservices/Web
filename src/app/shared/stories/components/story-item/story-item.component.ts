@@ -10,8 +10,6 @@ export class StoryItemComponent implements OnInit {
     index = 0;
     claps = 10;
 
-    constructor() { }
-
     ngOnInit() {
         this.index = this.randomInt(1, 10000);
         this.claps = this.randomInt(20, 1000);

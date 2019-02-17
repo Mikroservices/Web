@@ -99,6 +99,7 @@ export class AuthorizationService {
         }
 
         const decodedToken = this.jwtHelperService.decodeToken(actionToken);
+
         return new Date(Math.round(decodedToken.exp * this.oneSecond));
     }
 

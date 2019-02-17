@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { User } from 'src/app/core/models/user';
 
@@ -7,14 +7,8 @@ import { User } from 'src/app/core/models/user';
     templateUrl: './user-card.component.html',
     styleUrls: ['./user-card.component.less']
 })
-export class UserCardComponent implements OnInit {
+export class UserCardComponent {
 
     @Input()
     user: User;
-
-    constructor() { }
-
-    ngOnInit() {
-    }
-
 }

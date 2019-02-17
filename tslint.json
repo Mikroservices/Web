@@ -4,6 +4,7 @@
   ],
   "rules": {
     "arrow-return-shorthand": true,
+    "await-promise": true,
     "callable-types": true,
     "class-name": true,
     "comment-format": [
@@ -11,6 +12,7 @@
       "check-space"
     ],
     "curly": true,
+    "cyclomatic-complexity": true,
     "deprecation": {
       "severity": "warn"
     },
@@ -27,6 +29,7 @@
     ],
     "interface-over-type-literal": true,
     "label-position": true,
+    "max-classes-per-file": [true, 1],
     "max-line-length": [
       true,
       140
@@ -43,6 +46,7 @@
         ]
       }
     ],
+    "newline-before-return": true,
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -66,6 +70,7 @@
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
+    "no-return-await": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
@@ -73,6 +78,7 @@
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
+    "no-unsafe-finally": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
@@ -108,7 +114,7 @@
       }
     ],
     "unified-signatures": true,
-    "variable-name": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [
       true,
       "check-branch",
@@ -121,6 +127,7 @@
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
+    "unnecessary-constructor": true,
     "no-input-rename": true,
     "no-output-rename": true,
     "use-life-cycle-interface": true,
