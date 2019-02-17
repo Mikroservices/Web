@@ -28,29 +28,27 @@ export class LoginComponent implements OnInit {
         this.loginMode = LoginMode.Login;
     }
 
-    async onSubmit() {
+    async onSubmit(): Promise<void> {
         this.loginMode = LoginMode.Submitting;
 
-        this.accountService.login(this.login).subscribe(
-            result => {
-                this.authorizationService.signIn(result.accessToken);
-                this.router.navigate(['/home']);
-            },
-            error => {
+        try {
+            const accessToken = await this.accountService.login(this.login);
+            this.authorizationService.signIn(accessToken.accessToken);
+            this.router.navigate(['/home']);
+        } catch (error) {
 
-                if (error.error.code === 'invalidLoginCredentials') {
-                    this.errorMessage = 'Invalid credentials.';
-                } else if (error.error.code === 'emailNotConfirmed') {
-                    this.errorMessage = 'Your email is not confirmed. Check your inbox or reset your password.';
-                } else if (error.error.code === 'userAccountIsBlocked') {
-                    this.errorMessage = 'Your account is blocked. Contact with our support.';
-                } else {
-                    this.errorMessage = 'Unknown login error. Try again later.';
-                }
-
-                this.loginMode = LoginMode.Error;
+            if (error.error.code === 'invalidLoginCredentials') {
+                this.errorMessage = 'Invalid credentials.';
+            } else if (error.error.code === 'emailNotConfirmed') {
+                this.errorMessage = 'Your email is not confirmed. Check your inbox or reset your password.';
+            } else if (error.error.code === 'userAccountIsBlocked') {
+                this.errorMessage = 'Your account is blocked. Contact with our support.';
+            } else {
+                this.errorMessage = 'Unknown login error. Try again later.';
             }
-        );
+
+            this.loginMode = LoginMode.Error;
+        }
     }
 
     isLoginMode(): Boolean {

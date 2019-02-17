@@ -12,9 +12,9 @@ import { PasswordErrors } from '../models/password-errors';
 export class PasswordValidatorDirective implements Validator {
 
     private passwordErrors: PasswordErrors;
-    private lowercaseRegexp = new RegExp('[a-z]')
-    private uppercaseRegexp = new RegExp('[A-Z]')
-    private symbolRegexp = new RegExp('[\\W|_|0-9]')
+    private lowercaseRegexp = new RegExp('[a-z]');
+    private uppercaseRegexp = new RegExp('[A-Z]');
+    private symbolRegexp = new RegExp('[\\W|_|0-9]');
 
     constructor() {
         this.passwordErrors = new PasswordErrors();
@@ -63,6 +63,6 @@ export class PasswordValidatorDirective implements Validator {
     }
 
     isNullOrUndefined<T>(obj: T | null | undefined): obj is null | undefined {
-        return typeof obj === "undefined" || obj === null;
-    };
+        return typeof obj === 'undefined' || obj === null;
+    }
 }

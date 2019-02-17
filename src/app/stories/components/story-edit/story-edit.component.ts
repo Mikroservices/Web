@@ -17,8 +17,8 @@ import { NavbarService } from 'src/app/core/menu/services/navbar.service';
 })
 export class StoryEditComponent implements OnInit, OnDestroy {
 
-    title: string = '';
-    text: string = '';
+    title = '';
+    text = '';
     token: string = null;
 
     publishStoryModalRef: BsModalRef;
@@ -57,30 +57,24 @@ export class StoryEditComponent implements OnInit, OnDestroy {
 
         this.initSavingTimeout();
 
-        this.route.params.subscribe(params => {
+        this.route.params.subscribe(async (params) => {
+            try {
+                this.token = params['token'];
 
-            this.token = params['token'];
-
-            if (!this.token || this.token === '') {
-                return;
-            }
-
-            this.spinnerService.show();
-            this.storiesService.story(this.token).subscribe(
-                story => {
-                    this.title = story.title;
-                    this.text = story.text;
-                },
-                () => {
-                    this.toastrService.error('Error during downloading story.');
-                    
-                    this.spinnerService.hide();
-                    this.router.navigate(['/stories']);
-                },
-                () => {
-                    this.spinnerService.hide();
+                if (!this.token || this.token === '') {
+                    return;
                 }
-            );
+
+                this.spinnerService.show();
+                const story = await this.storiesService.story(this.token);
+                this.title = story.title;
+                this.text = story.text;
+            } catch {
+                this.toastrService.error('Error during downloading story.');
+                this.router.navigate(['/stories']);
+            } finally {
+                this.spinnerService.hide();
+            }
         });
     }
 
@@ -109,7 +103,7 @@ export class StoryEditComponent implements OnInit, OnDestroy {
 
     @HostListener('window:keydown', ['$event'])
     handleWindowEvent(event: KeyboardEvent): void {
-        if ((event.metaKey || event.ctrlKey) && event.code === "KeyS") {
+        if ((event.metaKey || event.ctrlKey) && event.code === 'KeyS') {
             this.save();
             event.preventDefault();
         }
@@ -119,40 +113,32 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         this.publishStoryModalRef = this.modalService.show(template);
     }
 
-    onPublishStoryModal(): void {
-
-        this.spinnerService.show();
-
-        this.storiesService.publish(this.token).subscribe(
-            () => {
-                this.toastrService.success('Your story was published.');
-                this.publishStoryModalRef.hide();
-                this.spinnerService.hide();
-            }, 
-            () => {
-                this.spinnerService.hide();
-            }
-        );
+    async onPublishStoryModal(): Promise<void> {
+        try {
+            this.spinnerService.show();
+            await this.storiesService.publish(this.token);
+            this.toastrService.success('Your story was published.');
+            this.publishStoryModalRef.hide();
+        } finally {
+            this.spinnerService.hide();
+        }
     }
 
     openDeleteStoryModal(template: TemplateRef<any>) {
         this.deleteStoryModalRef = this.modalService.show(template);
     }
 
-    onDeleteStoryModal(): void {
-        this.spinnerService.show();
-
-        this.storiesService.delete(this.token).subscribe(
-            () => {
-                this.toastrService.success('Your story was deleted.');
-                this.deleteStoryModalRef.hide();
-                this.spinnerService.hide();
-                this.router.navigate(['/stories']);
-            }, 
-            () => {
-                this.spinnerService.hide();
-            }
-        );
+    async onDeleteStoryModal(): Promise<void> {
+        try {
+            this.spinnerService.show();
+            this.storiesService.delete(this.token);
+            this.toastrService.success('Your story was deleted.');
+            this.deleteStoryModalRef.hide();
+            this.spinnerService.hide();
+            this.router.navigate(['/stories']);
+        } catch {
+            this.spinnerService.hide();
+        }
     }
 
     private save(): void {
@@ -163,7 +149,7 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         }
     }
 
-    private create(): void {
+    private async create(): Promise<void> {
 
         if (this.title === '' && this.text === '') {
             return;
@@ -180,19 +166,16 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         story.text = this.text;
         story.userId = user.id;
 
-        this.storiesService.create(story).subscribe(storyDto => {
-            // this.stories = stories;
-        },
-        () => {
+        try {
+            await this.storiesService.create(story);
+        } catch {
             this.toastrService.error('Error during saving story.');
+        } finally {
             this.spinnerService.hide();
-        },
-        () => {
-            this.spinnerService.hide();
-        });
+        }
     }
 
-    private update(): void {
+    private async update(): Promise<void> {
         this.spinnerService.show();
 
         const user = this.authorizationService.getUser();
@@ -203,25 +186,23 @@ export class StoryEditComponent implements OnInit, OnDestroy {
         story.text = this.text;
         story.userId = user.id;
 
-        this.storiesService.update(this.token, story).subscribe(storyDto => {
-            // this.stories = stories;
-        },
-        () => {
+        try {
+            await this.storiesService.update(this.token, story);
+        } catch {
             this.toastrService.error('Error during saving story.');
+        } finally {
             this.spinnerService.hide();
-        },
-        () => {
-            this.spinnerService.hide();
-        });
+        }
     }
 
     private generateToken(): string {
-        var text = '';
-        var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
-      
-        for (var i = 0; i < 12; i++)
+        let text = '';
+        const possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+        for (let i = 0; i < 12; i++) {
           text += possible.charAt(Math.floor(Math.random() * possible.length));
-      
+        }
+
         return text;
     }
 }

@@ -1,9 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/internal/Observable";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { environment } from "src/environments/environment";
-import { User } from "src/app/core/models/user";
+import { environment } from 'src/environments/environment';
+import { User } from 'src/app/core/models/user';
 
 @Injectable({
     providedIn: 'root'
@@ -17,15 +16,15 @@ export class UsersService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public profile(userName: string): Observable<User> {
-        return this.httpClient.get<User>(this.usersService +  '/users/' + userName);
+    public async profile(userName: string): Promise<User> {
+        return this.httpClient.get<User>(this.usersService +  '/users/' + userName).toPromise();
     }
 
-    public update(userName: string, user: User): Observable<User> {
-        return this.httpClient.put<User>(this.usersService + '/users/@' + userName, user);
+    public async update(userName: string, user: User): Promise<User> {
+        return this.httpClient.put<User>(this.usersService + '/users/@' + userName, user).toPromise();
     }
 
-    public delete(userName: string): Observable<Object> {
-        return this.httpClient.delete<User>(this.usersService + '/users/@' + userName);
+    public async delete(userName: string): Promise<Object> {
+        return this.httpClient.delete<User>(this.usersService + '/users/@' + userName).toPromise();
     }
 }

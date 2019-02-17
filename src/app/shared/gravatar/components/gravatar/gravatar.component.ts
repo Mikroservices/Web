@@ -12,13 +12,10 @@ export class GravatarComponent implements OnInit {
 
     @Input()
     emailHash: string;
-    
+
     url: string;
 
-    constructor() { }
-
-    ngOnInit() {
-        this.url = "//www.gravatar.com/avatar/" + this.emailHash + "?s=" + this.size + "&r=g&d=retro";
+    ngOnInit(): void {
+        this.url = '//www.gravatar.com/avatar/' + this.emailHash + '?s=' + this.size + '&r=g&d=retro';
     }
-
 }

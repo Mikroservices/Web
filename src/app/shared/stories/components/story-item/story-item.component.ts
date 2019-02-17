@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoryItemComponent implements OnInit {
 
-    index: number = 0;
-    claps: number = 10;
+    index = 0;
+    claps = 10;
 
     constructor() { }
 

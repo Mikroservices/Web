@@ -20,44 +20,40 @@ export class ForgotPasswordComponent implements OnInit {
         private toastr: ToastrService) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.forgotPassword = new ForgotPassword();
         this.forgotPasswordMode = ForgotPasswordMode.ForgotPassword;
     }
 
-    async onSubmit() {
-        this.forgotPasswordMode = ForgotPasswordMode.Submitting;
-
-        this.forgotPasswordService.token(this.forgotPassword).subscribe(
-            () => {
-                this.forgotPasswordMode = ForgotPasswordMode.Success;
-            },
-            (error) => {
-
-                if (error.error.code === 'userNotExists') {
-                    this.forgotPasswordMode = ForgotPasswordMode.UserNotExists;
-                    return;
-                }
-
-                this.forgotPasswordMode = ForgotPasswordMode.ForgotPassword;
-                this.toastr.error('Error', 'Unexpected error during resetting your password. Please try again.');
+    async onSubmit(): Promise<void> {
+        try {
+            this.forgotPasswordMode = ForgotPasswordMode.Submitting;
+            await this.forgotPasswordService.token(this.forgotPassword);
+            this.forgotPasswordMode = ForgotPasswordMode.Success;
+        } catch (error) {
+            if (error.error.code === 'userNotExists') {
+                this.forgotPasswordMode = ForgotPasswordMode.UserNotExists;
+                return;
             }
-        );
+
+            this.forgotPasswordMode = ForgotPasswordMode.ForgotPassword;
+            this.toastr.error('Error', 'Unexpected error during resetting your password. Please try again.');
+        }
     }
 
-    isForgotPasswordMode(): Boolean {
+    isForgotPasswordMode(): boolean {
         return this.forgotPasswordMode === ForgotPasswordMode.ForgotPassword;
     }
 
-    isSubmittingMode(): Boolean {
+    isSubmittingMode(): boolean {
         return this.forgotPasswordMode === ForgotPasswordMode.Submitting;
     }
 
-    isUserNotExistsMode(): Boolean {
+    isUserNotExistsMode(): boolean {
         return this.forgotPasswordMode === ForgotPasswordMode.UserNotExists;
     }
 
-    isSuccessMode(): Boolean {
+    isSuccessMode(): boolean {
         return this.forgotPasswordMode === ForgotPasswordMode.Success;
     }
 

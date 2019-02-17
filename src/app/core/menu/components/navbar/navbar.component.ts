@@ -16,8 +16,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private userChangeSubscription: Subscription;
 
     constructor(
-        private authorizationService: AuthorizationService, 
-        private navbarService: NavbarService) { 
+        private authorizationService: AuthorizationService,
+        private navbarService: NavbarService) {
     }
 
     ngOnInit() {

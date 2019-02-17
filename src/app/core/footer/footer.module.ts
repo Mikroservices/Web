@@ -10,7 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
     imports: [
         SharedModule
     ],
-    exports:[
+    exports: [
         FooterComponent
     ]
 })

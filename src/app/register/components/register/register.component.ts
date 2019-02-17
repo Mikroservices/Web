@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
         @Inject(DOCUMENT) private document: any
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.registerMode = RegisterMode.Register;
         this.user = new User();
     }
@@ -35,42 +35,38 @@ export class RegisterComponent implements OnInit {
 
         this.reCaptchaV3Service.execute(environment.recaptchaKey, 'homepage', async (token) => {
 
-            this.user.securityToken = token;
-
-            this.registerService.register(this.user).subscribe(
-                () => {
-                    this.removeGoogleBadge();
-                    this.registerMode = RegisterMode.Success;
-                },
-                error => {
-
-                    if (error.error.code === 'userNameIsAlreadyTaken') {
-                        this.errorMessage = 'User name is already taken. Please choose different one.';
-                    } else if (error.error.code === 'emailIsAlreadyConnected') {
-                        this.errorMessage = 'Given email is already connected with other account.';
-                    } else {
-                        this.errorMessage = 'Unexpected error occurred. Please try again.';
-                    }
-
-                    this.registerMode = RegisterMode.Error;
+            try {
+                this.user.securityToken = token;
+                await this.registerService.register(this.user);
+                this.removeGoogleBadge();
+                this.registerMode = RegisterMode.Success;
+            } catch (error) {
+                if (error.error.code === 'userNameIsAlreadyTaken') {
+                    this.errorMessage = 'User name is already taken. Please choose different one.';
+                } else if (error.error.code === 'emailIsAlreadyConnected') {
+                    this.errorMessage = 'Given email is already connected with other account.';
+                } else {
+                    this.errorMessage = 'Unexpected error occurred. Please try again.';
                 }
-            );
+
+                this.registerMode = RegisterMode.Error;
+            }
         });
     }
 
-    isRegisterMode(): Boolean {
+    isRegisterMode(): boolean {
         return this.registerMode === RegisterMode.Register;
     }
 
-    isSubmittingMode(): Boolean {
+    isSubmittingMode(): boolean {
         return this.registerMode === RegisterMode.Submitting;
     }
 
-    isSuccessMode(): Boolean {
+    isSuccessMode(): boolean {
         return this.registerMode === RegisterMode.Success;
     }
 
-    isErrorMode(): Boolean {
+    isErrorMode(): boolean {
         return this.registerMode === RegisterMode.Error;
     }
 

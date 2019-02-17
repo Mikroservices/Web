@@ -7,7 +7,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     ],
     imports: [
         CommonModule,
-        LoadingBarModule.forRoot()
+        LoadingBarModule
     ],
     exports: [
         LoadingBarModule

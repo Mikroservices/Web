@@ -64,9 +64,9 @@ export class AuthorizationService {
 
         const tokenExpirationTime = this.getTokenExpirationTime();
         const now = new Date();
-        
-        var tokenExpirationSeconds = Math.round(tokenExpirationTime.getTime() / this.oneSecond);
-        var nowSeconds = Math.round(now.getTime() / this.oneSecond);
+
+        const tokenExpirationSeconds = Math.round(tokenExpirationTime.getTime() / this.oneSecond);
+        const nowSeconds = Math.round(now.getTime() / this.oneSecond);
 
         const sessionTimeout = (tokenExpirationSeconds - nowSeconds) - this.tokenProcessingTime;
         this.initSessionTimeout(sessionTimeout);
@@ -78,20 +78,18 @@ export class AuthorizationService {
         this.changes.next(null);
     }
 
-    refreshAccessToken() {
+    async refreshAccessToken(): Promise<void> {
         const accessToken = this.persistanceService.getAccessToken();
         if (!accessToken) {
             return;
         }
 
-        this.accountService.refreshToken(accessToken).subscribe(
-            result => {
-                this.signIn(result.accessToken);
-            },
-            () => {
-                this.signOut();
-            }
-        );
+        try {
+            const refreshedAccessToken = await this.accountService.refreshToken(accessToken);
+            this.signIn(refreshedAccessToken.accessToken);
+        } catch {
+            this.signOut();
+        }
     }
 
     private getTokenExpirationTime(): Date {
@@ -107,7 +105,7 @@ export class AuthorizationService {
     private initSessionTimeout(seconds: number): void {
         this.zone.runOutsideAngular(() => {
             this.sessionTimeout = setTimeout(
-                () => this.refreshAccessToken(),
+                async () => this.refreshAccessToken(),
                 this.oneSecond * seconds
             );
         });

@@ -13,18 +13,18 @@ import {
 import * as MediumEditor from 'medium-editor';
 
 @Directive({
+    // tslint:disable-next-line: directive-selector
     selector: 'app-text-editor'
 })
-
 export class TextEditorDirective implements OnInit, OnChanges, OnDestroy {
 
     private lastViewModel: string;
     private element: HTMLElement;
     private editor: any;
 
-    @Input('editorModel') model: any;
-    @Input('editorPlaceholder') placeholder: string;
-    @Output('editorModelChange') update = new EventEmitter();
+    @Input() model: any;
+    @Input() placeholder: string;
+    @Output() modelChange = new EventEmitter();
 
     constructor(private el: ElementRef) { }
 
@@ -32,7 +32,7 @@ export class TextEditorDirective implements OnInit, OnChanges, OnDestroy {
         this.element = this.el.nativeElement;
         this.element.innerHTML = '<div class="me-editable">' + this.model + '</div>';
 
-        let options = {
+        const options = {
             toolbar: {
                 buttons: [
                     'bold',
@@ -79,7 +79,7 @@ export class TextEditorDirective implements OnInit, OnChanges, OnDestroy {
         let value = this.editor.getContent();
         value = value.replace(/&nbsp;/g, '').trim();
         this.lastViewModel = value;
-        this.update.emit(value);
+        this.modelChange.emit(value);
     }
 
     ngOnDestroy(): void {

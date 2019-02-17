@@ -61,7 +61,7 @@
 
 
 <ng-template #changePasswordModal>
-    <form name="form" (ngSubmit)="changePasswordForm.form.valid && onChangePassword()" #changePasswordForm="ngForm" novalidate>
+    <form name="form" (ngSubmit)="changePasswordForm.form.valid && submitChangePassword()" #changePasswordForm="ngForm" novalidate>
         <div class="modal-header">
             <h4 class="modal-title pull-left">Change password</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="changePasswordModalRef.hide()">
@@ -103,9 +103,11 @@
                 </small>
             </div>
 
+            <span *ngIf="changePasswordErrorMessage" class="text-danger">{{ changePasswordErrorMessage }}</span>
+
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="changePasswordModalRef.hide()">Cancel</button>
+            <button type="button" class="btn btn-default" (click)="closeChangePassword()">Cancel</button>
             <button type="submit" class="btn btn-primary">Change password</button>
         </div>
     </form>

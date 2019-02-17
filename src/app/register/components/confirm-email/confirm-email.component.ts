@@ -19,35 +19,33 @@ export class ConfirmEmailComponent implements OnInit {
         private registerService: RegisterService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.confirmEmailMode = ConfirmEmailMode.Validating;
 
-        this.route.queryParams.subscribe(params => {
+        this.route.queryParams.subscribe(async (params) => {
 
             const confirmEmail = new ConfirmEmail();
             confirmEmail.id = params.user;
             confirmEmail.confirmationGuid = params.token;
 
-            this.registerService.confirm(confirmEmail).subscribe(
-                () => {
-                    this.confirmEmailMode = ConfirmEmailMode.Success;
-                },
-                () => {
-                    this.confirmEmailMode = ConfirmEmailMode.Error;
-                }
-            );
+            try {
+                await this.registerService.confirm(confirmEmail);
+                this.confirmEmailMode = ConfirmEmailMode.Success;
+            } catch {
+                this.confirmEmailMode = ConfirmEmailMode.Error;
+            }
         });
     }
 
-    isValidatingMode(): Boolean {
+    isValidatingMode(): boolean {
         return this.confirmEmailMode === ConfirmEmailMode.Validating;
     }
 
-    isErrorMode(): Boolean {
+    isErrorMode(): boolean {
         return this.confirmEmailMode === ConfirmEmailMode.Error;
     }
 
-    isSuccessMode(): Boolean {
+    isSuccessMode(): boolean {
         return this.confirmEmailMode === ConfirmEmailMode.Success;
     }
 }

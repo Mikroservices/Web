@@ -30,32 +30,22 @@ export class StoryDetailsComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        this.spinnerService.show();
-
         this.navbarService.setEditStoryActionVisible();
-
         this.editStoryActionSubscription = this.navbarService.editStoryAction.subscribe(() => {
             this.router.navigate(['/stories/edit/', this.token]);
         });
 
-        this.route.params.subscribe(params => {
-
-            this.token = params['token'];
-
-            this.storiesService.story(this.token).subscribe(
-                story => {
-                    this.story = story;
-                },
-                () => {
-                    this.toastrService.error('Error during downloading story.');
-                    
-                    this.spinnerService.hide();
-                    this.router.navigate(['/home']);
-                },
-                () => {
-                    this.spinnerService.hide();
-                }
-            );
+        this.route.params.subscribe(async (params) => {
+            try {
+                this.spinnerService.show();
+                this.token = params['token'];
+                this.story = await this.storiesService.story(this.token);
+            } catch {
+                this.toastrService.error('Error during downloading story.');
+                this.router.navigate(['/home']);
+            } finally {
+                this.spinnerService.hide();
+            }
         });
     }
 

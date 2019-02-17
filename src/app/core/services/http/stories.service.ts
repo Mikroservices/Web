@@ -1,9 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/internal/Observable";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { environment } from "src/environments/environment";
-import { Story } from "src/app/core/models/story";
+import { environment } from 'src/environments/environment';
+import { Story } from 'src/app/core/models/story';
 
 @Injectable({
     providedIn: 'root'
@@ -17,27 +16,27 @@ export class StoriesService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public stories(): Observable<Story[]> {
-        return this.httpClient.get<Story[]>(this.storiesService + '/stories');
+    public async stories(): Promise<Story[]> {
+        return this.httpClient.get<Story[]>(this.storiesService + '/stories').toPromise();
     }
 
-    public story(token: string): Observable<Story> {
-        return this.httpClient.get<Story>(this.storiesService + '/stories/' + token);
+    public async story(token: string): Promise<Story> {
+        return this.httpClient.get<Story>(this.storiesService + '/stories/' + token).toPromise();
     }
 
-    public create(story: Story): Observable<Story> {
-        return this.httpClient.post<Story>(this.storiesService + '/stories', story);
+    public async create(story: Story): Promise<Story> {
+        return this.httpClient.post<Story>(this.storiesService + '/stories', story).toPromise();
     }
 
-    public update(token: string, story: Story): Observable<Story> {
-        return this.httpClient.put<Story>(this.storiesService + '/stories/' + token, story);
+    public async update(token: string, story: Story): Promise<Story> {
+        return this.httpClient.put<Story>(this.storiesService + '/stories/' + token, story).toPromise();
     }
 
-    public delete(token: string): Observable<Object> {
-        return this.httpClient.delete(this.storiesService + '/stories/' + token);
+    public async delete(token: string): Promise<Object> {
+        return this.httpClient.delete(this.storiesService + '/stories/' + token).toPromise();
     }
 
-    public publish(token: string): Observable<Story> {
-        return this.httpClient.post<Story>(this.storiesService + '/stories/publish/' + token, null);
+    public async publish(token: string): Promise<Story> {
+        return this.httpClient.post<Story>(this.storiesService + '/stories/publish/' + token, null).toPromise();
     }
 }

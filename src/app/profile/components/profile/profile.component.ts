@@ -18,32 +18,25 @@ export class ProfileComponent implements OnInit {
     private userName: string;
 
     constructor(
-        private route: ActivatedRoute, 
+        private route: ActivatedRoute,
         private router: Router,
         private usersService: UsersService,
         private spinnerService: SpinnerService,
         private toastrService: ToastrService) { }
 
     ngOnInit() {
-        this.spinnerService.show();
-
-        this.route.params.subscribe(params => {
+        this.route.params.subscribe(async (params) => {
+            this.spinnerService.show();
             this.userName = params['userName'];
 
-            this.usersService.profile(this.userName).subscribe(
-                user => {
-                    this.user = user;
-                },
-                () => {
-                    this.toastrService.error('Error during downloading user profile.');
-                    
-                    this.spinnerService.hide();
-                    this.router.navigate(['/home']);
-                },
-                () => {
-                    this.spinnerService.hide();
-                }
-            );
+            try {
+                this.user = await this.usersService.profile(this.userName);
+            } catch {
+                this.toastrService.error('Error during downloading user profile.');
+                this.router.navigate(['/home']);
+            } finally {
+                this.spinnerService.hide();
+            }
         });
     }
 }

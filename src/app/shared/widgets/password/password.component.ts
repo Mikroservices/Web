@@ -13,7 +13,7 @@ export class PasswordComponent implements OnInit {
     @Input()
     passwordText: string;
 
-    @Output() 
+    @Output()
     passwordTextChange = new EventEmitter<string>();
 
     @Output()

@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/internal/Observable";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
-import { environment } from "src/environments/environment";
-import { ConfirmEmail } from "src/app/core/models/confirm-email";
-import { User } from "src/app/core/models/user";
-import { BooleanResult } from "src/app/core/models/boolean-result";
+import { environment } from 'src/environments/environment';
+import { ConfirmEmail } from 'src/app/core/models/confirm-email';
+import { User } from 'src/app/core/models/user';
+import { BooleanResult } from 'src/app/core/models/boolean-result';
 
 @Injectable({
     providedIn: 'root'
@@ -19,15 +19,15 @@ export class RegisterService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public register(user: User): Observable<User> {
-        return this.httpClient.post<User>(this.usersService + '/register', user);
+    public async register(user: User): Promise<User> {
+        return this.httpClient.post<User>(this.usersService + '/register', user).toPromise();
     }
 
-    public confirm(confirmEmail: ConfirmEmail): Observable<Object> {
-        return this.httpClient.post(this.usersService + '/register/confirm', confirmEmail);
+    public async confirm(confirmEmail: ConfirmEmail): Promise<Object> {
+        return this.httpClient.post(this.usersService + '/register/confirm', confirmEmail).toPromise();
     }
 
-    public isUserNameTaken(userName: string) {
+    public isUserNameTaken(userName: string): Observable<BooleanResult> {
         return this.httpClient.get<BooleanResult>(this.usersService + '/register/userName/' + userName);
     }
 

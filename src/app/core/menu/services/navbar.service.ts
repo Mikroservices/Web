@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs/internal/Subject";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
     providedIn: 'root'
@@ -10,9 +10,9 @@ export class NavbarService {
     public deleteStoryAction = new Subject<any>();
     public editStoryAction = new Subject<any>();
 
-    private _isNewStoryActionVisible: boolean = true;
-    private _isPublishStoryActionVisible: boolean = false;
-    private _isEditStoryActionVisible: boolean = false;
+    private _isNewStoryActionVisible = true;
+    private _isPublishStoryActionVisible = false;
+    private _isEditStoryActionVisible = false;
 
     public get isNewStoryActionVisible(): boolean {
         return this._isNewStoryActionVisible;
@@ -54,5 +54,5 @@ export class NavbarService {
 
     public onEditStoryAction(): void {
         this.editStoryAction.next();
-    }    
+    }
 }

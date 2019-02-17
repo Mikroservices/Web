@@ -24,6 +24,7 @@ export class SettingsComponent implements OnInit {
     userNameToDelete: string;
     settingsMode: SettingsMode;
     errorMessage: string;
+    changePasswordErrorMessage: string;
 
     changePasswordModalRef: BsModalRef;
     deleteAccountModalRef: BsModalRef;
@@ -38,69 +39,66 @@ export class SettingsComponent implements OnInit {
         private spinnerService: SpinnerService
     ) { }
 
-    ngOnInit() {
-        this.spinnerService.show();
-        this.settingsMode = SettingsMode.Settings;
-        this.user = new User();
-        this.changePassword = new ChangePassword();
+    async ngOnInit(): Promise<void> {
+        try {
+            this.spinnerService.show();
+            this.settingsMode = SettingsMode.Settings;
+            this.user = new User();
+            this.changePassword = new ChangePassword();
 
-        let userFromToken = this.authorizationService.getUser();
-
-        this.usersService.profile(userFromToken.userName).subscribe(user => {
-            this.user = user;
-        },
-        () => {
+            const userFromToken = this.authorizationService.getUser();
+            this.user = await this.usersService.profile(userFromToken.userName);
+        } catch {
             this.toastrService.error('Error during downloading user settings.');
-                
-            this.spinnerService.hide();
             this.router.navigate(['/home']);
-        },
-        () => {
+        } finally {
             this.spinnerService.hide();
-        });
+        }
     }
 
-    async onSubmit() {
-        this.settingsMode = SettingsMode.Submitting;
-
-        this.usersService.update(this.user.userName, this.user).subscribe(
-            () => {
-                this.settingsMode = SettingsMode.Success;
-                this.authorizationService.refreshAccessToken();
-                this.toastrService.success('Settings was saved.');
-            },
-            () => {
-                this.errorMessage = 'Unexpected error occurred. Please try again.';
-                this.settingsMode = SettingsMode.Error;
-            }
-        );
+    async onSubmit(): Promise<void> {
+        try {
+            this.settingsMode = SettingsMode.Submitting;
+            await this.usersService.update(this.user.userName, this.user);
+            this.settingsMode = SettingsMode.Success;
+            this.authorizationService.refreshAccessToken();
+            this.toastrService.success('Settings was saved.');
+        } catch (error) {
+            console.error(error);
+            this.errorMessage = 'Unexpected error occurred. Please try again.';
+            this.settingsMode = SettingsMode.Error;
+        }
     }
 
-    onChangePassword() {
-        this.accountService.changePassword(this.changePassword).subscribe(
-            () => {
-                this.changePasswordModalRef.hide();
-                this.toastrService.success('Password was changed.');
-            },
-            () => {
-                this.errorMessage = 'Unexpected error occurred. Please try again.';
-            }
-        );
+    async submitChangePassword(): Promise<void> {
+        try {
+            await this.accountService.changePassword(this.changePassword);
+            this.changePasswordModalRef.hide();
+            this.toastrService.success('Password was changed.');
+        } catch {
+            this.changePasswordErrorMessage = 'Unexpected error occurred. Please try again.';
+        }
     }
 
-    onDeleteAccount() {
-        this.usersService.delete(this.userNameToDelete).subscribe(
-            () => {
-                this.deleteAccountModalRef.hide();
-                this.toastrService.success('Your account was deleted.');
+    closeChangePassword(): void {
+        this.changePassword.currentPassword = '';
+        this.changePassword.newPassword = '';
+        this.changePasswordErrorMessage = null;
 
-                this.authorizationService.signOut();
-                this.router.navigate(['/home']);
-            },
-            () => {
-                this.errorMessage = 'Unexpected error occurred. Please try again.';
-            }
-        );
+        this.changePasswordModalRef.hide();
+    }
+
+    async onDeleteAccount(): Promise<void> {
+        try {
+            await this.usersService.delete(this.userNameToDelete);
+            this.deleteAccountModalRef.hide();
+            this.toastrService.success('Your account was deleted.');
+
+            this.authorizationService.signOut();
+            this.router.navigate(['/home']);
+        } catch {
+            this.errorMessage = 'Unexpected error occurred. Please try again.';
+        }
     }
 
     openChangePasswordModal(template: TemplateRef<any>) {
@@ -111,20 +109,19 @@ export class SettingsComponent implements OnInit {
         this.deleteAccountModalRef = this.modalService.show(template);
     }
 
-    isSettingsMode(): Boolean {
+    isSettingsMode(): boolean {
         return this.settingsMode === SettingsMode.Settings;
     }
 
-    isSubmittingMode(): Boolean {
+    isSubmittingMode(): boolean {
         return this.settingsMode === SettingsMode.Submitting;
     }
 
-    isSuccessMode(): Boolean {
+    isSuccessMode(): boolean {
         return this.settingsMode === SettingsMode.Success;
     }
 
-    isErrorMode(): Boolean {
+    isErrorMode(): boolean {
         return this.settingsMode === SettingsMode.Error;
     }
-
 }

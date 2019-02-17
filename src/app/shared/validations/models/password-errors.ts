@@ -1,8 +1,8 @@
 export class PasswordErrors {
-    public length: boolean = true;
-    public lowercase: boolean = true;
-    public uppercase: boolean = true;
-    public symbol: boolean = true;
+    public length = true;
+    public lowercase = true;
+    public uppercase = true;
+    public symbol = true;
 
     public isValid() {
         return !this.length && !this.lowercase && !this.uppercase && !this.symbol;

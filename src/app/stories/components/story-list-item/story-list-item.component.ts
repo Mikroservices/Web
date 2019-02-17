@@ -26,7 +26,7 @@ export class StoryListItemComponent implements OnInit {
             return 'nothing to read';
         }
 
-        if(this.story.duration === 1) {
+        if (this.story.duration === 1) {
             return '1 minute read';
         }
 
@@ -36,7 +36,7 @@ export class StoryListItemComponent implements OnInit {
     get words(): string {
         if (this.story.words === 0) {
             return 'empty';
-        } 
+        }
 
         if (this.story.words === 1) {
             return '1 word';
@@ -50,21 +50,21 @@ export class StoryListItemComponent implements OnInit {
         const modified = new Date(this.story.modified);
 
         const diff = Math.floor(now.getTime() - modified.getTime());
-        
-        var days = Math.floor(diff / this.day);
-        var months = Math.floor(days / this.daysInMonth);
-        var years = Math.floor(months / this.monthsInYear);
+
+        const days = Math.floor(diff / this.day);
+        const months = Math.floor(days / this.daysInMonth);
+        const years = Math.floor(months / this.monthsInYear);
 
         if (years > 0) {
             if (months > 6) {
-                return 'almost' + (years + 1) + ' years ago'; 
+                return 'almost' + (years + 1) + ' years ago';
             }
 
             if (years === 1) {
-                return '1 year ago'; 
+                return '1 year ago';
             }
 
-            return (years + 1) + ' years ago'; 
+            return (years + 1) + ' years ago';
         }
 
         if (months > 0) {
@@ -80,15 +80,15 @@ export class StoryListItemComponent implements OnInit {
         }
 
         if (days > 20) {
-            return 'almost 1 month ago'
+            return 'almost 1 month ago';
         }
 
         if (days === 1) {
-            return '1 day ago'
+            return '1 day ago';
         }
 
         if (days === 0) {
-            return 'today'
+            return 'today';
         }
 
         return days + ' ago';
