@@ -6,6 +6,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NgxMdModule } from 'ngx-md';
+import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,13 +23,14 @@ import { SettingsModule } from './settings/settings.module';
 import { AuthorizationService } from './core/services/authorization/authorization.service';
 import { StoriesModule } from './stories/stories.module';
 import { environment } from 'src/environments/environment';
+import { highlightInitializer } from './app-highlight-initializer';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
         tokenGetter: () => {
             return persistanceService.getAccessToken();
         },
-        whitelistedDomains: [ environment.usersService, environment.storiesService ],
+        whitelistedDomains: [environment.usersService, environment.storiesService],
         blacklistedRoutes: []
     };
 }
@@ -57,6 +60,7 @@ export function appInitialization(authorizationService: AuthorizationService) {
         }),
         TabsModule.forRoot(),
         BsDropdownModule.forRoot(),
+        NgxMdModule.forRoot(),
         NgxCaptchaModule,
         CoreModule,
         HomeModule,
@@ -69,7 +73,18 @@ export function appInitialization(authorizationService: AuthorizationService) {
         SharedModule
     ],
     providers: [
-        { provide: APP_INITIALIZER, useFactory: appInitialization, deps: [ AuthorizationService ], multi: true },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: appInitialization,
+            deps: [AuthorizationService],
+            multi: true
+        },
+        {
+            provide: HIGHLIGHT_OPTIONS,
+            useValue: {
+                languages: highlightInitializer,
+            }
+        }
     ],
     bootstrap: [AppComponent]
 })

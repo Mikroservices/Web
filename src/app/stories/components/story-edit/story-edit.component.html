@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
-        <form name="form" #f="ngForm" novalidate>
+        <!-- <form name="form" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="title" style="color: #c1c1c1; font-weight: 200">title</label>
                 <div id="title" class="story-title" name="title" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" data-placeholder="title of your story..." (blur)="titleChanged()" [(ngModel)]="title"></div>
@@ -10,7 +10,8 @@
                 <label for="title" style="color: #c1c1c1; font-weight: 200">your story</label>
                 <app-text-editor [(model)]="text" placeholder="enter your story here..."></app-text-editor>
             </div>
-        </form>
+        </form> -->
+        <app-markdown-editor [(storyTitle)]="title" [(storyText)]="text"></app-markdown-editor>
     </div>
 </div>
 

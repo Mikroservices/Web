@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { PersistanceService } from '../persistance/persistance.service';
 import { User } from 'src/app/core/models/user';
 import { AccountService } from '../http/account.service';
+import { AccessToken } from '../../models/access-token';
 
 @Injectable({
     providedIn: 'root'
@@ -56,8 +57,9 @@ export class AuthorizationService {
         return user;
     }
 
-    signIn(accessToken: string): void {
-        this.persistanceService.setAccessToken(accessToken);
+    signIn(accessToken: AccessToken): void {
+        this.persistanceService.setAccessToken(accessToken.accessToken);
+        this.persistanceService.setRefreshToken(accessToken.refreshToken);
 
         const user = this.getUser();
         this.changes.next(user);
@@ -79,14 +81,14 @@ export class AuthorizationService {
     }
 
     async refreshAccessToken(): Promise<void> {
-        const accessToken = this.persistanceService.getAccessToken();
-        if (!accessToken) {
+        const refreshToken = this.persistanceService.getRefreshToken();
+        if (!refreshToken) {
             return;
         }
 
         try {
-            const refreshedAccessToken = await this.accountService.refreshToken(accessToken);
-            this.signIn(refreshedAccessToken.accessToken);
+            const refreshedAccessToken = await this.accountService.refreshToken(refreshToken);
+            this.signIn(refreshedAccessToken);
         } catch {
             this.signOut();
         }

@@ -1,6 +1,5 @@
 <div *ngIf="story" class="row">
     <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
-        <div class="story-title">{{ story.title }}</div>
-        <div [innerHTML]="story.text"></div>
+        <app-preview [storyTitle]="story.title" [storyText]="story.text"></app-preview>
     </div>
 </div>

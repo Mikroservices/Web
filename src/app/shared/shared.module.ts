@@ -14,9 +14,8 @@ import { SpinnerModule } from './spinner/spinner.module';
 import { StoriesModule } from './stories/stories.module';
 import { UserCardModule } from './user-card/user-card.module';
 import { ValidationsModule } from './validations/validations.module';
-import { TextEditorModule } from './text-editor/text-editor.module';
 import { WidgetsModule } from './widgets/widgets.module';
-
+import { MarkdownEditorModule } from './markdown-editor/markdown-editor.module';
 
 @NgModule({
     declarations: [
@@ -36,10 +35,10 @@ import { WidgetsModule } from './widgets/widgets.module';
         StoriesModule,
         UserCardModule,
         ValidationsModule,
-        TextEditorModule,
         WidgetsModule,
         TabsModule,
-        BsDropdownModule
+        BsDropdownModule,
+        MarkdownEditorModule
     ]
 })
 export class SharedModule { }

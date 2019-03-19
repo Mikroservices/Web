@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AccessToken } from 'src/app/core/models/access-token';
 import { Login } from 'src/app/core/models/login';
 import { ChangePassword } from 'src/app/core/models/change-password';
+import { RefreshToken } from '../../models/refresh-token';
 
 @Injectable({
     providedIn: 'root'
@@ -19,10 +20,10 @@ export class AccountService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public async refreshToken(accessToken: string): Promise<AccessToken> {
+    public async refreshToken(refreshToken: string): Promise<AccessToken> {
         return this.httpClient.post<AccessToken>(
             this.usersService + '/account/refresh',
-            new AccessToken(accessToken)
+            new RefreshToken(refreshToken)
         ).toPromise();
     }
 

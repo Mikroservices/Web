@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Login } from '../../../core/models/login';
 import { LoginMode } from '../../models/login-mode';
@@ -16,16 +16,22 @@ export class LoginComponent implements OnInit {
     login: Login;
     loginMode: LoginMode;
     errorMessage: string;
+    returnUrl: string;
 
     constructor(
         private accountService: AccountService,
         private router: Router,
-        private authorizationService: AuthorizationService) {
+        private authorizationService: AuthorizationService,
+        private route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.login = new Login();
         this.loginMode = LoginMode.Login;
+
+        this.route.queryParams.subscribe(async (params) => {
+            this.returnUrl = params.returnUrl;
+        });
     }
 
     async onSubmit(): Promise<void> {
@@ -33,8 +39,13 @@ export class LoginComponent implements OnInit {
 
         try {
             const accessToken = await this.accountService.login(this.login);
-            this.authorizationService.signIn(accessToken.accessToken);
-            this.router.navigate(['/home']);
+            this.authorizationService.signIn(accessToken);
+
+            if (this.returnUrl) {
+                this.router.navigateByUrl(this.returnUrl);
+            } else {
+                this.router.navigate(['/home']);
+            }
         } catch (error) {
 
             if (error.error.code === 'invalidLoginCredentials') {

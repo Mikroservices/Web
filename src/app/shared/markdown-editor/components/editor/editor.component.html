@@ -1,0 +1,5 @@
+<label for="storyTitle" style="color: #c1c1c1; font-weight: 200">title</label>
+<div id="storyTitle" class="story-title" name="storyTitle" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" data-placeholder="title of your story..." (blur)="storyTitleBlur()" [ngModel]="storyTitle" (ngModelChange)="storyTitleChanged($event)"></div>
+
+<label for="storyText" style="color: #c1c1c1; font-weight: 200">your story</label>
+<textarea id="storyText" placeholder="content of your story..." class="story-text" name="storyText" (blur)="storyTextBlur()"  [ngModel]="storyText" (ngModelChange)="storyTextChanged($event)" autosize></textarea>

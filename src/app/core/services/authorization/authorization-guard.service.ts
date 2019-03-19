@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
-import { AuthorizationService } from './authorization.service';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
+import { AuthorizationService } from './authorization.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,11 +13,11 @@ export class AuthorizationGuardService implements CanActivate {
         public router: Router
     ) { }
 
-    async canActivate(): Promise<boolean> {
+    async canActivate(_: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
 
         if (!this.authorizationService.isLoggedIn()) {
             this.authorizationService.signOut();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
 
             return false;
         }

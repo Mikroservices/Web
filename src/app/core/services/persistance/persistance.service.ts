@@ -42,4 +42,16 @@ export class PersistanceService {
     removeAccessToken(): void {
         localStorage.removeItem('access_token');
     }
+
+    setRefreshToken(data: any): void {
+        this.set('refresh_token', data);
+    }
+
+    getRefreshToken(): any {
+        return this.get('refresh_token');
+    }
+
+    removeRefreshToken(): void {
+        localStorage.removeItem('refresh_token');
+    }
 }
