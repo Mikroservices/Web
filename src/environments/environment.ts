@@ -3,12 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  recaptchaKey: '6LfwsncUAAAAAPsUABRdM5OQVLRBFur_ZVQJoXPx',
-  httpSchema: 'http://',
-  usersService: 'localhost:8001',
-  storiesService: 'localhost:8003'
-};
+    production: false,
+    recaptchaKey: '6LfwsncUAAAAAPsUABRdM5OQVLRBFur_ZVQJoXPx',
+    httpSchema: 'http://',
+    usersService: 'localhost:8001'
+  };
 
 /*
  * For easier debugging in development mode, you can import the following file

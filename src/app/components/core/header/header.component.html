@@ -1,0 +1,71 @@
+<nav class="mat-elevation-z6">
+    <mat-toolbar color="primary">
+        <button mat-button [routerLink]="['\home']">
+            <mat-icon>group_work</mat-icon>
+            Mikroservices
+        </button>
+        <ng-container *ngIf="!user">
+            <div class="flex-spacer"></div>
+            <button mat-button [routerLink]="['/login']">Sign in</button>
+        </ng-container>
+        <ng-container *ngIf="user">
+            <div fxHide fxShow.gt-xs>
+                <button mat-button [routerLink]="['/deliveries']" aria-label="Deliveries">Deliveries</button>
+                <button mat-button [matMenuTriggerFor]="adminMenu">Administration</button>
+                <mat-menu #adminMenu="matMenu">
+                    <button mat-menu-item [routerLink]="['/shops']" aria-label="Shops">
+                        <mat-icon>store_mall_directory</mat-icon>
+                        <span>Shops</span>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/vehicles']" aria-label="Vehicles">
+                        <mat-icon>local_shipping</mat-icon>
+                        <span>Vehicles</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item [routerLink]="['/users']" aria-label="Users">
+                        <mat-icon>people_alt</mat-icon>
+                        <span>Users</span>
+                    </button>
+                </mat-menu>
+            </div>
+            <div class="flex-spacer"></div>
+            <div fxHide fxShow.gt-xs>
+                <span class="mat-small">Welcome, {{ user.name }}</span>
+                <button mat-button (click)="signOut()">Sign out</button>
+            </div>
+            <div fxShow fxHide.gt-xs>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu with actions">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item disabled aria-label="Signed in as">
+                        <mat-icon>face</mat-icon>
+                        <span>{{ user.name }}</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item [routerLink]="['/deliveries']" aria-label="Deliveries">
+                        <mat-icon>shopping_cart</mat-icon>
+                        <span>Deliveries</span>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/shops']" aria-label="Shops">
+                        <mat-icon>store_mall_directory</mat-icon>
+                        <span>Shops</span>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/vehicles']" aria-label="Vehicles">
+                        <mat-icon>local_shipping</mat-icon>
+                        <span>Vehicles</span>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/users']" aria-label="Users">
+                        <mat-icon>people_alt</mat-icon>
+                        <span>Users</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="signOut()" aria-label="Sign out">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Sign out</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </ng-container>
+    </mat-toolbar>
+</nav>
