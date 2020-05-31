@@ -6,9 +6,11 @@ import { AccessForbiddenPage } from './errors/access-forbidden/access-forbidden.
 import { PageNotFoundPage } from './errors/page-not-found/page-not-found.page';
 import { LoggedInGuardService } from '../services/authorization/logged-in-guard.service';
 import { LoginPage } from './login/login.page';
+import { LoginCallbackPage } from './login-callback/login-callback.page';
 
 const routes: Routes = [
     { path: 'login', component: LoginPage, canActivate: [ LoggedInGuardService ] },
+    { path: 'login-callback', component: LoginCallbackPage, canActivate: [ LoggedInGuardService ] },
     // { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ LoggedInGuardService ] },
     // { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ LoggedInGuardService ] },
     // { path: 'register', component: RegisterComponent, canActivate: [ LoggedInGuardService ] },

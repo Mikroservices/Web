@@ -8,6 +8,7 @@ import { AuthorizationService } from 'src/app/services/authorization/authorizati
 import { DirtyErrorStateMatcher } from 'src/app/common/DirtyErrorStateMatcher';
 import { AuthClientsService } from 'src/app/services/http/auth-clients.service';
 import { AuthClient } from 'src/app/models/auth-client';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -69,6 +70,10 @@ export class LoginPage implements OnInit {
 
             this.loginMode = LoginMode.Error;
         }
+    }
+
+    getExternalProviderUrl(authClient: AuthClient): String {
+        return environment.httpSchema + environment.usersService + '/identity/authenticate/' + authClient.uri;
     }
 
     isLoginMode(): Boolean {

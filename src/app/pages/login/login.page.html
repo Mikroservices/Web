@@ -34,10 +34,10 @@
 
         <div class="external-sign-in">
             <div *ngFor="let authClient of authClients">
-                <button type="button" mat-flat-button color="basic">
+                <a [href]="getExternalProviderUrl(authClient)" type="button" mat-flat-button color="basic">
                     <div class='icon' [innerHTML]="authClient.svgIcon | sanitizeHtml"></div>
                     &nbsp;{{ authClient.name }}
-                </button>
+                </a>
             </div>
         </div>
     </div>

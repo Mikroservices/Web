@@ -77,6 +77,7 @@ export class AuthorizationService {
     signOut(): void {
         this.cancelSessionTimeout();
         this.persistanceService.removeAccessToken();
+        this.persistanceService.removeRefreshToken();
         this.changes.next(null);
     }
 
