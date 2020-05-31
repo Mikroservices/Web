@@ -4,9 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home/home.page';
 import { AccessForbiddenPage } from './errors/access-forbidden/access-forbidden.page';
 import { PageNotFoundPage } from './errors/page-not-found/page-not-found.page';
+import { LoggedInGuardService } from '../services/authorization/logged-in-guard.service';
+import { LoginPage } from './login/login.page';
 
 const routes: Routes = [
-    // { path: 'login', component: LoginComponent, canActivate: [ LoggedInGuardService ] },
+    { path: 'login', component: LoginPage, canActivate: [ LoggedInGuardService ] },
     // { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ LoggedInGuardService ] },
     // { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ LoggedInGuardService ] },
     // { path: 'register', component: RegisterComponent, canActivate: [ LoggedInGuardService ] },

@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+// Styles for the docs app that are based on the current theme.
+@mixin material-app-theme($theme) {
+    $primary: map-get($theme, primary);
+    $foreground: map-get($theme, foreground);
+    $error: mat-palette($mat-red);
+    $warning: mat-palette($mat-orange);
+    $grey: mat-palette($mat-grey);
+
+    body {
+        background-color: mat-color($foreground);
+    }
+
+    .error {
+        color: mat-color($error);
+    }
+
+    .grey {
+        color: mat-color($grey);
+    }
+
+    .warning.mat-hint {
+        color: mat-color($warning);
+    }
+
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: mat-color($grey);
+    
+        &::before, &::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid mat-color($grey);
+        }
+    
+        &::before {
+            margin-right: .25em;
+        }
+    
+        &::after {
+            margin-left: .25em;
+        }
+    }
+}

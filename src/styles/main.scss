@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+@import './app-theme';
+@import './messages-theme';
+// @import './styles/api';
+// @import './styles/markdown';
+// @import './styles/tables';
+@import './general';
+
+// Include material core styles.
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+// $unit4-app-primary: mat-palette($mat-blue-grey, 700, 600, 800);
+// $unit4-app-accent:  mat-palette($mat-light-blue, 800, 700, 900);
+
+$unit4-app-primary: mat-palette($mat-indigo);
+$unit4-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$unit4-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$unit4-app-theme: mat-light-theme($unit4-app-primary, $unit4-app-accent, $unit4-app-warn);
+
+@include angular-material-theme($unit4-app-theme);
+@include material-app-theme($unit4-app-theme);
+@include messages-theme($unit4-app-theme)

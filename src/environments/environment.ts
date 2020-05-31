@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     recaptchaKey: '6LfwsncUAAAAAPsUABRdM5OQVLRBFur_ZVQJoXPx',
     httpSchema: 'http://',
-    usersService: 'localhost:8001'
+    usersService: 'localhost:8080'
   };
 
 /*
