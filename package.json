@@ -25,7 +25,8 @@
     "@auth0/angular-jwt": "^4.1.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "ngx-captcha": "~8.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.7",

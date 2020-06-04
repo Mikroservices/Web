@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { PersistanceService } from './services/persistance/persistance.service';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { PagesModule } from './pages/pages.module';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 export function jwtOptionsFactory(persistanceService: PersistanceService) {
     return {
@@ -40,6 +41,7 @@ export function appInitialization(authorizationService: AuthorizationService) {
                 deps: [PersistanceService]
             }
         }),
+        NgxCaptchaModule,
         PagesModule
     ],
     providers: [

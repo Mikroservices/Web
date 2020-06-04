@@ -4,17 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home/home.page';
 import { AccessForbiddenPage } from './errors/access-forbidden/access-forbidden.page';
 import { PageNotFoundPage } from './errors/page-not-found/page-not-found.page';
-import { LoggedInGuardService } from '../services/authorization/logged-in-guard.service';
+import { LoggedOutGuardService } from '../services/authorization/logged-out-guard.service';
 import { LoginPage } from './login/login.page';
 import { LoginCallbackPage } from './login-callback/login-callback.page';
+import { RegisterPage } from './register/register.page';
 
 const routes: Routes = [
-    { path: 'login', component: LoginPage, canActivate: [ LoggedInGuardService ] },
-    { path: 'login-callback', component: LoginCallbackPage, canActivate: [ LoggedInGuardService ] },
-    // { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ LoggedInGuardService ] },
-    // { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ LoggedInGuardService ] },
-    // { path: 'register', component: RegisterComponent, canActivate: [ LoggedInGuardService ] },
-    // { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedInGuardService ] },
+    { path: 'login', component: LoginPage, canActivate: [ LoggedOutGuardService ] },
+    { path: 'login-callback', component: LoginCallbackPage, canActivate: [ LoggedOutGuardService ] },
+    // { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ LoggedOutGuardService ] },
+    // { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ LoggedOutGuardService ] },
+    { path: 'register', component: RegisterPage, canActivate: [ LoggedOutGuardService ] },
+    // { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedOutGuardService ] },
     // { path: 'profile/:userName', component: ProfileComponent, canActivate: [ AuthorizationGuardService ]  },
     // { path: 'settings', component: SettingsComponent, canActivate: [ AuthorizationGuardService ] },
     { path: 'home', component: HomePage },
