@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BooleanInput } from '@angular/cdk/coercion';
 
 import { Login } from 'src/app/models/login';
 import { LoginMode } from 'src/app/models/login-mode';
@@ -18,12 +19,13 @@ import { environment } from 'src/environments/environment';
 export class LoginPage implements OnInit {
     LoginMode = LoginMode;
 
-    login: Login;
-    loginMode: LoginMode;
-    errorMessage: string;
-    returnUrl: string;
+    login = new Login('', '');
+    loginMode = LoginMode.Login;
     dirtyErrorStateMatcher = new DirtyErrorStateMatcher();
-    authClients: AuthClient[];
+
+    errorMessage?: string;
+    returnUrl?: string;
+    authClients?: AuthClient[];
 
     constructor(
         private accountService: AccountService,
@@ -34,9 +36,6 @@ export class LoginPage implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
-        this.login = new Login();
-        this.loginMode = LoginMode.Login;
-
         this.route.queryParams.subscribe(async (params) => {
             this.returnUrl = params.returnUrl;
         });
@@ -72,19 +71,19 @@ export class LoginPage implements OnInit {
         }
     }
 
-    getExternalProviderUrl(authClient: AuthClient): String {
+    getExternalProviderUrl(authClient: AuthClient): string {
         return environment.httpSchema + environment.usersService + '/identity/authenticate/' + authClient.uri;
     }
 
-    isLoginMode(): Boolean {
+    isLoginMode(): BooleanInput {
         return this.loginMode === LoginMode.Login;
     }
 
-    isSubmittingMode(): Boolean {
+    isSubmittingMode(): BooleanInput {
         return this.loginMode === LoginMode.Submitting;
     }
 
-    isErrorMode(): Boolean {
+    isErrorMode(): BooleanInput {
         return this.loginMode === LoginMode.Error;
     }
 }

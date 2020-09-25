@@ -12,22 +12,22 @@
                     <div fxLayout="column" fxLayoutGap="20px">
                         <mat-form-field floatLabel="always">
                             <input matInput name="userName" [(ngModel)]="user.userName" #userName="ngModel" type="text" placeholder="Username" aria-label="Username" required />
-                            <mat-error *ngIf="userName.dirty && userName.invalid && userName.errors.required">Enter username.</mat-error>
+                            <mat-error *ngIf="userName.dirty && userName.invalid && userName.errors?.required">Enter username.</mat-error>
                         </mat-form-field>
 
                         <mat-form-field floatLabel="always">
                             <input matInput name="email" [(ngModel)]="user.email" #email="ngModel" type="email" placeholder="Email" aria-label="Email" required />
-                            <mat-error *ngIf="email.dirty && email.invalid && email.errors.required">Enter email.</mat-error>
+                            <mat-error *ngIf="email.dirty && email.invalid && email.errors?.required">Enter email.</mat-error>
                         </mat-form-field>
 
                         <mat-form-field floatLabel="always">
                             <input matInput name="name" [(ngModel)]="user.name" #name="ngModel" type="text" placeholder="Name" aria-label="Name" required />
-                            <mat-error *ngIf="name.dirty && name.invalid && name.errors.required">Enter name.</mat-error>
+                            <mat-error *ngIf="name.dirty && name.invalid && name.errors?.required">Enter name.</mat-error>
                         </mat-form-field>
 
                         <mat-form-field floatLabel="always">
                             <input matInput name="password" [(ngModel)]="user.password" #password="ngModel" type="password" placeholder="Password" aria-label="Password" required />
-                            <mat-error *ngIf="password.dirty && password.invalid && password.errors.required">Enter password.</mat-error>
+                            <mat-error *ngIf="password.dirty && password.invalid && password.errors?.required">Enter password.</mat-error>
                         </mat-form-field>
                     </div>
                 </mat-card-content>

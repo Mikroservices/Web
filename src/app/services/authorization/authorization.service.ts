@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { PersistanceService } from '../persistance/persistance.service';
@@ -12,8 +12,8 @@ import { AccessToken } from '../../models/access-token';
 })
 export class AuthorizationService {
 
-    public changes = new BehaviorSubject<User>(this.getUser());
-    private sessionTimeout: any;
+    public changes = new BehaviorSubject<User | null>(this.getUser());
+    private sessionTimeout?: NodeJS.Timeout;
     private tokenProcessingTime = 30;
     private oneSecond = 1000;
 
@@ -24,7 +24,7 @@ export class AuthorizationService {
         private zone: NgZone) {
     }
 
-    isLoggedIn(): Boolean {
+    isLoggedIn(): boolean {
 
         const actionToken = this.persistanceService.getAccessToken();
         if (!actionToken) {
@@ -65,9 +65,14 @@ export class AuthorizationService {
         this.changes.next(user);
 
         const tokenExpirationTime = this.getTokenExpirationTime();
-        const now = new Date();
+        if (tokenExpirationTime == null) {
+            this.signOut();
+            return;
+        }
 
-        const tokenExpirationSeconds = Math.round(tokenExpirationTime.getTime() / this.oneSecond);
+        const now = new Date();
+        const expirationTime = tokenExpirationTime.getTime();
+        const tokenExpirationSeconds = Math.round(expirationTime / this.oneSecond);
         const nowSeconds = Math.round(now.getTime() / this.oneSecond);
 
         const sessionTimeout = (tokenExpirationSeconds - nowSeconds) - this.tokenProcessingTime;
@@ -95,7 +100,7 @@ export class AuthorizationService {
         }
     }
 
-    private getTokenExpirationTime(): Date {
+    private getTokenExpirationTime(): Date | null {
         const actionToken = this.persistanceService.getAccessToken();
         if (!actionToken) {
             return null;
@@ -115,7 +120,9 @@ export class AuthorizationService {
         });
     }
 
-    private cancelSessionTimeout() {
-        clearTimeout(this.sessionTimeout);
+    private cancelSessionTimeout(): void {
+        if (this.sessionTimeout) {
+            clearTimeout(this.sessionTimeout);
+        }
     }
 }

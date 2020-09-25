@@ -12,23 +12,23 @@ import { User } from 'src/app/models/user';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    public user: User;
-    private userChangeSubscription: Subscription;
+    public user?: User | null;
+    private userChangeSubscription?: Subscription;
 
     constructor(
         private authorizationService: AuthorizationService,
         private router: Router) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.user = this.authorizationService.getUser();
         this.userChangeSubscription = this.authorizationService.changes.subscribe(user => {
             this.user = user;
         });
     }
 
-    ngOnDestroy() {
-        this.userChangeSubscription.unsubscribe();
+    ngOnDestroy(): void {
+        this.userChangeSubscription?.unsubscribe();
     }
 
     async signOut(): Promise<void> {

@@ -4,6 +4,6 @@ export class AccessToken {
 
     constructor(accessToken: string, refreshToken: string) {
         this.accessToken = accessToken;
-        this.refreshToken = refreshToken
+        this.refreshToken = refreshToken;
     }
 }

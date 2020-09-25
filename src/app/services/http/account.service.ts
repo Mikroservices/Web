@@ -13,7 +13,7 @@ import { RefreshToken } from 'src/app/models/refresh-token';
 })
 export class AccountService {
 
-    private get usersService() {
+    private get usersService(): string {
         return environment.httpSchema + environment.usersService;
     }
 
@@ -31,7 +31,7 @@ export class AccountService {
         return this.httpClient.post<AccessToken>(this.usersService + '/account/login', login).toPromise();
     }
 
-    public async changePassword(changePassword: ChangePassword): Promise<Object> {
+    public async changePassword(changePassword: ChangePassword): Promise<object> {
         return this.httpClient.post(this.usersService + '/account/change-password', changePassword).toPromise();
     }
 }

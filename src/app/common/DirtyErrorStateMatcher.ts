@@ -3,7 +3,7 @@ import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 export class DirtyErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        const isSubmitted = form && form.submitted;
-        return (control && (control.dirty && control.invalid));  // show error only when dirty and invalid
+        // show error only when dirty and invalid
+        return control != null && control.dirty && control.invalid;
     }
 }

@@ -9,7 +9,7 @@ import { AuthClient } from 'src/app/models/auth-client';
 })
 export class AuthClientsService {
 
-    private get usersService() {
+    private get usersService(): string {
         return environment.httpSchema + environment.usersService;
     }
 

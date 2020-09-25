@@ -12,7 +12,7 @@ import { BooleanResult } from 'src/app/models/boolean-result';
 })
 export class RegisterService {
 
-    private get usersService() {
+    private get usersService(): string {
         return environment.httpSchema + environment.usersService;
     }
 
@@ -23,7 +23,7 @@ export class RegisterService {
         return this.httpClient.post<User>(this.usersService + '/register', user).toPromise();
     }
 
-    public async confirm(confirmEmail: ConfirmEmail): Promise<Object> {
+    public async confirm(confirmEmail: ConfirmEmail): Promise<object> {
         return this.httpClient.post(this.usersService + '/register/confirm', confirmEmail).toPromise();
     }
 

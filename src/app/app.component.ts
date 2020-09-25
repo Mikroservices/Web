@@ -10,7 +10,7 @@ import { LoadingService } from './services/common/loading.service';
 })
 export class AppComponent implements OnDestroy, AfterViewInit {
     showLoader = false;
-    loadingStateChangesSubscription: Subscription;
+    loadingStateChangesSubscription?: Subscription;
 
     constructor(
         private loadingService: LoadingService,
@@ -26,8 +26,6 @@ export class AppComponent implements OnDestroy, AfterViewInit {
     }
 
     ngOnDestroy(): void {
-        if (this.loadingStateChangesSubscription) {
-            this.loadingStateChangesSubscription.unsubscribe();
-        }
+        this.loadingStateChangesSubscription?.unsubscribe();
     }
 }

@@ -10,7 +10,7 @@ import { IdentityToken } from 'src/app/models/identity-token';
 })
 export class IdentityService {
 
-    private get usersService() {
+    private get usersService(): string {
         return environment.httpSchema + environment.usersService;
     }
 

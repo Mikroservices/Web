@@ -1,6 +1,6 @@
 export class AuthClient {
-    public id: string;
-    public uri: string;
-    public name: string;
-    public svgIcon: string;
+    public id?: string;
+    public uri?: string;
+    public name?: string;
+    public svgIcon?: string;
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+/* tslint:disable:no-any */
+
 @Injectable({
     providedIn: 'root'
 })
@@ -15,7 +17,12 @@ export class PersistanceService {
 
     get(key: string): any {
         try {
-            return JSON.parse(localStorage.getItem(key));
+            const value = localStorage.getItem(key);
+            if (value == null) {
+                return null;
+            }
+
+            return JSON.parse(value);
         } catch (e) {
             console.error('Error getting data from localStorage', e);
 

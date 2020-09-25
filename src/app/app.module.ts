@@ -3,7 +3,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
@@ -12,19 +12,15 @@ import { AuthorizationService } from './services/authorization/authorization.ser
 import { PagesModule } from './pages/pages.module';
 import { NgxCaptchaModule } from 'ngx-captcha';
 
-export function jwtOptionsFactory(persistanceService: PersistanceService) {
-    return {
-        tokenGetter: () => {
-            return persistanceService.getAccessToken();
-        },
-        whitelistedDomains: [environment.usersService],
-        blacklistedRoutes: []
-    };
-}
+const jwtOptionsFactory = (persistanceService: PersistanceService) => ({
+    tokenGetter: () => persistanceService.getAccessToken(),
+    whitelistedDomains: [environment.usersService],
+    blacklistedRoutes: []
+});
 
-export function appInitialization(authorizationService: AuthorizationService) {
+const appInitialization = (authorizationService: AuthorizationService) => {
     return () => authorizationService.refreshAccessToken();
-}
+};
 
 @NgModule({
     declarations: [
@@ -45,7 +41,7 @@ export function appInitialization(authorizationService: AuthorizationService) {
         PagesModule
     ],
     providers: [
-        { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check' },
+        { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check' }},
         {
             provide: APP_INITIALIZER,
             useFactory: appInitialization,

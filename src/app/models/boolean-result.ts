@@ -1,3 +1,3 @@
 export class BooleanResult {
-    public result: boolean;
+    public result = false;
 }

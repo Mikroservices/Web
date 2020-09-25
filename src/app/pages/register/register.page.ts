@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { BooleanInput } from '@angular/cdk/coercion';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 
 import { User } from 'src/app/models/user';
@@ -15,15 +16,16 @@ import { environment } from 'src/environments/environment';
 export class RegisterPage implements OnInit {
     RegisterMode = RegisterMode;
 
-    user: User;
-    registerMode: RegisterMode;
-    errorMessage: string;
-    passwordIsValid: boolean;
+    user = new User();
+    registerMode = RegisterMode.Register;
+
+    errorMessage?: string;
+    passwordIsValid?: boolean;
 
     constructor(
         private registerService: RegisterService,
         private reCaptchaV3Service: ReCaptchaV3Service,
-        @Inject(DOCUMENT) private document: any
+        @Inject(DOCUMENT) private document: Document
     ) { }
 
     ngOnInit(): void {
@@ -31,7 +33,7 @@ export class RegisterPage implements OnInit {
         this.user = new User();
     }
 
-    async onSubmit() {
+    async onSubmit(): Promise<void> {
         this.registerMode = RegisterMode.Submitting;
 
         this.reCaptchaV3Service.execute(environment.recaptchaKey, 'homepage', async (token) => {
@@ -55,19 +57,19 @@ export class RegisterPage implements OnInit {
         });
     }
 
-    isRegisterMode(): boolean {
+    isRegisterMode(): BooleanInput {
         return this.registerMode === RegisterMode.Register;
     }
 
-    isSubmittingMode(): boolean {
+    isSubmittingMode(): BooleanInput {
         return this.registerMode === RegisterMode.Submitting;
     }
 
-    isSuccessMode(): boolean {
+    isSuccessMode(): BooleanInput {
         return this.registerMode === RegisterMode.Success;
     }
 
-    isErrorMode(): boolean {
+    isErrorMode(): BooleanInput {
         return this.registerMode === RegisterMode.Error;
     }
 
@@ -75,7 +77,7 @@ export class RegisterPage implements OnInit {
         this.passwordIsValid = valid;
     }
 
-    private removeGoogleBadge() {
+    private removeGoogleBadge(): void {
         const googleBadge = this.document.getElementsByClassName('grecaptcha-badge');
         if (googleBadge && googleBadge.length > 0) {
             googleBadge[0].remove();

@@ -10,7 +10,7 @@ import { AuthorizationService } from 'src/app/services/authorization/authorizati
     styleUrls: ['./login-callback.page.scss']
 })
 export class LoginCallbackPage implements OnInit {
-    public errorMessage: String = null;
+    public errorMessage?: string;
 
     constructor(
         private identityService: IdentityService,
@@ -20,8 +20,8 @@ export class LoginCallbackPage implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
-        const authenticateToken = this.route.snapshot.queryParams['authenticateToken'];
-        
+        const authenticateToken = this.route.snapshot.queryParams.authenticateToken;
+
         try {
             const accessToken = await this.identityService.login(new IdentityToken(authenticateToken));
             this.authorizationService.signIn(accessToken);
