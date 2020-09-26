@@ -18,9 +18,9 @@ export class RegisterPage implements OnInit {
 
     user = new User();
     registerMode = RegisterMode.Register;
+    passwordIsValid = false;
 
     errorMessage?: string;
-    passwordIsValid?: boolean;
 
     constructor(
         private registerService: RegisterService,

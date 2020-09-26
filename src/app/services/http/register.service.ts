@@ -28,7 +28,7 @@ export class RegisterService {
     }
 
     public isUserNameTaken(userName: string): Observable<BooleanResult> {
-        return this.httpClient.get<BooleanResult>(this.usersService + '/register/userName/' + userName);
+        return this.httpClient.get<BooleanResult>(this.usersService + '/register/username/' + userName);
     }
 
     public isEmailConnected(email: string): Observable<BooleanResult> {

@@ -8,10 +8,13 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HeaderComponent } from './core/header/header.component';
+import { PasswordComponent } from './widgets/password/password.component';
+import { ValidationsModule } from '../validators/validations.module';
 
 @NgModule({
     declarations: [
-        HeaderComponent
+        HeaderComponent,
+        PasswordComponent
     ],
     imports: [
         BrowserModule,
@@ -22,7 +25,8 @@ import { HeaderComponent } from './core/header/header.component';
         BrowserTransferStateModule,
         FlexLayoutModule,
         AngularMaterialModule,
-        RouterModule
+        RouterModule,
+        ValidationsModule
     ],
     exports: [
         BrowserModule,
@@ -34,7 +38,9 @@ import { HeaderComponent } from './core/header/header.component';
         FlexLayoutModule,
         AngularMaterialModule,
         RouterModule,
-        HeaderComponent
+        ValidationsModule,
+        HeaderComponent,
+        PasswordComponent
     ]
 })
 export class ComponentsModule { }

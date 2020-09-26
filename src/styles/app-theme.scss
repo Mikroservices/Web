@@ -12,16 +12,16 @@
         background-color: mat-color($foreground);
     }
 
-    .error {
+    .text-error {
         color: mat-color($error);
     }
 
-    .grey {
-        color: mat-color($grey);
+    .text-warning {
+        color: mat-color($warning);
     }
 
-    .warning.mat-hint {
-        color: mat-color($warning);
+    .text-muted {
+        color: mat-color($grey);
     }
 
     .separator {
