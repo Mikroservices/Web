@@ -8,11 +8,12 @@ import { LoggedOutGuardService } from '../services/authorization/logged-out-guar
 import { LoginPage } from './login/login.page';
 import { LoginCallbackPage } from './login-callback/login-callback.page';
 import { RegisterPage } from './register/register.page';
+import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
 
 const routes: Routes = [
     { path: 'login', component: LoginPage, canActivate: [ LoggedOutGuardService ] },
+    { path: 'forgot-password', component: ForgotPasswordPage, canActivate: [ LoggedOutGuardService ] },
     { path: 'login-callback', component: LoginCallbackPage, canActivate: [ LoggedOutGuardService ] },
-    // { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ LoggedOutGuardService ] },
     // { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ LoggedOutGuardService ] },
     { path: 'register', component: RegisterPage, canActivate: [ LoggedOutGuardService ] },
     // { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedOutGuardService ] },

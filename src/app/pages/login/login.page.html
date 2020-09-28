@@ -30,7 +30,7 @@
             </mat-card>
         </form>
 
-        <div class="separator margin-top-20 margin-bottom-20">Or via Social Account</div>
+        <div *ngIf="authClients && authClients.length > 0" class="separator margin-top-20 margin-bottom-20">Or via Social Account</div>
 
         <div class="external-sign-in">
             <div *ngFor="let authClient of authClients">

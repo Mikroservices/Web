@@ -8,6 +8,7 @@ import { AccessForbiddenPage } from './errors/access-forbidden/access-forbidden.
 import { LoginPage } from './login/login.page';
 import { PipesModule } from '../pipes/pipes.module';
 import { RegisterPage } from './register/register.page';
+import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { RegisterPage } from './register/register.page';
         LoginPage,
         PageNotFoundPage,
         AccessForbiddenPage,
-        RegisterPage
+        RegisterPage,
+        ForgotPasswordPage
     ],
     exports: [
         ComponentsModule,
@@ -30,7 +32,8 @@ import { RegisterPage } from './register/register.page';
         LoginPage,
         PageNotFoundPage,
         AccessForbiddenPage,
-        RegisterPage
+        RegisterPage,
+        ForgotPasswordPage
     ]
 })
 export class PagesModule { }
