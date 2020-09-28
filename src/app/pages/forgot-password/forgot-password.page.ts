@@ -52,7 +52,7 @@ export class ForgotPasswordPage {
         return this.forgotPasswordMode === ForgotPasswordMode.Success;
     }
 
-    resetMode() {
+    resetMode(): void {
         this.forgotPasswordMode = ForgotPasswordMode.ForgotPassword;
     }
 }

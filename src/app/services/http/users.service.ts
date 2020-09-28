@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user';
 })
 export class UsersService {
 
-    private get usersService() {
+    private get usersService(): string {
         return environment.httpSchema + environment.usersService;
     }
 
