@@ -9,4 +9,5 @@ export class User {
     public website?: string;
     public securityToken?: string;
     public gravatarHash?: string;
+    public redirectBaseUrl?: string;
 }

@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { RegisterMode } from 'src/app/models/register-mode';
 import { RegisterService } from 'src/app/services/http/register.service';
 import { environment } from 'src/environments/environment';
+import { WindowService } from 'src/app/services/common/window.service';
 
 @Component({
     selector: 'app-register',
@@ -25,12 +26,12 @@ export class RegisterPage implements OnInit {
     constructor(
         private registerService: RegisterService,
         private reCaptchaV3Service: ReCaptchaV3Service,
+        private windowService: WindowService,
         @Inject(DOCUMENT) private document: Document
     ) { }
 
     ngOnInit(): void {
-        this.registerMode = RegisterMode.Register;
-        this.user = new User();
+        this.user.redirectBaseUrl = this.windowService.getApplicationUrl();
     }
 
     async onSubmit(): Promise<void> {

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ForgotPassword } from 'src/app/models/forgot-password';
 import { ForgotPasswordMode } from 'src/app/models/forgot-password-mode';
 import { MessagesService } from 'src/app/services/common/messages.service';
+import { WindowService } from 'src/app/services/common/window.service';
 import { ForgotPasswordService } from 'src/app/services/http/forgot-password.service';
 
 @Component({
@@ -10,14 +11,19 @@ import { ForgotPasswordService } from 'src/app/services/http/forgot-password.ser
     templateUrl: './forgot-password.page.html',
     styleUrls: ['./forgot-password.page.scss']
 })
-export class ForgotPasswordPage {
+export class ForgotPasswordPage implements OnInit {
 
-    forgotPassword = new ForgotPassword('');
+    forgotPassword = new ForgotPassword();
     forgotPasswordMode = ForgotPasswordMode.ForgotPassword;
 
     constructor(
         private forgotPasswordService: ForgotPasswordService,
-        private messagesService: MessagesService) {
+        private messagesService: MessagesService,
+        private windowService: WindowService) {
+    }
+
+    ngOnInit(): void {
+        this.forgotPassword.redirectBaseUrl = this.windowService.getApplicationUrl();
     }
 
     async onSubmit(): Promise<void> {

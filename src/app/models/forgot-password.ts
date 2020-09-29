@@ -1,7 +1,4 @@
 export class ForgotPassword {
-    public email: string;
-
-    constructor(email: string) {
-        this.email = email;
-    }
+    public email?: string;
+    public redirectBaseUrl?: string;
 }

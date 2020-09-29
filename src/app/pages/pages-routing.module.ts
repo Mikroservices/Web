@@ -9,14 +9,16 @@ import { LoginPage } from './login/login.page';
 import { LoginCallbackPage } from './login-callback/login-callback.page';
 import { RegisterPage } from './register/register.page';
 import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
+import { ResetPasswordPage } from './reset-password/reset-password.page';
+import { ConfirmEmailPage } from './confirm-email/confirm-email.page';
 
 const routes: Routes = [
     { path: 'login', component: LoginPage, canActivate: [ LoggedOutGuardService ] },
     { path: 'forgot-password', component: ForgotPasswordPage, canActivate: [ LoggedOutGuardService ] },
     { path: 'login-callback', component: LoginCallbackPage, canActivate: [ LoggedOutGuardService ] },
-    // { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ LoggedOutGuardService ] },
+    { path: 'reset-password', component: ResetPasswordPage, canActivate: [ LoggedOutGuardService ] },
     { path: 'register', component: RegisterPage, canActivate: [ LoggedOutGuardService ] },
-    // { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [ LoggedOutGuardService ] },
+    { path: 'confirm-email', component: ConfirmEmailPage, canActivate: [ LoggedOutGuardService ] },
     // { path: 'profile/:userName', component: ProfileComponent, canActivate: [ AuthorizationGuardService ]  },
     // { path: 'settings', component: SettingsComponent, canActivate: [ AuthorizationGuardService ] },
     { path: 'home', component: HomePage },

@@ -9,6 +9,8 @@ import { LoginPage } from './login/login.page';
 import { PipesModule } from '../pipes/pipes.module';
 import { RegisterPage } from './register/register.page';
 import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
+import { ResetPasswordPage } from './reset-password/reset-password.page';
+import { ConfirmEmailPage } from './confirm-email/confirm-email.page';
 
 @NgModule({
     imports: [
@@ -22,7 +24,9 @@ import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
         PageNotFoundPage,
         AccessForbiddenPage,
         RegisterPage,
-        ForgotPasswordPage
+        ForgotPasswordPage,
+        ResetPasswordPage,
+        ConfirmEmailPage
     ],
     exports: [
         ComponentsModule,
@@ -33,7 +37,9 @@ import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
         PageNotFoundPage,
         AccessForbiddenPage,
         RegisterPage,
-        ForgotPasswordPage
+        ForgotPasswordPage,
+        ResetPasswordPage,
+        ConfirmEmailPage
     ]
 })
 export class PagesModule { }
