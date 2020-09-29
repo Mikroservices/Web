@@ -24,7 +24,7 @@ export class UsersService {
         return this.httpClient.put<User>(this.usersService + '/users/@' + userName, user).toPromise();
     }
 
-    public async delete(userName: string): Promise<Object> {
+    public async delete(userName: string): Promise<object> {
         return this.httpClient.delete<User>(this.usersService + '/users/@' + userName).toPromise();
     }
 }

@@ -10,10 +10,12 @@
                 <mat-card-content>
                     <div fxLayout="column" class="margin-bottom-20">
                         <mat-form-field  floatLabel="always">
-                            <input matInput name="userName" [(ngModel)]="user.userName" #userName="ngModel" type="text" placeholder="Username" aria-label="Username" required pattern="^[a-zA-Z0-9]*$" appUniqueUserName />
+                            <input matInput name="userName" [(ngModel)]="user.userName" #userName="ngModel" type="text" placeholder="Username"
+                                aria-label="Username" required pattern="^[a-zA-Z0-9]*$" appUniqueUserName appMaxLength="50" />
                             <mat-error *ngIf="userName.invalid && userName.errors?.required">Enter username.</mat-error>
                             <mat-error *ngIf="userName.invalid && userName.errors?.pattern">Only alphanumeric characters are allowed in user name.</mat-error>
                             <mat-error *ngIf="userName.invalid && userName.errors?.appUniqueUserName">Choose a different user name, this one is already taken.</mat-error>
+                            <mat-error *ngIf="userName.invalid && userName.errors?.appMaxLength">Choose a different user name, this one is too long.</mat-error>
                         </mat-form-field>
                     </div>
 
@@ -34,8 +36,9 @@
 
                     <div fxLayout="column" class="margin-bottom-20">
                         <mat-form-field floatLabel="always">
-                            <input matInput name="name" [(ngModel)]="user.name" #name="ngModel" type="text" placeholder="Name" aria-label="Name" required />
+                            <input matInput name="name" [(ngModel)]="user.name" #name="ngModel" type="text" placeholder="Name" aria-label="Name" required appMaxLength="50" />
                             <mat-error *ngIf="name.invalid && name.errors?.required">Enter name.</mat-error>
+                            <mat-error *ngIf="name.invalid && name.errors?.appMaxLength">Name is too long.</mat-error>
                         </mat-form-field>
                     </div>
 

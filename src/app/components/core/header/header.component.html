@@ -10,23 +10,7 @@
         </ng-container>
         <ng-container *ngIf="user">
             <div fxHide fxShow.gt-xs>
-                <button mat-button [routerLink]="['/deliveries']" aria-label="Deliveries">Deliveries</button>
-                <button mat-button [matMenuTriggerFor]="adminMenu">Administration</button>
-                <mat-menu #adminMenu="matMenu">
-                    <button mat-menu-item [routerLink]="['/shops']" aria-label="Shops">
-                        <mat-icon>store_mall_directory</mat-icon>
-                        <span>Shops</span>
-                    </button>
-                    <button mat-menu-item [routerLink]="['/vehicles']" aria-label="Vehicles">
-                        <mat-icon>local_shipping</mat-icon>
-                        <span>Vehicles</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item [routerLink]="['/users']" aria-label="Users">
-                        <mat-icon>people_alt</mat-icon>
-                        <span>Users</span>
-                    </button>
-                </mat-menu>
+                <button mat-button [routerLink]="['/account']" aria-label="Account">Account</button>
             </div>
             <div class="flex-spacer"></div>
             <div fxHide fxShow.gt-xs>
@@ -43,21 +27,9 @@
                         <span>{{ user.name }}</span>
                     </button>
                     <mat-divider></mat-divider>
-                    <button mat-menu-item [routerLink]="['/deliveries']" aria-label="Deliveries">
-                        <mat-icon>shopping_cart</mat-icon>
-                        <span>Deliveries</span>
-                    </button>
-                    <button mat-menu-item [routerLink]="['/shops']" aria-label="Shops">
-                        <mat-icon>store_mall_directory</mat-icon>
-                        <span>Shops</span>
-                    </button>
-                    <button mat-menu-item [routerLink]="['/vehicles']" aria-label="Vehicles">
-                        <mat-icon>local_shipping</mat-icon>
-                        <span>Vehicles</span>
-                    </button>
-                    <button mat-menu-item [routerLink]="['/users']" aria-label="Users">
-                        <mat-icon>people_alt</mat-icon>
-                        <span>Users</span>
+                    <button mat-menu-item [routerLink]="['/account']" aria-label="Account">
+                        <mat-icon>account_circle</mat-icon>
+                        <span>Account</span>
                     </button>
                     <mat-divider></mat-divider>
                     <button mat-menu-item (click)="signOut()" aria-label="Sign out">

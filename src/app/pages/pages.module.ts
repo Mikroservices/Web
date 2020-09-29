@@ -11,6 +11,7 @@ import { RegisterPage } from './register/register.page';
 import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
 import { ResetPasswordPage } from './reset-password/reset-password.page';
 import { ConfirmEmailPage } from './confirm-email/confirm-email.page';
+import { AccountPage } from './account/account.page';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { ConfirmEmailPage } from './confirm-email/confirm-email.page';
         RegisterPage,
         ForgotPasswordPage,
         ResetPasswordPage,
-        ConfirmEmailPage
+        ConfirmEmailPage,
+        AccountPage
     ],
     exports: [
         ComponentsModule,
@@ -39,7 +41,8 @@ import { ConfirmEmailPage } from './confirm-email/confirm-email.page';
         RegisterPage,
         ForgotPasswordPage,
         ResetPasswordPage,
-        ConfirmEmailPage
+        ConfirmEmailPage,
+        AccountPage
     ]
 })
 export class PagesModule { }

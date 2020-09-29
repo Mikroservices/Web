@@ -11,6 +11,8 @@ import { RegisterPage } from './register/register.page';
 import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
 import { ResetPasswordPage } from './reset-password/reset-password.page';
 import { ConfirmEmailPage } from './confirm-email/confirm-email.page';
+import { AuthorizationGuardService } from '../services/authorization/authorization-guard.service';
+import { AccountPage } from './account/account.page';
 
 const routes: Routes = [
     { path: 'login', component: LoginPage, canActivate: [ LoggedOutGuardService ] },
@@ -20,7 +22,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterPage, canActivate: [ LoggedOutGuardService ] },
     { path: 'confirm-email', component: ConfirmEmailPage, canActivate: [ LoggedOutGuardService ] },
     // { path: 'profile/:userName', component: ProfileComponent, canActivate: [ AuthorizationGuardService ]  },
-    // { path: 'settings', component: SettingsComponent, canActivate: [ AuthorizationGuardService ] },
+    { path: 'account', component: AccountPage, canActivate: [ AuthorizationGuardService ] },
     { path: 'home', component: HomePage },
     { path: 'access-forbidden', component: AccessForbiddenPage },
     { path: '', redirectTo: '/home', pathMatch: 'full' },

@@ -1,0 +1,56 @@
+
+<div [hidden]="!isReady" [@fadeIn]>
+    <section class="mat-typography">
+        <h1>User account</h1>
+    </section>
+
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+        <mat-card>
+            <mat-card-content>
+        
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" class="margin-bottom-20">
+                    <mat-form-field fxFlex="50%">
+                        <input matInput name="userName" #userName="ngModel" [(ngModel)]="user.name"
+                            placeholder="Name" aria-label="Name" appMaxLength="50" />
+                        <mat-error *ngIf="userName.invalid && userName.errors?.appMaxLength">
+                            Too long name.
+                        </mat-error>
+                    </mat-form-field>
+        
+                    <mat-form-field fxFlex="50%">
+                        <input matInput name="location" #location="ngModel" [(ngModel)]="user.location"
+                            placeholder="Location" aria-label="Location" appMaxLength="50" />
+                        <mat-error *ngIf="location.invalid && location.errors?.appMaxLength">
+                            Too long location.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" class="margin-bottom-20">
+                    <mat-form-field fxFlex="50%">
+                        <input matInput name="website" #website="ngModel" [(ngModel)]="user.website"
+                            placeholder="Website" aria-label="Website" appMaxLength="50" />
+                        <mat-error *ngIf="website.invalid && website.errors?.appMaxLength">
+                            Too long website URL.
+                        </mat-error>
+                    </mat-form-field>
+        
+                    <mat-form-field fxFlex="100%">
+                        <textarea matInput name="bio" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="10" placeholder="Bio" #bio="ngModel" [(ngModel)]="user.bio"
+                            aria-label="Bio"></textarea>
+                        <!-- <mat-error *ngIf="bio.invalid && bio.errors?.required">Enter comment.</mat-error> -->
+                    </mat-form-field>
+                </div>
+                
+            </mat-card-content>
+        </mat-card>
+
+        <div class="actions">
+            <button type="button" mat-raised-button [routerLink]="['/home']" aria-label="Cancel">Cancel</button>
+            <button type="submit" mat-raised-button color="primary" aria-label="Save">Save</button>
+        </div>
+    </form>
+</div>
+
