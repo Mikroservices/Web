@@ -1,0 +1,9 @@
+.content {
+    padding: 40px;
+}
+
+@media (max-width: 599px) {
+    .content{
+        padding: 10px;
+    }
+}

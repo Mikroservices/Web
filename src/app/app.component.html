@@ -1,8 +1,12 @@
-<ngx-loading-bar [includeSpinner]="true" [color]="'#ff4d4d'"></ngx-loading-bar>
-<app-navbar></app-navbar>
+<div class="mat-typography">
+    <app-header></app-header>
+    <main class="content"> 
 
-<div class="container pt-4 pb-4">
-    <router-outlet></router-outlet>
+        <div *ngIf="showLoader" class="loading-shade">
+            <mat-spinner [diameter]="36"></mat-spinner>
+        </div>
+
+        <router-outlet></router-outlet>
+    </main>
+    <!-- <app-footer></app-footer> -->
 </div>
-
-<app-footer></app-footer>
