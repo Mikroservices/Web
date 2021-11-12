@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 function getWindow(): Window {
     return window;
 }

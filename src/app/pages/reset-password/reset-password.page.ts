@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { ResetPassword } from 'src/app/models/reset-password';
 import { ResetPasswordMode } from 'src/app/models/reset-password-mode';
 import { MessagesService } from 'src/app/services/common/messages.service';
-import { WindowService } from 'src/app/services/common/window.service';
 import { ForgotPasswordService } from 'src/app/services/http/forgot-password.service';
 
 @Component({

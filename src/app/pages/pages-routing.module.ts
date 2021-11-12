@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LoggedOutGuardService } from '../services/authorization/logged-out-guard.service';
+import { AuthorizationGuardService } from '../services/authorization/authorization-guard.service';
 import { HomePage } from './home/home.page';
 import { AccessForbiddenPage } from './errors/access-forbidden/access-forbidden.page';
 import { PageNotFoundPage } from './errors/page-not-found/page-not-found.page';
-import { LoggedOutGuardService } from '../services/authorization/logged-out-guard.service';
 import { LoginPage } from './login/login.page';
 import { LoginCallbackPage } from './login-callback/login-callback.page';
 import { RegisterPage } from './register/register.page';
 import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
 import { ResetPasswordPage } from './reset-password/reset-password.page';
 import { ConfirmEmailPage } from './confirm-email/confirm-email.page';
-import { AuthorizationGuardService } from '../services/authorization/authorization-guard.service';
 import { AccountPage } from './account/account.page';
 
 const routes: Routes = [

@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-    LoginMode = LoginMode;
+    readonly LoginMode = LoginMode;
 
     login = new Login('', '');
     loginMode = LoginMode.Login;

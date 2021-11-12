@@ -2,8 +2,8 @@ import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { PersistanceService } from '../persistance/persistance.service';
 import { User } from 'src/app/models/user';
+import { PersistanceService } from '../persistance/persistance.service';
 import { AccountService } from '../http/account.service';
 import { AccessToken } from '../../models/access-token';
 

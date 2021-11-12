@@ -8,14 +8,14 @@ import { Subscription } from 'rxjs';
 export class ScreenSizeService implements OnDestroy {
 
     private breakpointSubscription: Subscription;
-    private handsetFunction: () => void;
-    private tabletFunction: () => void;
-    private browserFunction: () => void;
+    private handsetFunction: (() => void) | undefined;
+    private tabletFunction: (() => void) | undefined;
+    private browserFunction: (() => void) | undefined;
 
     constructor(private breakpointObserver: BreakpointObserver) {
         this.breakpointSubscription = this.breakpointObserver
             .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium])
-            .subscribe(_ => {
+            .subscribe(() => {
                 if (this.isHandsetLayout() && this.handsetFunction) {
                     this.handsetFunction();
                 } else if (this.isTabletLayout() && this.tabletFunction) {
@@ -27,9 +27,9 @@ export class ScreenSizeService implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.handsetFunction = null;
-        this.tabletFunction = null;
-        this.browserFunction = null;
+        this.handsetFunction = undefined;
+        this.tabletFunction = undefined;
+        this.browserFunction = undefined;
 
         if (this.breakpointSubscription) {
             this.breakpointSubscription.unsubscribe();

@@ -15,7 +15,7 @@ import { WindowService } from 'src/app/services/common/window.service';
     styleUrls: ['./register.page.scss']
 })
 export class RegisterPage implements OnInit {
-    RegisterMode = RegisterMode;
+    readonly RegisterMode = RegisterMode;
 
     user = new User();
     registerMode = RegisterMode.Register;
