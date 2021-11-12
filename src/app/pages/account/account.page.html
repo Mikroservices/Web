@@ -7,8 +7,14 @@
     <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
         <mat-card>
+
+            <mat-card-header>
+                <mat-card-title>
+                    Your personal information
+                </mat-card-title>
+            </mat-card-header>
+
             <mat-card-content>
-        
                 <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" class="margin-bottom-20">
                     <mat-form-field fxFlex="50%">
                         <input matInput name="userName" #userName="ngModel" [(ngModel)]="user.name"
@@ -39,18 +45,59 @@
                     <mat-form-field fxFlex="100%">
                         <textarea matInput name="bio" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
                             cdkAutosizeMaxRows="10" placeholder="Bio" #bio="ngModel" [(ngModel)]="user.bio"
-                            aria-label="Bio"></textarea>
-                        <!-- <mat-error *ngIf="bio.invalid && bio.errors?.required">Enter comment.</mat-error> -->
+                            aria-label="Bio" appMaxLength="50"></textarea>
+                        <mat-error *ngIf="bio.invalid && bio.errors?.appMaxLength">Too long bio.</mat-error>
                     </mat-form-field>
-                </div>
-                
+                </div>                
             </mat-card-content>
-        </mat-card>
 
-        <div class="actions">
-            <button type="button" mat-raised-button [routerLink]="['/home']" aria-label="Cancel">Cancel</button>
-            <button type="submit" mat-raised-button color="primary" aria-label="Save">Save</button>
-        </div>
+            <mat-card-actions>
+                <div class="account-actions">
+                    <button type="submit" mat-raised-button color="primary" aria-label="Save">Save</button>
+                </div>
+            </mat-card-actions>
+
+        </mat-card>
     </form>
+
+    <mat-card class="margin-top-20">
+        <mat-card-header>
+            <mat-card-title>
+                Change password
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutGap="20px">
+                <div fxFlex>
+                    Set a strong password and don't reuse it for other accounts.
+                </div>
+                <div fxFlex="none">
+                    <button type="button" [disabled]="isSubmittingMode()" mat-raised-button color="primary" aria-label="Change password">Change password</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="margin-top-20">
+        <mat-card-header>
+            <mat-card-title>
+                Delete account
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutGap="20px">
+                <div fxFlex>
+                    You can delete your account, this operation is irreversible. Keep in mind that you will
+                    not be able to reactivate your account or retrieve any of the content or information
+                    you have added.
+                </div>
+                <div fxFlex="none">
+                    <button type="button" [disabled]="isSubmittingMode()" mat-raised-button color="accent" aria-label="Delete
+                    account">Delete account</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
 </div>
 
