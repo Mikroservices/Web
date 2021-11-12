@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { AccessToken } from 'src/app/models/access-token';
@@ -21,17 +21,26 @@ export class AccountService {
     }
 
     public async refreshToken(refreshToken: string): Promise<AccessToken> {
-        return this.httpClient.post<AccessToken>(
+        const event$ = this.httpClient.post<AccessToken>(
             this.usersService + '/account/refresh',
             new RefreshToken(refreshToken)
-        ).toPromise();
+        );
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 
     public async login(login: Login): Promise<AccessToken> {
-        return this.httpClient.post<AccessToken>(this.usersService + '/account/login', login).toPromise();
+        const event$ = this.httpClient.post<AccessToken>(this.usersService + '/account/login', login);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 
     public async changePassword(changePassword: ChangePassword): Promise<object> {
-        return this.httpClient.post(this.usersService + '/account/change-password', changePassword).toPromise();
+        const event$ =  this.httpClient.post(this.usersService + '/account/change-password', changePassword);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 }

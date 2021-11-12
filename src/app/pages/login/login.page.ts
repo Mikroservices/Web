@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
             } else {
                 this.router.navigate(['/home']);
             }
-        } catch (error) {
+        } catch (error: any) {
 
             if (error.error.code === 'invalidLoginCredentials') {
                 this.errorMessage = 'Invalid credentials.';

@@ -31,7 +31,7 @@ export class ForgotPasswordPage implements OnInit {
             this.forgotPasswordMode = ForgotPasswordMode.Submitting;
             await this.forgotPasswordService.token(this.forgotPassword);
             this.forgotPasswordMode = ForgotPasswordMode.Success;
-        } catch (error) {
+        } catch (error: any) {
             if (error.error.code === 'userNotFound') {
                 this.forgotPasswordMode = ForgotPasswordMode.UserNotExists;
                 return;

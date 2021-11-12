@@ -44,7 +44,7 @@ export class RegisterPage implements OnInit {
                 await this.registerService.register(this.user);
                 this.removeGoogleBadge();
                 this.registerMode = RegisterMode.Success;
-            } catch (error) {
+            } catch (error: any) {
                 if (error.error.code === 'userNameIsAlreadyTaken') {
                     this.errorMessage = 'User name is already taken. Please choose different one.';
                 } else if (error.error.code === 'emailIsAlreadyConnected') {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { ForgotPassword } from 'src/app/models/forgot-password';
@@ -18,10 +19,16 @@ export class ForgotPasswordService {
     }
 
     public async token(forgotPassword: ForgotPassword): Promise<object> {
-        return this.httpClient.post(this.usersService + '/forgot/token', forgotPassword).toPromise();
+        const event$ = this.httpClient.post(this.usersService + '/forgot/token', forgotPassword);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 
     public async confirm(resetPassword: ResetPassword): Promise<object> {
-        return this.httpClient.post(this.usersService + '/forgot/confirm', resetPassword).toPromise();
+        const event$ = this.httpClient.post(this.usersService + '/forgot/confirm', resetPassword);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 }

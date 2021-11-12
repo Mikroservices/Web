@@ -26,7 +26,7 @@ export class LoginCallbackPage implements OnInit {
             const accessToken = await this.identityService.login(new IdentityToken(authenticateToken));
             this.authorizationService.signIn(accessToken);
             this.router.navigate(['/home']);
-        } catch (error) {
+        } catch (error: any) {
 
             if (error.error.code === 'invalidLoginCredentials') {
                 this.errorMessage = 'Invalid credentials.';

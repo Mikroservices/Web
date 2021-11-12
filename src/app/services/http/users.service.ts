@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/models/user';
@@ -17,14 +18,23 @@ export class UsersService {
     }
 
     public async profile(userName: string): Promise<User> {
-        return this.httpClient.get<User>(this.usersService +  '/users/' + userName).toPromise();
+        const event$ = this.httpClient.get<User>(this.usersService +  '/users/' + userName);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 
     public async update(userName: string, user: User): Promise<User> {
-        return this.httpClient.put<User>(this.usersService + '/users/@' + userName, user).toPromise();
+        const event$ = this.httpClient.put<User>(this.usersService + '/users/@' + userName, user);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 
     public async delete(userName: string): Promise<object> {
-        return this.httpClient.delete<User>(this.usersService + '/users/@' + userName).toPromise();
+        const event$ = this.httpClient.delete<User>(this.usersService + '/users/@' + userName);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 }

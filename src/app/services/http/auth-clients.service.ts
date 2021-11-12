@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { AuthClient } from 'src/app/models/auth-client';
@@ -17,6 +18,9 @@ export class AuthClientsService {
     }
 
     public async getList(): Promise<AuthClient[]> {
-        return this.httpClient.get<AuthClient[]>(this.usersService + '/auth-clients').toPromise();
+        const event$ = this.httpClient.get<AuthClient[]>(this.usersService + '/auth-clients');
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 }

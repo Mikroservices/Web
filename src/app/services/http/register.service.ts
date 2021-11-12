@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { ConfirmEmail } from 'src/app/models/confirm-email';
@@ -20,11 +21,17 @@ export class RegisterService {
     }
 
     public async register(user: User): Promise<User> {
-        return this.httpClient.post<User>(this.usersService + '/register', user).toPromise();
+        const event$ = this.httpClient.post<User>(this.usersService + '/register', user);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 
     public async confirm(confirmEmail: ConfirmEmail): Promise<object> {
-        return this.httpClient.post(this.usersService + '/register/confirm', confirmEmail).toPromise();
+        const event$ = this.httpClient.post(this.usersService + '/register/confirm', confirmEmail);
+
+        const result = await firstValueFrom(event$);
+        return result;
     }
 
     public isUserNameTaken(userName: string): Observable<BooleanResult> {
